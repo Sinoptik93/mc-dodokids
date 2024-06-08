@@ -23,11 +23,11 @@ const languages = [{label: 'en', active: true}];
 <Layout
     title="title"
 >
-    <Header
-        translate={{test: ''}}
-        languageList={languages}
-        client:load
-    />
+    <!--<Header-->
+    <!--    translate={{test: ''}}-->
+    <!--    languageList={languages}-->
+    <!--    client:load-->
+    <!--/>-->
 
     <SectionHero
         extraClass="mb-10"
@@ -53,8 +53,13 @@ const languages = [{label: 'en', active: true}];
     <SectionForSchools
         extraClass="mb-10"
     />
-    <SectionQuestionAndAnswers/>
-    <SectionSocialNetworks/>
+
+    <SectionQuestionAndAnswers
+        extraClass="mb-20 md:mb-40"
+    />
+
+    <SectionSocialNetworks />
+
     <SectionMap/>
 
     <Footer/>

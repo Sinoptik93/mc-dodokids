@@ -38,6 +38,7 @@ const SlideFeedback = ({feedbackText, userName, date, rating}: SlideFeedbackProp
                     {
                         [1, 2, 3, 4, 5].map((step) => (
                             <div
+                                key={step}
                                 className={
                                     twMerge(
                                         "w-8",
@@ -104,6 +105,7 @@ const SlideFeedback = ({feedbackText, userName, date, rating}: SlideFeedbackProp
                                     {
                                         [1, 2, 3, 4, 5].map((step) => (
                                             <div
+                                                key={step}
                                                 className={
                                                     twMerge(
                                                         "w-8",
@@ -162,9 +164,9 @@ const SliderFeedback = ({feedbackList}: SliderFeedbackProps) => {
                 onSwiper={(swiper) => console.log(swiper)}
             >
                 {
-                    feedbackList.map(({rating, userName, date, feedbackText}) => (
+                    feedbackList.map(({rating, userName, date, feedbackText}, index) => (
                         <SwiperSlide
-                            key={date.toDateString()}
+                            key={date.toDateString() + index}
                         >
                             <SlideFeedback
                                 rating={rating}

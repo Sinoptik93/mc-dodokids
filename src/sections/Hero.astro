@@ -3,6 +3,7 @@ import {Image} from 'astro:assets';
 import {twMerge} from "tailwind-merge";
 
 import ButtonLink from "~/components/ButtonLink/ButtonLink.astro";
+import ModalBookingEvent from "~/components/ModalBookingEvent/ModalBookingEvent";
 
 import DodoKidsPreview from '~/assets/images/preview-mc-kids.png'
 import friendBalloon from '~/assets/images/friend-balloon.svg'
@@ -114,5 +115,9 @@ const {extraClass} = Astro.props;
             </div>
         </div>
     </div>
+
+    <ModalBookingEvent
+        client:only="react"
+    />
 
 </div>

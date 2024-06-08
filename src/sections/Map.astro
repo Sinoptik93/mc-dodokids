@@ -2,13 +2,31 @@
 import {Image} from 'astro:assets';
 import {twMerge} from "tailwind-merge";
 
+import CustomMap from '~/components/Map/Map';
+
 interface Props {
     extraClass?: string;
 }
 
+
 const {extraClass} = Astro.props;
+
+const center = {
+    lat: 35.166063,
+    lng: 33.358583
+}
+
+const pointsList = [center]
 ---
 
-<div>
-    Map
+<div class={
+    twMerge(
+        extraClass,
+    )
+}>
+    <CustomMap
+        pointsList={pointsList}
+        center={center}
+        client:only="react"
+    />
 </div>

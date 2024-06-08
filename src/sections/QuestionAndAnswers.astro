@@ -1,14 +1,66 @@
 ---
 import {Image} from 'astro:assets';
 import {twMerge} from "tailwind-merge";
+import AccordionGroup from "~/components/AccordionGroup/AccordionGroup";
 
 interface Props {
     extraClass?: string;
 }
 
 const {extraClass} = Astro.props;
+
+const infoList = [
+    {
+        question: "What Ingredients Are Typically Used, and Where Can You Find Them?",
+        answer: "What Ingredients Are Typically Used, and Where Can You Find Them?"
+    },
+    {
+        question: "How Long Do Children's Pizza Workshops Last, and What's the Format?",
+        answer: "What Ingredients Are Typically Used, and Where Can You Find Them?"
+    },
+    {
+        question: "Are There Any Requirements for Participants, Such as Skills or Prior Knowledge?",
+        answer: "What Ingredients Are Typically Used, and Where Can You Find Them?"
+    },
+    {
+        question: "What age groups can attend our pizza-making workshops?",
+        answer: "At Kids Pizza Academy, we welcome children of all ages to our pizza-making workshops! We offer specialized sessions tailored to three distinct age groups: 3-5, 6-8, and 9-12, ensuring that each child enjoys an age-appropriate and delightful experience. Whether your child is a budding chef or a more experienced young baker, there's a pizza adventure waiting for them."
+    },
+    {
+        question: "What Should Parents Know to Ensure Their Child's Enjoyment and Benefit from the Workshop?",
+        answer: "What Ingredients Are Typically Used, and Where Can You Find Them?"
+    },
+    {
+        question: "Can Parents Join Their Child in Cooking?",
+        answer: "What Ingredients Are Typically Used, and Where Can You Find Them?"
+    },
+    {
+        question: "What's Included in the Birthday Celebration?",
+        answer: "What Ingredients Are Typically Used, and Where Can You Find Them?"
+    },
+    {
+        question: "What Sets Themed Master Classes Apart?",
+        answer: "What Ingredients Are Typically Used, and Where Can You Find Them?"
+    },
+    {
+        question: "What Ingredients Are Typically Used, and Where Can You Find Them?",
+        answer: "Do You Have Special Offers for School Groups?"
+    },
+]
 ---
 
-<div>
-    Question Answers
+<div class={
+    twMerge(
+        "container",
+        extraClass,
+    )
+}>
+    <h2 class="relative z-10 mb-10 font-black text-4xl md:text-5xl text-center uppercase">
+        Have a question?
+    </h2>
+
+    <AccordionGroup
+        infoList={infoList}
+        client:load
+    />
 </div>
