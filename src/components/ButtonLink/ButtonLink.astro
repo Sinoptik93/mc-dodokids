@@ -1,0 +1,28 @@
+---
+import {twMerge} from "tailwind-merge";
+
+interface Props {
+    url: string;
+    title: string;
+    extraClass?: string;
+}
+
+const {url, title, extraClass} = Astro.props;
+
+---
+
+<a
+    href={url}
+    target={ url.startsWith("#") ? "_self" : "_blank"}
+    class={
+        twMerge(
+            "text-base text-white text-center leading-none",
+            "px-8 py-6 rounded-full",
+            "md:px-8 md:py-6",
+            "bg-orange hover:bg-orange-400 active:bg-orange transition-colors",
+            extraClass,
+        )
+    }
+>
+    {title}
+</a>

@@ -1,0 +1,9 @@
+.swiper-pagination {
+    & > .swiper-pagination-bullet  {
+        @apply opacity-100 size-3 mx-12 bg-transparent border-[1px] border-orange transition-colors;
+    }
+
+    & > .swiper-pagination-bullet-active {
+        @apply bg-orange border-[1px] border-orange;
+    }
+}

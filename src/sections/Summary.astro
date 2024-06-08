@@ -1,0 +1,91 @@
+---
+import {Image} from 'astro:assets';
+import {twMerge} from "tailwind-merge";
+
+import mcPhotosAccent from '~/assets/images/mc-photos-accent.png'
+import ButtonLink from "../components/ButtonLink/ButtonLink.astro";
+
+interface Props {
+    extraClass?: string;
+}
+
+const {extraClass} = Astro.props;
+---
+
+<div class={
+    twMerge(
+        "container flex flex-col-reverse gap-2 md:gap-4",
+        "md:flex-row",
+        extraClass
+    )
+}>
+    <div class="flex justify-center items-center">
+
+        <div class="max-w-md flex flex-col gap-6 md:gap-10">
+            <div class="flex flex-col gap-4 md:gap-6">
+
+                <h2 class="uppercase font-black text-3xl md:text-5xl">
+                    Kids pizza<br>master class
+                </h2>
+
+                <p
+                    class="w-fit text-orange bg-orange-100 rounded-xl p-3 leading-[0.5rem]"
+                >
+                    The cost of the master class 25 € per person
+                </p>
+
+                <p class="text-neutral-400">
+                    The price includes a 25 cm pizza with toppings to choose from, branded merch and a pizza maker
+                    diploma
+                </p>
+            </div>
+
+            <div class="flex flex-wrap gap-2 items-center text-neutral-400">
+                <p>
+                    Minimum group of four people from 4 y.o.
+                </p>
+
+                <div class="bg-neutral-400 size-1 rounded-full"/>
+
+                <p>
+                    60 min
+                </p>
+
+                <div class="bg-neutral-400 size-1 rounded-full"/>
+
+                <p>
+                    Pizza
+                </p>
+            </div>
+
+            <p>
+                Let your child become a pizza chef! In this hands-on class, they'll knead dough, choose toppings, and
+                craft their own pizza masterpiece. Our friendly hosts offer personalized guidance for an unforgettable
+                pizza-making experience.
+            </p>
+
+            <ButtonLink
+                url="#"
+                title="Book Now for Pizza Fun"
+                extraClass="md:w-fit"
+            />
+        </div>
+
+
+    </div>
+
+    <div class="flex flex-1 justify-center items-center">
+        <div class={
+            twMerge(
+                "w-full"
+            )
+        }>
+            <Image
+                src={mcPhotosAccent}
+                alt="mcPhotosAccent"
+                class="w-full h-full object-contain"
+            />
+        </div>
+    </div>
+
+</div>

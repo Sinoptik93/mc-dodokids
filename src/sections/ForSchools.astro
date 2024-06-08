@@ -1,0 +1,103 @@
+---
+import {Image} from 'astro:assets';
+import {twMerge} from "tailwind-merge";
+import ButtonLink from "~/components/ButtonLink/ButtonLink.astro";
+
+import iconMail from '~/assets/icons/icon-mail.svg';
+import schoolDesktop from '~/assets/images/school-desktop.svg'
+import schoolMobile from '~/assets/images/school-mobile.svg'
+
+interface Props {
+    extraClass?: string;
+}
+
+const {extraClass} = Astro.props;
+---
+
+<div
+    class={
+        twMerge(
+            "relative z-20 bg-purple-200 rounded-3xl md:rounded-8xl py-10 md:py-24 overflow-hidden",
+            extraClass
+        )
+    }
+>
+
+    <div
+        class="relative z-20 container"
+    >
+        <div class="flex flex-col md:max-w-[440px]">
+            <h2 class="font-black text-2xl md:text-5xl mb-4">
+                For schools
+            </h2>
+
+            <p class="w-fit px-4 py-1 mb-10 text-purple bg-[#D2C0FF] rounded-xl">
+                Age-Appropriate Pizza Workshops
+            </p>
+
+            <!--TODO: color -->
+            <p class="text-[#83799E] mb-9">
+                Welcome to Dodo Pizza, where learning and culinary creativity combine! Our school program offers
+                hands-on, educational experiences with pizza-making master class.
+                Contact us to discuss scheduling and pricing or leave a request and we will contact you.
+            </p>
+
+            <ButtonLink
+                url="#s"
+                title="Discover special discounts"
+                extraClass="bg-purple text-white w-fit mb-11"
+            />
+
+            <a
+                class="flex items-center gap-2"
+                href="mailto:feedback@dodopizza.com.cy"
+            >
+
+                <div class={
+                    twMerge(
+                        "pointer-events-none text-purple",
+                        "size-8",
+                        "md:size-8"
+                    )
+                }>
+                    <Image
+                        class="w-full h-full object-contain"
+                        src={iconMail}
+                        alt="icon mail"
+                    />
+                </div>
+
+                <p class="text-2xl">
+                    feedback@dodopizza.com.cy
+                </p>
+
+            </a>
+        </div>
+    </div>
+
+
+    <div class={
+        twMerge(
+            "hidden md:block z-10 absolute pointer-events-none text-purple inset-0 top-16 right-[650px] scale-[2.3]",
+        )
+    }>
+        <Image
+            class="w-full h-full object-contain"
+            src={schoolDesktop}
+            alt="school bg"
+        />
+    </div>
+
+    <div class={
+        twMerge(
+            "md:hidden z-10 absolute pointer-events-none text-purple inset-0 -top-10 right-0 scale-125",
+        )
+    }>
+        <Image
+            class="w-full h-full object-contain"
+            src={schoolMobile}
+            alt="school bg"
+        />
+    </div>
+
+</div>

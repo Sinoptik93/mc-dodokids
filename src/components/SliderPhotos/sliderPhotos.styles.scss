@@ -1,0 +1,33 @@
+#slider-photos {
+    position: relative;
+
+    &::before,
+    &::after {
+        @apply content-[''] absolute w-10 md:w-[400px] z-10 pointer-events-none inset-y-0;
+    }
+
+    &::before {
+        @apply left-0;
+        background: linear-gradient(to right, white, rgba(255, 255, 255, 0));
+    }
+
+    &::after {
+        @apply right-0;
+        background: linear-gradient(to left, white, rgba(255, 255, 255, 0));
+    }
+
+    .swiper {
+    }
+
+    .swiper-wrapper {
+        @apply overflow-visible;
+    }
+
+    .swiper-slide {
+        @apply overflow-hidden transition-all duration-[0.3s] ease-[ease-in-out] rounded-xl md:rounded-3xl scale-[0.8];
+    }
+
+    .swiper-slide-active {
+        @apply rounded-none scale-100;
+    }
+}

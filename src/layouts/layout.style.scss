@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bg-color-radial {
+    background: radial-gradient(100% 600% at 18.18% 0%, #4C6EFF 0%, #FFBC01 26.56%, #FF7A72 64.06%, #F03D01 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@layer base {
+    .absolute-center {
+        @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
+    }
+}

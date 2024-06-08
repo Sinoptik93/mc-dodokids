@@ -1,0 +1,119 @@
+---
+import {Image} from 'astro:assets';
+import {twMerge} from "tailwind-merge";
+
+import SliderFeedback from '~/components/SliderFeedback/SliderFeedback';
+
+import star from '~/assets/images/star.svg'
+import {SlideFeedbackProps} from "../components/SliderFeedback/types";
+
+interface Props {
+    extraClass?: string;
+}
+
+const {extraClass} = Astro.props;
+
+const feedbackList: SlideFeedbackProps[] = [
+    {
+        rating: 4,
+        date: new Date(),
+        userName: "Лариса Дудлик",
+        feedbackText: "Недавно нам выдали проспект, рекламирующий увлекательнейшее бесплатное мероприятие в пиццерии \"Додо\" и мы, не откладывая в долгий ящик, тут же его посетили. Вернее сначала мы оставили заявку на сайте Dodokids, перезвонили нам примерно через сутки... Интересное и бесплатное мероприятие-платишь только за приготовленную пиццу, могут участвовать и дети и взрослые, в дополнение к мастер-классу экскурсия по кухне, понравилась работа персонала, который отнесся к детям с пониманием и заботой"
+
+    },
+    {
+        rating: 5,
+        date: new Date(),
+        userName: "Дима",
+        feedbackText: "Приветствую, друзья!\n Детям понравилось. Бесплатно, платишь только за то, что будут готовить поварята."
+    },
+    {
+        rating: 3,
+        date: new Date(),
+        userName: "Анна Капшина",
+        feedbackText: "Этот отзыв о том, как весело и полезно провести время с детьми! Одна знакомая предложила нам посетить вместе с ее дочкой мастер-класс по изготовлению пиццы в \"Додо пицца\", мы конечно же не отказались."
+    },
+    {
+        rating: 4,
+        date: new Date(),
+        userName: "Лариса Дудлик",
+        feedbackText: "Недавно нам выдали проспект, рекламирующий увлекательнейшее бесплатное мероприятие в пиццерии \"Додо\" и мы, не откладывая в долгий ящик, тут же его посетили. Вернее сначала мы оставили заявку на сайте Dodokids, перезвонили нам примерно через сутки... Интересное и бесплатное мероприятие-платишь только за приготовленную пиццу, могут участвовать и дети и взрослые, в дополнение к мастер-классу экскурсия по кухне, понравилась работа персонала, который отнесся к детям с пониманием и заботой"
+
+    },
+    {
+        rating: 5,
+        date: new Date(),
+        userName: "Дима",
+        feedbackText: "Приветствую, друзья!\n Детям понравилось. Бесплатно, платишь только за то, что будут готовить поварята."
+    },
+    {
+        rating: 3,
+        date: new Date(),
+        userName: "Анна Капшина",
+        feedbackText: "Этот отзыв о том, как весело и полезно провести время с детьми! Одна знакомая предложила нам посетить вместе с ее дочкой мастер-класс по изготовлению пиццы в \"Додо пицца\", мы конечно же не отказались."
+    },
+
+]
+---
+
+<div class={
+    twMerge(
+        "container",
+        extraClass,
+    )
+}>
+    <div class="relative">
+
+        <h2 class="relative z-10 mb-10 font-black text-4xl md:text-5xl text-center uppercase">
+            Kids like us!
+        </h2>
+
+        <SliderFeedback
+            feedbackList={feedbackList}
+            client:only="react"
+        />
+
+        <div class={
+            twMerge(
+                "absolute rotate-[135deg]",
+                "size-10 -top-[50px] right-[80px]",
+                "md:size-[5rem] md:-top-10 md:right-[350px]",
+            )
+        }>
+            <Image
+                class="w-full h-full object-contain"
+                src={star}
+                alt="star"
+            />
+        </div>
+
+        <div class={
+            twMerge(
+                "absolute rotate-[135deg]",
+                "size-8 -top-[30px] right-[30px]",
+                "md:size-10 md:-top-2.5 md:right-[300px]",
+            )
+        }>
+            <Image
+                class="w-full h-full object-contain"
+                src={star}
+                alt="star"
+            />
+        </div>
+
+        <div class={
+            twMerge(
+                "absolute rotate-[135deg]",
+                "size-8 top-0 left-0",
+                "md:size-10 md:-top-3 md:left-[300px]",
+            )
+        }>
+            <Image
+                class="w-full h-full object-contain"
+                src={star}
+                alt="star"
+            />
+        </div>
+    </div>
+
+</div>

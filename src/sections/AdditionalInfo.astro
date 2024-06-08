@@ -1,0 +1,122 @@
+---
+import {Image} from 'astro:assets';
+import {twMerge} from "tailwind-merge";
+import ButtonLink from "~/components/ButtonLink/ButtonLink.astro";
+import SliderAdditional from "~/components/SliderAdditional/SliderAdditional";
+
+import celebrateImageTop from "~/assets/images/celebrate-1-1.svg";
+import celebrateImageBottom from "~/assets/images/celebrate-1-2.svg";
+
+import type {SlideAdditionalProps} from "~/components/SliderAdditional/types";
+
+interface Props {
+    extraClass?: string;
+}
+
+const slides: SlideAdditionalProps[] = [
+    {
+        icon: 'guest',
+        title: 'Guests',
+        description: 'The birthday packages are available for a maximum of 20 guests. Adults can join their child for free and cook alongside them, offering a helping hand when needed.'
+    },
+    {
+        icon: 'food',
+        title: 'Food',
+        description: 'You can bring your own cake and fruit. For other food, you can order on-site through the Dodo Pizza app (link).',
+    },
+    {
+        icon: 'discount',
+        title: 'Discount',
+        description: 'With the purchase of any package, you\'ll enjoy a special 10% discount on any order at Dodo Pizza during the event.',
+    },
+    {
+        icon: 'customization',
+        title: 'Customization',
+        description: 'We\'re always happy to tailor celebration to your wishes, so please feel free to reach out to us, and together, we\'ll create a magical birthday for your child.',
+    },
+]
+
+const {extraClass} = Astro.props;
+---
+
+<div
+    class={
+        twMerge(
+            "relative flex flex-col overflow-hidden",
+            "bg-orange-100 rounded-3xl md:rounded-8xl",
+            "md:rounded-8xl md:overflow-visible",
+            extraClass
+        )
+    }
+>
+    <div class="relative flex flex-col overflow-hidden">
+        <div class={
+            twMerge(
+                "absolute",
+                "w-[420px] -top-[70px] -right-[190px]",
+                "md:w-auto md:-top-[260px] md:-right-[160px]"
+            )
+        }>
+            <Image
+                src={celebrateImageTop}
+                alt="celebrate bg"
+                class="h-full w-full object-contain"
+            />
+        </div>
+
+        <div class="relative z-10 container flex flex-col py-16 md:py-32">
+            <div class={
+                twMerge(
+                    "flex flex-col gap-6 max-w-md mb-10 md:mb-40",
+                    ""
+                )
+            }>
+                <h2
+                    class="font-black text-4xl md:text-6xl"
+                >
+                    Celebrate<br>
+                    birthday<br>
+                    <span
+                        class="bg-color-radial"
+                    >
+                with us
+            </span>
+                </h2>
+
+                <p class="md:text-xl text-stone-500">
+                    Fill out the form and we will reserve a table for you for free.
+                </p>
+
+                <ButtonLink
+                    url="#"
+                    title="Book the B-party now!"
+                    extraClass="md:w-fit"
+                />
+            </div>
+
+            <div class="relative z-10 flex flex-col gap-6 items-center">
+                <h2 class="font-black text-3xl md:text-5xl">Additional information</h2>
+
+                <SliderAdditional
+                    slides={slides}
+                    client:only="react"
+                />
+            </div>
+        </div>
+    </div>
+
+    <div class={
+        twMerge(
+            "absolute",
+            "w-[800px] top-[390px] -left-[90px]",
+            "md:overflow-visible md:w-auto md:top-[480px] md:left-0"
+        )
+    }>
+        <Image
+            src={celebrateImageBottom}
+            alt="celebrate bg"
+            class="h-full w-full object-contain"
+        />
+    </div>
+
+</div>

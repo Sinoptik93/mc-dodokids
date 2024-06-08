@@ -1,0 +1,60 @@
+---
+import {twMerge} from "tailwind-merge";
+interface Props {
+	title: string;
+    extraClass?: string;
+}
+
+const { title, extraClass } = Astro.props;
+import './layout.style.scss';
+
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+
+        <style is:global>
+            @font-face {
+                font-family: "DodoRounded v2 Regular";
+                src: url("../assets/fonts/DodoRounded_v2-Regular.woff2") format("woff2");
+                font-display: swap;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: "DodoRounded v2 Bold";
+                src: url("../assets/fonts/DodoRounded_v2-Bold.woff2") format("woff2");
+                font-display: swap;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: "DodoRounded v2 Black";
+                src: url("../assets/fonts/DodoRounded_v2-Black.woff2") format("woff2");
+                font-display: swap;
+                font-style: normal;
+            }
+
+            html {
+                font-family: 'DodoRounded v2 Regular', system-ui, sans-serif;
+                scroll-behavior: smooth;
+            }
+        </style>
+	</head>
+	<body>
+    <main class={
+        twMerge(
+            extraClass
+        )
+    }>
+		<slot />
+    </main>
+	</body>
+</html>

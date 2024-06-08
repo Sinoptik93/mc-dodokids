@@ -1,0 +1,131 @@
+---
+import {Image} from 'astro:assets';
+import {twMerge} from "tailwind-merge";
+import ButtonLink from "~/components/ButtonLink/ButtonLink.astro";
+import SliderPhotos from "~/components/SliderPhotos/SliderPhotos";
+
+import heart from "~/assets/images/heart.svg";
+import heartSmall from "~/assets/images/heart-small.svg";
+import photo1 from "~/assets/images/photo-1.png";
+import photo2 from "~/assets/images/photo-2.png";
+
+interface Props {
+    extraClass?: string;
+}
+
+const {extraClass} = Astro.props;
+
+const slides: {alt: string; src: string}[] = [
+    {
+        alt: 'photo 1',
+        src: photo1.src,
+    },
+    {
+        alt: 'photo 2',
+        src: photo2.src,
+    },
+    {
+        alt: 'photo 3',
+        src: photo1.src,
+    },
+    {
+        alt: 'photo 4',
+        src: photo2.src,
+    },
+    {
+        alt: 'photo 5',
+        src: photo1.src,
+    },
+    {
+        alt: 'photo 6',
+        src: photo2.src,
+    },
+]
+---
+
+<div class={
+    twMerge(
+        "relative pt-40 pb-10",
+        extraClass,
+    )
+}>
+
+    <div class="md:container flex flex-col items-center gap-4 md:gap-6">
+        <h2 class="relative z-10 font-black text-5xl text-center uppercase">
+            The moments of kid's <br>pizza-making adventure
+        </h2>
+
+        <ButtonLink
+            url="#insta"
+            title="Go to Instagram"
+            extraClass="w-full md:w-fit"
+        />
+
+        <SliderPhotos
+            slides={slides}
+            client:only="react"
+        />
+
+        <!-- HEARTS -->
+        <!-- Right -->
+        <div class={
+            twMerge(
+                "absolute rotate-[30deg]",
+                "w-20 top-16 right-24",
+                "md:w-auto md:top-[160px] md:right-[100px]"
+            )
+        }>
+            <Image
+                src={heart}
+                alt="heart"
+                class="h-full w-full object-contain"
+            />
+        </div>
+
+        <div class={
+            twMerge(
+                "absolute",
+                "hidden",
+                "md:block md:top-[280px] md:right-[250px] md:-rotate-[17deg]"
+            )
+        }>
+            <Image
+                src={heartSmall}
+                alt="heart small"
+                class="h-full w-full object-contain"
+            />
+        </div>
+
+        <!-- Left -->
+        <div class={
+            twMerge(
+                "absolute -rotate-[30deg]",
+                "w-20 top-16 left-24",
+                "md:w-auto md:top-[160px] md:left-[100px]"
+            )
+        }>
+            <Image
+                src={heart}
+                alt="heart"
+                class="h-full w-full object-contain"
+            />
+        </div>
+
+        <div class={
+            twMerge(
+                "absolute",
+                "hidden",
+                "md:block md:top-[280px] md:left-[250px] md:rotate-[17deg]"
+            )
+        }>
+            <Image
+                src={heartSmall}
+                alt="heart small"
+                class="h-full w-full object-contain"
+            />
+        </div>
+    </div>
+
+
+
+</div>

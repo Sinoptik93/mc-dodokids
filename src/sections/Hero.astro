@@ -1,0 +1,118 @@
+---
+import {Image} from 'astro:assets';
+import {twMerge} from "tailwind-merge";
+
+import ButtonLink from "~/components/ButtonLink/ButtonLink.astro";
+
+import DodoKidsPreview from '~/assets/images/preview-mc-kids.png'
+import friendBalloon from '~/assets/images/friend-balloon.svg'
+import friendOctopus from '~/assets/images/friend-octopus.svg'
+import friendTriangle from '~/assets/images/friend-triangle.svg'
+
+interface Props {
+    extraClass?: string;
+}
+
+const {extraClass} = Astro.props;
+---
+
+<div class={
+    twMerge(
+        "relative overflow-hidden flex items-center justify-center",
+        "h-[520px] md:h-screen ",
+        "rounded-b-3xl md:rounded-b-8xl",
+        extraClass
+    )
+}>
+    <Image
+        src={DodoKidsPreview}
+        alt="DodoKids Preview"
+        class="absolute w-full h-full object-cover"
+    />
+
+    <div
+        class="absolute z-20 inset-0 bg-black bg-opacity-40"
+    />
+
+    <div class={
+        twMerge(
+            "container relative z-30",
+            "flex justify-center items-center",
+        )
+    }>
+        <div class={
+            twMerge(
+                "relative ",
+                "flex flex-col justify-center items-center gap-8"
+            )
+        }>
+            <div>
+                <h1 class="z-10 font-black uppercase text-white text-6xl md:text-8xl text-center">
+                    Pizza with <br> your own <br class="md:hidden"> hands
+                </h1>
+
+                <p class="z-10 text-white text-base md:text-3xl text-center">
+                    Little Chefs, Big Fun!
+                </p>
+            </div>
+
+            <ButtonLink
+                url="#"
+                title="Book master Class"
+                extraClass="w-full md:w-fit"
+            />
+
+            <div
+                class={
+                    twMerge(
+                        "absolute z-20",
+                        "-top-[60px] right-[50px] w-16",
+                        "md:-top-[108px] md:right-[240px] md:w-auto",
+                        "animate-fade animate-once animate-delay-300"
+                    )
+                }
+            >
+                <Image
+                    src={friendBalloon}
+                    alt="friendBalloon"
+                    class="object-contain w-full h-full"
+                />
+            </div>
+
+            <div
+                class={
+                    twMerge(
+                        "absolute z-20",
+                        "-top-[42px] left-[68px] h-14",
+                        "md:-top-[64px] md:left-[290px] md:h-auto",
+                        "animate-fade animate-once animate-delay-500"
+                    )
+                }
+            >
+                <Image
+                    src={friendOctopus}
+                    alt="friendOctopus"
+                    class="object-contain w-full h-full"
+                />
+            </div>
+
+            <div
+                class={
+                    twMerge(
+                        "absolute z-20",
+                        "top-[156px] left-0 w-16",
+                        "md:-top-[6px] md:-left-[10px] md:w-auto",
+                        "animate-fade animate-once animate-delay-800"
+                    )
+                }
+            >
+                <Image
+                    src={friendTriangle}
+                    alt="friendTriangle"
+                    class="object-contain w-full h-full"
+                />
+            </div>
+        </div>
+    </div>
+
+</div>

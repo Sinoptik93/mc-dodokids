@@ -1,0 +1,39 @@
+{
+    "extends": "astro/tsconfigs/strict",
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "jsxImportSource": "react",
+        "verbatimModuleSyntax": false,
+        "noUnusedParameters": false,
+        "resolveJsonModule": true,
+        "moduleResolution": "Node",
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": "./src",
+        "paths": {
+            "~/pages/*": [
+                "pages/*"
+            ],
+            "~/layouts/*": [
+                "layouts/*"
+            ],
+            "~/sections/*": [
+                "sections/*"
+            ],
+            "~/components/*": [
+                "components/*"
+            ],
+            "~/assets/*": [
+                "assets/*"
+            ]
+        }
+    },
+    "include": [
+        "src",
+        "eslint.config.js"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
