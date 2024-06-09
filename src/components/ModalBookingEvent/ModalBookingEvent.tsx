@@ -53,13 +53,13 @@ const ModalBookingEvent = () => {
         defaultValues: {
             event: 'pizza-mc',
             pizzeria: 'limasol',
-            name: '',
-            phone: '',
+            name: 'Sergey',
+            phone: '+7777777777',
             date: '2024-06-08',
-            children: [],
-            additionalInfo: '',
+            children: [{name: 'Test', age: '20', allergy: true, allergyDetails: ''}],
+            additionalInfo: 'Test',
             agreePrivacy: true,
-            agreePromotions: true,
+            agreePromotions: false,
         },
     });
 
@@ -71,10 +71,8 @@ const ModalBookingEvent = () => {
     const onSubmit = async (data: FormValues) => {
 
         const ID_DODO =
-            "AKfycbw4Il-pAJSTlwnszflukx_Gq-Xr8fle-dpmy-JG1IyrV2Cg3W4F7MB-v9l7SWmrUcKUog";
-        const getUrl = (id) => `https://script.google.com/macros/s/${id}/exec`;
-
-
+            "AKfycbxAe_nVS_VaJrUZKpAJI3RQR_Rxsk2YwHHOmkNy4xFKeQeCw4W0qgPQVi5IW-3Gpn-QEA";
+        const getUrl = (id: string) => `https://script.google.com/macros/s/${id}/exec`;
 
         const response = await fetch(getUrl(ID_DODO), {
             method: "POST",
