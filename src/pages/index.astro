@@ -15,14 +15,33 @@ import SectionForSchools from '~/sections/ForSchools.astro';
 import SectionQuestionAndAnswers from '~/sections/QuestionAndAnswers.astro';
 import SectionSocialNetworks from '~/sections/SocialsNetworks.astro';
 import SectionMap from '~/sections/Map.astro';
+import ModalBookingEvent from "~/components/ModalBookingEvent/ModalBookingEvent";
+import {TRIGGER_NAME} from "~/components/ModalBookingEvent/config"
 
 
-const languages = [{label: 'en', active: true}];
+const languages = [
+    {
+        label: 'en',
+        active: true
+    }
+];
 ---
+<script src='../components/ModalBookingEvent/modalBookingEventTrigger'></script>
 
 <Layout
     title="title"
 >
+    <button
+        id="modal-button"
+        class="text-2xl text-black"
+        data-react-trigger={TRIGGER_NAME}
+    >
+        Open
+    </button>
+
+    <ModalBookingEvent
+        client:only="react"
+    />
     <!--<Header-->
     <!--    translate={{test: ''}}-->
     <!--    languageList={languages}-->
@@ -58,7 +77,7 @@ const languages = [{label: 'en', active: true}];
         extraClass="mb-20 md:mb-40"
     />
 
-    <SectionSocialNetworks />
+    <SectionSocialNetworks/>
 
     <SectionMap/>
 

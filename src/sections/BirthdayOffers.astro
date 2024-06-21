@@ -1,0 +1,132 @@
+---
+import {Image} from 'astro:assets';
+import {twMerge} from "tailwind-merge";
+
+import OfferCard from "~/components/OfferCard/OfferCard";
+
+import friendTriangle from '~/assets/images/friend-triangle.svg'
+
+interface Props {
+    extraClass?: string;
+}
+
+const benefits1 = [
+    'Pizza-Making Master Class',
+    'Venue Decoration: balloons, pennant flags, birthday caps',
+    'Photo & Video Service',
+    [
+        'Kids meal: kids-crafted pizzas',
+        'Refreshing beverages: water, orange/apple juice',
+    ],
+    [
+        'Dodo beaks for each kid',
+        '10 minutes greeting from Dodo bird mascot',
+    ],
+    'Digital invitation',
+    'Duration: 2 hours'
+];
+
+const benefits2 = [
+    'Pizza-Making Master Class',
+    'Venue Decoration: balloons, flags,  birthday caps',
+    [
+        'Photo & Video Service',
+        '2 printed photos for every guest'
+    ],
+    [
+        'Kids meal: kids-crafted pizzas',
+        'Snacks: potato slices with dips',
+        'Refreshing beverages: water, orange/apple juice',
+        'Dessert: Sundae ice cream',
+        'Birthday Cake with your chosen theme'
+    ],
+    [
+        'Dodo beaks for each kid',
+        '20 minutes greeting from Dodo bird mascot',
+    ],
+    'Return gifts',
+    'Digital invitation',
+    'Duration: 2 hours'
+];
+
+const benefits3 = [
+    'Themed Culinary Adventure Master Class',
+    'Exclusive Venue Decoration: balloons, flags, birthday caps, photo zone, balloon arch',
+    'Experience an Exclusive Pinata',
+    [
+        'Photo & Video Service',
+        '2 printed photos for every guest',
+    ],
+    [
+        'Kids meal: kids-crafted food + pizza',
+        'Snacks: potato slices with dips and popcorn',
+        'Refreshing beverages: water, orange/apple juice, soft drinks',
+        'Dessert: Milkshakes and Sundae ice cream',
+        'Birthday Cake with your chosen theme'
+    ],
+    [
+        'Dodo beaks for each kid',
+        '30 minutes with Dodo bird mascot'
+    ],
+    'Exclusive Return Gifts',
+    'Digital or printed invitation',
+    'Duration: 2 hours'
+];
+
+const {extraClass} = Astro.props;
+---
+
+<section
+    class={
+        twMerge(
+            "container flex items-start md:items-stretch flex-col md:flex-row gap-8 md:gap-4",
+            extraClass,
+        )
+    }
+>
+    <OfferCard
+        client:load
+        color={{
+            text: 'text-gray-800',
+            accent: 'text-orange-500',
+            background: 'bg-white',
+            border: 'border-orange-200',
+        }}
+        priceList={{
+            weekdays: {from: 'Mon', to: 'Thu', price: 90},
+            weekend: {from: 'Fri', to: 'Sun', price: 100}
+        }}
+        benefits={benefits1}
+    />
+
+    <OfferCard
+        client:load
+        isPopular
+        color={{
+            text: 'text-white',
+            accent: 'text-yellow-400',
+            background: 'bg-violet-600',
+            border: 'border-violet-500',
+        }}
+        priceList={{
+            weekdays: {from: 'Mon', to: 'Thu', price: 90},
+            weekend: {from: 'Fri', to: 'Sun', price: 100}
+        }}
+        benefits={benefits2}
+    />
+
+    <OfferCard
+        client:load
+        color={{
+            text: 'text-gray-800',
+            accent: 'text-orange-500',
+            background: 'bg-orange-100',
+            border: 'border-orange-100',
+        }}
+        priceList={{
+            weekdays: {from: 'Mon', to: 'Thu', price: 90},
+            weekend: {from: 'Fri', to: 'Sun', price: 100}
+        }}
+        benefits={benefits3}
+    />
+</section>

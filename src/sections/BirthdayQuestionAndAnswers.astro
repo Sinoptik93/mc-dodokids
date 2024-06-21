@@ -1,0 +1,50 @@
+---
+import {Image} from 'astro:assets';
+import {twMerge} from "tailwind-merge";
+import AccordionGroup from "~/components/AccordionGroup/AccordionGroup";
+
+interface Props {
+    extraClass?: string;
+}
+
+const {extraClass} = Astro.props;
+
+const infoList = [
+    {
+        question: "What ideas do you suggest for birthday party pizza?",
+        answer: "What ideas do you suggest for birthday party pizza?"
+    },
+    {
+        question: "How many children can be invited to the masterclass?",
+        answer: "How many children can be invited to the masterclass?"
+    },
+    {
+        question: "Are there any age restrictions for children's participation?",
+        answer: "Are there any age restrictions for children's participation?"
+    },
+    {
+        question: "What should be considered when inviting guests?",
+        answer: "What should be considered when inviting guests?"
+    },
+    {
+        question: "What are the advantages of having a birthday party at a pizza-making masterclass?",
+        answer: "What are the advantages of having a birthday party at a pizza-making masterclass?"
+    },
+]
+---
+
+<section class={
+    twMerge(
+        "container",
+        extraClass,
+    )
+}>
+    <h2 class="relative z-10 mb-10 font-black text-4xl md:text-5xl text-center uppercase">
+        Have a question?
+    </h2>
+
+    <AccordionGroup
+        infoList={infoList}
+        client:load
+    />
+</section>

@@ -13,6 +13,7 @@ const AccordionGroup = (
     return (
         <Accordion
             className="flex flex-col gap-1"
+            showDivider={false}
             defaultExpandedKeys={[infoList[3].question]}
             itemClasses={{
                 trigger:  'p-0',

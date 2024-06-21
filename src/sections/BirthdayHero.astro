@@ -1,0 +1,76 @@
+---
+import {Image} from 'astro:assets';
+import {twMerge} from "tailwind-merge";
+
+import Button from "~/components/Button/Button";
+
+import celebrate from '~/assets/images/celebrate-2.svg'
+import celebrateMobile from '~/assets/images/celebrate-2-mobile.svg'
+import {TRIGGER_NAME} from "~/components/ModalBookingEvent/config";
+
+
+interface Props {
+    extraClass?: string;
+}
+
+const {extraClass} = Astro.props;
+---
+
+<section
+    class={
+        twMerge(
+            "relative overflow-hidden h-[490px] flex justify-center bg-orange-100 rounded-b-3xl",
+            "md:h-[770px] md:rounded-b-8xl",
+            extraClass,
+        )
+    }
+>
+
+    <div class={
+        twMerge(
+            "container relative z-10 flex flex-col justify-center items-center",
+
+        )
+    }>
+        <h1 class={
+            twMerge(
+                "text-5xl font-black uppercase text-center mb-8",
+                "md:max-w-xl md:text-8xl"
+            )
+        }>
+            Celebrate birthday <br/>
+            <span class="bg-color-radial">with us</span>
+        </h1>
+
+        <Button
+            title="Let’s get B-day party started!"
+            extraClass="md:hidden"
+            data-react-trigger={TRIGGER_NAME}
+        />
+
+    </div>
+
+    <Image
+        src={celebrate}
+        alt="celebrate"
+        class={
+            twMerge(
+                "absolute w-full h-full scale-150 hidden pointer-events-none",
+                "md:block",
+                "bottom-0 top-36",
+            )
+        }
+    />
+
+    <Image
+        src={celebrateMobile}
+        alt="celebrate"
+        class={
+            twMerge(
+                "absolute w-full h-full scale-[2.6]",
+                "md:hidden",
+                "bottom-0 top-4"
+            )
+        }
+    />
+</section>

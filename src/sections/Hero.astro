@@ -2,20 +2,23 @@
 import {Image} from 'astro:assets';
 import {twMerge} from "tailwind-merge";
 
-import ButtonLink from "~/components/ButtonLink/ButtonLink.astro";
-import ModalBookingEvent from "~/components/ModalBookingEvent/ModalBookingEvent";
+import Button from "~/components/Button/Button";
 
 import DodoKidsPreview from '~/assets/images/preview-mc-kids.png'
 import friendBalloon from '~/assets/images/friend-balloon.svg'
 import friendOctopus from '~/assets/images/friend-octopus.svg'
 import friendTriangle from '~/assets/images/friend-triangle.svg'
 
+import {TRIGGER_NAME} from '~/components/ModalBookingEvent/config'
+
 interface Props {
     extraClass?: string;
 }
 
 const {extraClass} = Astro.props;
+
 ---
+
 
 <div class={
     twMerge(
@@ -57,10 +60,10 @@ const {extraClass} = Astro.props;
                 </p>
             </div>
 
-            <ButtonLink
-                url="#"
+            <Button
                 title="Book master Class"
                 extraClass="w-full md:w-fit"
+                data-react-trigger={TRIGGER_NAME}
             />
 
             <div
@@ -115,9 +118,4 @@ const {extraClass} = Astro.props;
             </div>
         </div>
     </div>
-
-    <ModalBookingEvent
-        client:only="react"
-    />
-
 </div>

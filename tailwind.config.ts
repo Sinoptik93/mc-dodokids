@@ -1,11 +1,12 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
-// @ts-ignore
-import tailwindAnimated from "tailwindcss-animated";
+import colors from 'tailwindcss/colors';
 import {nextui} from '@nextui-org/react';
 
 import {Config} from 'tailwindcss'
 
+
 export default {
+    darkMode: 'class',
     content: [
         './src/**/*.{astro,md,mdx,ts,tsx}',
         './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
@@ -61,9 +62,19 @@ export default {
             }
         },
     },
-    darkMode: 'class',
     plugins: [
-        tailwindAnimated,
-        nextui
+        nextui({
+            themes: {
+                light: {
+                    colors: {
+                        primary: {
+                            ...colors.orange,
+                            foreground: 'hsl(0,0%,100%)',
+                            DEFAULT: 'hsl(26,100%,50%)',
+                        },
+                    },
+                }
+            }
+        })
     ],
 } satisfies Config;

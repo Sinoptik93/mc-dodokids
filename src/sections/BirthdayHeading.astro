@@ -1,0 +1,40 @@
+---
+import {Image} from 'astro:assets';
+import {twMerge} from "tailwind-merge";
+
+import ButtonLink from "~/components/ButtonLink/ButtonLink.astro";
+
+import friendTriangle from '~/assets/images/friend-triangle.svg'
+
+interface Props {
+    extraClass?: string;
+}
+
+const {extraClass} = Astro.props;
+
+---
+
+<section
+    class={
+        twMerge(
+            "container flex flex-col justify-center items-center pt-10 md:pt-32",
+            extraClass,
+        )
+    }
+>
+    <h2
+        class="mb-6 md:mb-0 md:mt-0 md:max-w-5xl text-4xl md:text-6xl font-black text-center"
+    >
+        Choose the Perfect Package for Your
+    </h2>
+    <p
+        class={
+            twMerge(
+                "px-2 py-2 text-2xl font-black text-white rounded-4xl bg-orange text-center",
+                "md:relative md:-top-3 md:text-3xl md:px-4 md:-rotate-1 md:rounded-full",
+            )
+        }
+    >
+        Child's Unforgettable Celebration!
+    </p>
+</section>
