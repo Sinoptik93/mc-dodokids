@@ -32,14 +32,14 @@ import './modalBookingEvent.styles.scss'
 
 type FormValues = {
     event: string;
-    pizzeria: string;
+    address: string | null;
     name: string;
     phone: string;
     date: string;
     children: {
         name: string;
         age: string;
-        allergy: boolean;
+        noAllergy: boolean;
         allergyDetails?: string;
     }[];
     additionalInfo: string;
@@ -100,11 +100,11 @@ const ModalBookingEvent = () => {
     } = useForm<FormValues>({
         defaultValues: {
             event: 'pizza-mc',
-            pizzeria: null,
+            address: null,
             name: 'Sergey',
             phone: '+79097376778',
-            date: '2024-06-22',
-            children: [{name: 'Anton', age: '20', allergy: false, allergyDetails: 'Some allergy'}],
+            date: "2024-06-25",
+            children: [{name: 'Anton', age: '20', noAllergy: false, allergyDetails: 'Some allergy'}],
             additionalInfo: 'Some info',
             agreePrivacy: true,
             agreePromotions: false,
@@ -113,7 +113,7 @@ const ModalBookingEvent = () => {
 
     const empty = {
         event: 'pizza-mc',
-        pizzeria: 'limasol',
+        address: 'a',
         name: '',
         phone: '',
         date: '',
@@ -121,7 +121,7 @@ const ModalBookingEvent = () => {
             {
                 name: '',
                 age: '',
-                allergy: false,
+                noAllergy: false,
                 allergyDetails: ''
             }
         ],
@@ -130,9 +130,10 @@ const ModalBookingEvent = () => {
         agreePromotions: false,
     }
 
-    const additionalInfo = watch('date')
+    const additionalInfo = watch('additionalInfo')
+    const address = watch('address');
 
-    console.log(additionalInfo)
+    console.log(address)
 
 
     const {fields, append, remove} = useFieldArray({
@@ -142,7 +143,7 @@ const ModalBookingEvent = () => {
 
     const onSubmit = async (data: FormValues) => {
         const ID_DODO =
-            "AKfycbxC9HS7UczlLEuSVy_lCis9Of8EhSHEvX1jDuEvvfZdzrRUTyp40N1vazI_85Wscfi6_A";
+            "AKfycbyWeo6GqjKjHKeCUI1EEuJOFpeH_5a0LJzVkgkEU6TNsR60m6MDrdUZrliVpO_K3Inivw";
         const getUrl = (id: string) => `https://script.google.com/macros/s/${id}/exec`;
 
         const response = await fetch(getUrl(ID_DODO), {
@@ -275,25 +276,17 @@ const ModalBookingEvent = () => {
                                                 <label className="">Choose a pizzeria</label>
                                                 <div className="space-y-2">
                                                     <Controller
-                                                        name="pizzeria"
+                                                        name="address"
                                                         control={control}
                                                         rules={{
                                                             required: true
                                                         }}
                                                         render={({field}) => (
                                                             <RadioGroup
+                                                                isInvalid={!!errors.address?.message}
                                                                 defaultValue={field.value}
                                                                 onChange={field.onChange}
                                                             >
-                                                                <Radio
-                                                                    value="limasol"
-                                                                    // classNames={{
-                                                                    //     control: "bg-orange",
-                                                                    //     wrapper: "group-data-[selected=true]:border-orange border-orange"
-                                                                    // }}
-                                                                >
-                                                                    st. Omonoias, 38, Limassol
-                                                                </Radio>
                                                                 <Radio
                                                                     value="address1"
                                                                     // classNames={{
@@ -311,6 +304,15 @@ const ModalBookingEvent = () => {
                                                                     // }}
                                                                 >
                                                                     address2
+                                                                </Radio>
+                                                                <Radio
+                                                                    value="address3"
+                                                                    // classNames={{
+                                                                    //     control: "bg-orange",
+                                                                    //     wrapper: "group-data-[selected=true]:border-orange border-orange"
+                                                                    // }}
+                                                                >
+                                                                    address3
                                                                 </Radio>
                                                             </RadioGroup>
                                                         )}
@@ -391,7 +393,7 @@ const ModalBookingEvent = () => {
                                                             append({
                                                                 name: '',
                                                                 age: '',
-                                                                allergy: false,
+                                                                noAllergy: false,
                                                                 allergyDetails: ''
                                                             })
                                                         }
@@ -452,7 +454,7 @@ const ModalBookingEvent = () => {
                                                         </div>
 
                                                         <Checkbox
-                                                            {...register(`children.${index}.allergy`)}
+                                                            {...register(`children.${index}.noAllergy`)}
                                                             // classNames={{
                                                             //     wrapper: "before:border-orange after:bg-orange",
                                                             // }}
@@ -460,7 +462,7 @@ const ModalBookingEvent = () => {
                                                             No allergy
                                                         </Checkbox>
 
-                                                        {!watchChildren[index]?.allergy && (
+                                                        {!watchChildren[index]?.noAllergy && (
                                                             <Textarea
                                                                 fullWidth
                                                                 size="lg"
@@ -525,10 +527,10 @@ const ModalBookingEvent = () => {
                                                 disabled={isSubmitting}
                                                 className={
                                                     twMerge(
-                                                        "text-base text-white text-center leading-none",
+                                                        "text-base text-white text-center leading-none bg-orange",
                                                         "px-8 py-6 rounded-full",
                                                         "md:px-8 md:py-6",
-                                                        "active:bg-orange transition-colors",
+                                                        "active:bg-orange disabled:bg-neutral-400 disabled:pointer-events-none",
                                                     )
                                                 }
                                             >
