@@ -207,6 +207,7 @@ const ModalBookingEvent = () => {
 
     const watchChildren = watch("children", []);
 
+
     return (
         <Modal
             isOpen={isOpen}
@@ -405,6 +406,7 @@ const ModalBookingEvent = () => {
 
                                             <div className="flex flex-col gap-4">
                                                 <label className="">Date</label>
+                                                {/* @ts-ignore */}
                                                 <DatePicker
                                                     aria-label="Date"
                                                     variant="bordered"
