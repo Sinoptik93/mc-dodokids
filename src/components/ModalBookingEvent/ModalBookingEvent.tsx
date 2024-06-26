@@ -7,6 +7,8 @@ import {
     Modal,
     Button,
     Radio,
+    Select,
+    SelectItem,
     Input,
     Textarea,
     Checkbox,
@@ -320,6 +322,23 @@ const ModalBookingEvent = () => {
                                                 </div>
                                             </div>
 
+                                            <div className="flex flex-col gap-4 w-full">
+                                                <p>City</p>
+                                                <Select
+                                                    size="lg"
+                                                    defaultSelectedKeys={['limassol']}
+                                                    fullWidth
+                                                    variant="bordered"
+                                                    placeholder="City"
+                                                >
+                                                    {[{label: 'Limassol', key: 'limassol'}].map((city) => (
+                                                        <SelectItem key={city.key}>
+                                                            {city.label}
+                                                        </SelectItem>
+                                                    ))}
+                                                </Select>
+                                            </div>
+
                                             <div className="flex flex-col gap-2">
                                                 <label className="">Choose a pizzeria</label>
                                                 <div className="space-y-2">
@@ -354,22 +373,13 @@ const ModalBookingEvent = () => {
                                                                 >
                                                                     address2
                                                                 </Radio>
-                                                                <Radio
-                                                                    value="address3"
-                                                                    // classNames={{
-                                                                    //     control: "bg-orange",
-                                                                    //     wrapper: "group-data-[selected=true]:border-orange border-orange"
-                                                                    // }}
-                                                                >
-                                                                    address3
-                                                                </Radio>
                                                             </RadioGroup>
                                                         )}
                                                     />
                                                 </div>
                                             </div>
 
-                                            <div className="flex flex-col gap-4">
+                                            <div className="flex flex-col gap-4 w-full">
                                                 <p>Order person info</p>
                                                 <Input
                                                     isClearable
@@ -403,6 +413,7 @@ const ModalBookingEvent = () => {
                                                     />
                                                 </div>
                                             </div>
+
 
                                             <div className="flex flex-col gap-4">
                                                 <label className="">Date</label>
@@ -567,7 +578,8 @@ const ModalBookingEvent = () => {
                                                     I agree with the Privacy Policy
                                                 </Checkbox>
                                                 {errors.agreePrivacy &&
-                                                    <span className="text-red-500 text-xs">This field is required</span>}
+                                                    <span
+                                                        className="text-red-500 text-xs">This field is required</span>}
                                                 <Checkbox
                                                     {...register('agreePromotions')}
                                                     classNames={{
