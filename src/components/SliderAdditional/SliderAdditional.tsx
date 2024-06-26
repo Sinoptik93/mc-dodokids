@@ -46,7 +46,7 @@ const SliderAdditional = ({slides}: SliderAdditionalProps) => {
         <Swiper
             modules={[Pagination]}
             pagination={{clickable: true}}
-            className="max-w-full h-80"
+            className="max-w-full"
             breakpoints={{
                 320: {
                     slidesPerView: 1,
