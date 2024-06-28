@@ -271,9 +271,11 @@ const ModalBookingEvent = ({translates}: { translates: Translate; }) => {
             onOpen();
         };
 
+        // @ts-ignore
         window.addEventListener(TRIGGER_NAME, handleOpenModal);
 
         return () => {
+            // @ts-ignore
             window.removeEventListener(TRIGGER_NAME, handleOpenModal);
             onClose();
         }
@@ -530,6 +532,7 @@ const ModalBookingEvent = ({translates}: { translates: Translate; }) => {
                                                             }
                                                         </div>
                                                         <div className="flex gap-4">
+                                                            {/*@ts-ignore*/}
                                                             <Input
                                                                 aria-label={translates.child.name}
                                                                 isClearable
