@@ -7,11 +7,16 @@ import SliderFeedback from '~/components/SliderFeedback/SliderFeedback';
 import star from '~/assets/images/star.svg'
 import {SlideFeedbackProps} from "../components/SliderFeedback/types";
 
-interface Props {
-    extraClass?: string;
+interface Translates {
+    heading: string;
 }
 
-const {extraClass} = Astro.props;
+interface Props {
+    extraClass?: string;
+    translates: Translates;
+}
+
+const {extraClass, translates} = Astro.props;
 
 const feedbackList: SlideFeedbackProps[] = [
     {
@@ -65,7 +70,7 @@ const feedbackList: SlideFeedbackProps[] = [
     <div class="relative">
 
         <h2 class="relative z-10 mb-10 font-black text-4xl md:text-5xl text-center uppercase">
-            Kids like us!
+            {translates.heading}
         </h2>
 
         <SliderFeedback

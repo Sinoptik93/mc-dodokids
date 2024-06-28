@@ -9,11 +9,18 @@ import heartSmall from "~/assets/images/heart-small.svg";
 import photo1 from "~/assets/images/photo-1.png";
 import photo2 from "~/assets/images/photo-2.png";
 
-interface Props {
-    extraClass?: string;
+interface Translates {
+    heading: string;
+    buttonTitle: string;
+    headingSlider: string;
 }
 
-const {extraClass} = Astro.props;
+interface Props {
+    extraClass?: string;
+    translates: Translates;
+}
+
+const {extraClass, translates} = Astro.props;
 
 const slides: {alt: string; src: string}[] = [
     {
@@ -51,18 +58,18 @@ const slides: {alt: string; src: string}[] = [
 }>
 
     <div class="container flex flex-col items-center gap-4 md:gap-6">
-        <h2 class="relative z-10 font-black text-5xl text-center uppercase">
-            The moments of kid's <br>pizza-making adventure
+        <h2 class="relative z-10 font-black text-5xl text-center uppercase" set:html={translates.heading}>
         </h2>
 
         <ButtonLink
             url="#insta"
-            title="Go to Instagram"
+            title={translates.buttonTitle}
             extraClass="w-full md:w-fit"
         />
 
         <SliderPhotos
             slides={slides}
+            title={translates.headingSlider}
             client:only="react"
         />
 

@@ -1,0 +1,44 @@
+---
+import {getCollection} from 'astro:content';
+import Layout from '~/layouts/Layout.astro';
+
+import BirthdayHero from '~/sections/BirthdayHero.astro';
+import BirthdayHeading from '~/sections/BirthdayHeading.astro';
+import BirthdayOffers from '~/sections/BirthdayOffers.astro';
+import BirthdayQuestionAndAnswers from '~/sections/BirthdayQuestionAndAnswers.astro';
+import ModalBookingEvent from "../components/ModalBookingEvent/ModalBookingEvent";
+import Footer from "../components/Footer/Footer.astro";
+
+const languages = [
+    {
+        label: 'en',
+        active: true
+    }
+];
+---
+<script src='../components/ModalBookingEvent/modalBookingEventTrigger'></script>
+
+<Layout
+    title="title"
+>
+    <ModalBookingEvent
+        client:only="react"
+    />
+
+    <BirthdayHero />
+
+    <BirthdayHeading
+        extraClass="mb-20"
+    />
+
+    <BirthdayOffers
+        extraClass="mb-20"
+    />
+
+    <BirthdayQuestionAndAnswers
+        extraClass="mb-20"
+    />
+
+    <Footer/>
+
+</Layout>

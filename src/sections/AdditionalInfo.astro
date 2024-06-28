@@ -8,36 +8,41 @@ import celebrateImageTop from "~/assets/images/celebrate-1-1.svg";
 import celebrateImageBottom from "~/assets/images/celebrate-1-2.svg";
 
 import type {SlideAdditionalProps} from "~/components/SliderAdditional/types";
+import {TRIGGER_NAME} from "../components/ModalBookingEvent/config";
+
+interface Translate {
+    heading: {
+      base: string;
+      colored: string;
+    };
+    subheading: string;
+    bookButton: {
+        title: string;
+        url: string;
+    };
+    sliderHeading: string;
+}
 
 interface Props {
     extraClass?: string;
+    slides: SlideAdditionalProps[];
+    translates: Translate;
 }
 
-const slides: SlideAdditionalProps[] = [
-    {
-        icon: 'guest',
-        title: 'Guests',
-        description: 'The birthday packages are available for a maximum of 20 guests. Adults can join their child for free and cook alongside them, offering a helping hand when needed.'
-    },
-    {
-        icon: 'food',
-        title: 'Food',
-        description: 'You can bring your own cake and fruit. For other food, you can order on-site through the Dodo Pizza app (link).',
-    },
-    {
-        icon: 'discount',
-        title: 'Discount',
-        description: 'With the purchase of any package, you\'ll enjoy a special 10% discount on any order at Dodo Pizza during the event.',
-    },
-    {
-        icon: 'customization',
-        title: 'Customization',
-        description: 'We\'re always happy to tailor celebration to your wishes, so please feel free to reach out to us, and together, we\'ll create a magical birthday for your child.',
-    },
-]
 
-const {extraClass} = Astro.props;
+const {extraClass, slides, translates} = Astro.props;
 ---
+<script>
+    import {createReactTrigger} from '~/utils/triggers/reactTrigger'
+    import {TRIGGER_NAME} from '~/components/ModalBookingEvent/config'
+
+    const modalButton = document.querySelector(`[data-react-trigger="${TRIGGER_NAME}"]`);
+    const handleClick = createReactTrigger<{defaultEvent: string}>({name: TRIGGER_NAME, detail: {defaultEvent: 'birthday'}})
+
+    if (modalButton) {
+        modalButton.addEventListener('click', handleClick);
+    }
+</script>
 
 <div
     class={
@@ -68,34 +73,27 @@ const {extraClass} = Astro.props;
             <div class={
                 twMerge(
                     "flex flex-col gap-6 max-w-md mb-10 md:mb-40",
-                    ""
                 )
             }>
                 <h2
                     class="font-black text-4xl md:text-6xl"
                 >
-                    Celebrate<br>
-                    birthday<br>
-                    <span
-                        class="bg-color-radial"
-                    >
-                with us
-            </span>
+                    {translates.heading.base}<span class="bg-color-radial"><br/>{translates.heading.colored}</span>
                 </h2>
 
                 <p class="md:text-xl text-stone-500">
-                    Fill out the form and we will reserve a table for you for free.
+                    {translates.subheading}
                 </p>
 
                 <ButtonLink
-                    url="#"
-                    title="Book the B-party now!"
+                    url={translates.bookButton.title}
+                    title={translates.bookButton.title}
                     extraClass="md:w-fit"
                 />
             </div>
 
             <div class="relative z-10 flex flex-col gap-6 items-center">
-                <h2 class="font-black text-3xl md:text-5xl">Additional information</h2>
+                <h2 class="font-black text-3xl md:text-5xl">{translates.sliderHeading}</h2>
 
                 <SliderAdditional
                     slides={slides}

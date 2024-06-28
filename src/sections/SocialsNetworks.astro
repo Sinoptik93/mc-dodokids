@@ -2,8 +2,23 @@
 import {Image} from 'astro:assets';
 import {twMerge} from "tailwind-merge";
 
+type SocialNetworkEnum = "instagram"  | "facebook"  | "tiktok"  | "phone";
+
+interface SocialNetwork {
+    type: SocialNetworkEnum;
+    url: string;
+    alt: string;
+    title: string;
+}
+
+interface Translates {
+    heading: string;
+    socialNetworkList: SocialNetwork[];
+}
+
 interface Props {
     extraClass?: string;
+    translates: Translates;
 }
 
 import logoInstagram from '~/assets/logos/logo-instagram.svg';
@@ -11,34 +26,14 @@ import logoFb from '~/assets/logos/logo-fb.svg';
 import logoTikTok from '~/assets/logos/logo-tik-tok.svg';
 import iconPhone from '~/assets/icons/icon-phone.svg';
 
-const {extraClass} = Astro.props;
+const {extraClass, translates} = Astro.props;
 
-const socialsNetworksList = [
-    {
-        icon: logoInstagram,
-        url: 'https://www.instagram.com',
-        alt: 'instagram',
-        title: 'Dodo Pizza Cyprus',
-    },
-    {
-        icon: logoFb,
-        url: 'https://www.facebook.com',
-        alt: 'facebbok',
-        title: 'FB - Dodo Pizza Cyprus',
-    },
-    {
-        icon: logoTikTok,
-        url: 'https://tiktok.com',
-        alt: 'tik tok',
-        title: 'Tik Tok',
-    },
-    {
-        icon: iconPhone,
-        url: 'tel:+357 7700 07 07',
-        alt: 'phone',
-        title: '+357 7700 07 07',
-    },
-]
+const logoLibrary = {
+    facebook: logoFb,
+    instagram: logoInstagram,
+    tiktok: logoTikTok,
+    phone: iconPhone,
+}
 ---
 
 <div
@@ -50,13 +45,13 @@ const socialsNetworksList = [
     }
 >
     <div class="container">
-        <h2 class="relative z-10 mb-10 font-black text-4xl md:text-5xl text-center uppercase">
-            Have More Questions?<br>Contact Us!
+        <h2 class="relative z-10 mb-10 font-black text-4xl md:text-5xl text-center uppercase" set:html={translates.heading}>
+
         </h2>
 
         <div class="flex flex-col px-8 md:px-0 md:flex-row gap-3 justify-center">
             {
-                socialsNetworksList.map((social) => (
+                translates.socialNetworkList.map((social) => (
                     <a
                         href={social.url}
                         class="p-4 flex items-center gap-4 rounded-2xl shadow-lg shadow-neutral-100 bg-white"
@@ -69,7 +64,7 @@ const socialsNetworksList = [
                         }>
                             <Image
                                 class="w-full h-full object-contain"
-                                src={social.icon}
+                                src={logoLibrary[social.type]}
                                 alt={social.alt}
                             />
                         </div>

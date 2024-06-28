@@ -1,18 +1,41 @@
 ---
 import {Image} from 'astro:assets';
 import {twMerge} from "tailwind-merge";
-import ButtonLink from "~/components/ButtonLink/ButtonLink.astro";
+import Button from "~/components/Button/Button";
 
 import iconMail from '~/assets/icons/icon-mail.svg';
 import schoolDesktop from '~/assets/images/school-desktop.svg'
 import schoolMobile from '~/assets/images/school-mobile.svg'
 
-interface Props {
-    extraClass?: string;
+interface Translate {
+    heading: string;
+    subheading: string;
+    description: string;
+    linkTitle: string;
+    feedbackEmail: string;
 }
 
-const {extraClass} = Astro.props;
+interface Props {
+    extraClass?: string;
+    translates: Translate;
+}
+
+const {extraClass, translates} = Astro.props;
 ---
+
+<script>
+    import {createReactTrigger} from '~/utils/triggers/reactTrigger'
+    import {TRIGGER_NAME} from '~/components/ModalBookingEvent/config'
+    // const TRIGGER_NAME = "schools-mc"
+
+    const modalButton = document.querySelector(`[data-react-trigger="birthday"]`);
+    const handleClick = createReactTrigger<{defaultEvent: string}>({name: TRIGGER_NAME, detail: {defaultEvent: 'birthday'}})
+
+    console.log(modalButton)
+    if (modalButton) {
+        modalButton.addEventListener('click', handleClick);
+    }
+</script>
 
 <div
     class={
@@ -28,29 +51,27 @@ const {extraClass} = Astro.props;
     >
         <div class="flex flex-col md:max-w-[440px]">
             <h2 class="font-black text-2xl md:text-5xl mb-4">
-                For schools
+                {translates.heading}
             </h2>
 
             <p class="w-fit px-4 py-1 mb-10 text-purple bg-[#D2C0FF] rounded-xl">
-                Age-Appropriate Pizza Workshops
+                {translates.subheading}
             </p>
 
             <!--TODO: color -->
             <p class="text-[#83799E] mb-9">
-                Welcome to Dodo Pizza, where learning and culinary creativity combine! Our school program offers
-                hands-on, educational experiences with pizza-making master class.
-                Contact us to discuss scheduling and pricing or leave a request and we will contact you.
+                {translates.description}
             </p>
 
-            <ButtonLink
-                url="#s"
-                title="Discover special discounts"
+            <Button
+                data-react-trigger="birthday"
+                title={translates.linkTitle}
                 extraClass="bg-purple text-white w-fit mb-11"
             />
 
             <a
                 class="flex items-center gap-2"
-                href="mailto:feedback@dodopizza.com.cy"
+                href={`mailto:${translates.feedbackEmail}`}
             >
 
                 <div class={
@@ -68,7 +89,7 @@ const {extraClass} = Astro.props;
                 </div>
 
                 <p class="text-2xl">
-                    feedback@dodopizza.com.cy
+                    {translates.feedbackEmail}
                 </p>
 
             </a>

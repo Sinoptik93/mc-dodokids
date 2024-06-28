@@ -5,11 +5,25 @@ import {twMerge} from "tailwind-merge";
 import mcPhotosAccent from '~/assets/images/mc-photos-accent.png'
 import ButtonLink from "../components/ButtonLink/ButtonLink.astro";
 
-interface Props {
-    extraClass?: string;
+interface Translates {
+    heading: string;
+    costBadge: string;
+    subtitle: string;
+    extra: {
+        description: string;
+        time: string;
+        product: string;
+    };
+    description: string;
+    formButtonTitle: string;
 }
 
-const {extraClass} = Astro.props;
+interface Props {
+    extraClass?: string;
+    translates: Translates;
+}
+
+const {extraClass, translates} = Astro.props;
 ---
 
 <div class={
@@ -24,49 +38,45 @@ const {extraClass} = Astro.props;
         <div class="max-w-md flex flex-col gap-6 md:gap-10">
             <div class="flex flex-col gap-4 md:gap-6">
 
-                <h2 class="uppercase font-black text-3xl md:text-5xl">
-                    Kids pizza<br>master class
+                <h2 class="uppercase font-black text-3xl md:text-5xl" set:html={translates.heading}>
                 </h2>
 
                 <p
                     class="w-fit text-orange bg-orange-100 rounded-xl p-3 leading-[0.5rem]"
                 >
-                    The cost of the master class 25 € per person
+                    {translates.costBadge}
                 </p>
 
                 <p class="text-neutral-400">
-                    The price includes a 25 cm pizza with toppings to choose from, branded merch and a pizza maker
-                    diploma
+                    {translates.subtitle}
                 </p>
             </div>
 
             <div class="flex flex-wrap gap-2 items-center text-neutral-400">
                 <p>
-                    Minimum group of four people from 4 y.o.
+                    {translates.extra.description}
                 </p>
 
                 <div class="bg-neutral-400 size-1 rounded-full"/>
 
                 <p>
-                    60 min
+                    {translates.extra.time}
                 </p>
 
                 <div class="bg-neutral-400 size-1 rounded-full"/>
 
                 <p>
-                    Pizza
+                    {translates.extra.product}
                 </p>
             </div>
 
             <p>
-                Let your child become a pizza chef! In this hands-on class, they'll knead dough, choose toppings, and
-                craft their own pizza masterpiece. Our friendly hosts offer personalized guidance for an unforgettable
-                pizza-making experience.
+                {translates.description}
             </p>
 
             <ButtonLink
                 url="#"
-                title="Book Now for Pizza Fun"
+                title={translates.formButtonTitle}
                 extraClass="md:w-fit"
             />
         </div>

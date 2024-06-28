@@ -4,11 +4,24 @@ import {twMerge} from "tailwind-merge";
 
 import logoDodo from '~/assets/logos/logo-dodo.svg';
 
-interface Props {
-    extraClass?: string;
+interface Translate {
+    privacy: {
+        title: string;
+        url: string;
+    };
+    useTerms: {
+        title: string;
+        url: string;
+    };
+    sections: FooterSection[]
 }
 
-const {extraClass} = Astro.props;
+interface Props {
+    extraClass?: string;
+    translates: Translate;
+}
+
+const {extraClass, translates} = Astro.props;
 
 interface SourceLink {
     title: string;
@@ -23,48 +36,6 @@ interface FooterSection {
 
 type DataProps = FooterSection[]
 
-const data : DataProps = [
-    {
-        heading: 'About Us',
-        linksList: [
-            {
-                title: 'Dodo Brands website',
-                url: 'https://dodobrands.io/',
-            },
-            {
-                title: 'Dodo Pizza in Cyprus',
-                url: '#',
-            },
-        ]
-    },
-    {
-        heading: 'Follow us',
-        linksList: [
-            {
-                title: 'Dodo Pizza Cyprus Instagram',
-                url: '#',
-            },
-            {
-                title: 'Dodo Pizza Cyprus TikTok',
-                url: '#',
-            },
-        ]
-    },
-    {
-        heading: 'Contacts',
-        linksList: [
-            {
-                title: '+357 7700 07 07',
-                url: 'tel:+357 7700 07 07',
-            },
-            {
-                title: 'feedback@dodopizza.com.cy',
-                url: 'mailto:feedback@dodopizza.com.cy',
-            },
-        ]
-    },
-
-]
 ---
 
 <div
@@ -92,7 +63,7 @@ const data : DataProps = [
             </div>
 
             {
-                data.map((footerSection) => (
+                translates.sections.map((footerSection) => (
                     <div class="flex flex-col gap-4 md:gap-6 md:basis-80">
                         <p class="font-bold text-neutral-300 text-2xl">{footerSection.heading}</p>
 
@@ -113,8 +84,8 @@ const data : DataProps = [
             <p class="text-neutral-300">Dodo Pizza © {new Date().toLocaleDateString('en-EN', {year: 'numeric'})} </p>
 
             <div class="flex flex-col md:flex-row gap-4">
-                <a href="#privacy" target="_blank" class="text-neutral-300">Privacy Policy</a>
-                <a href="#privacy" target="_blank" class="text-neutral-300">Terms of use</a>
+                <a href={translates.privacy.url} target="_blank" class="text-neutral-300">{translates.privacy.title}</a>
+                <a href={translates.useTerms.url} target="_blank" class="text-neutral-300">{translates.useTerms.title}</a>
             </div>
         </div>
     </div>

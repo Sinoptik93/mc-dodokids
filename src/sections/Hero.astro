@@ -11,13 +11,31 @@ import friendTriangle from '~/assets/images/friend-triangle.svg'
 
 import {TRIGGER_NAME} from '~/components/ModalBookingEvent/config'
 
-interface Props {
-    extraClass?: string;
+interface Translates {
+    heading: string;
+    subheading: string;
+    formButtonTitle: string;
 }
 
-const {extraClass} = Astro.props;
+interface Props {
+    extraClass?: string;
+    translates: Translates;
+}
 
+const {extraClass, translates} = Astro.props;
 ---
+
+<script>
+    import {createReactTrigger} from '~/utils/triggers/reactTrigger'
+    import {TRIGGER_NAME} from '~/components/ModalBookingEvent/config'
+
+    const modalButton = document.querySelector(`[data-react-trigger="mc-pizza"]`);
+    const handleClick = createReactTrigger<{defaultEvent: string}>({name: TRIGGER_NAME, detail: {defaultEvent: 'mc-pizza'}})
+
+    if (modalButton) {
+        modalButton.addEventListener('click', handleClick);
+    }
+</script>
 
 
 <div class={
@@ -51,19 +69,19 @@ const {extraClass} = Astro.props;
             )
         }>
             <div>
-                <h1 class="z-10 font-black uppercase text-white text-6xl md:text-8xl text-center">
-                    Pizza with <br> your own <br class="md:hidden"> hands
+                <h1 class="z-10 font-black uppercase text-white text-6xl md:text-8xl text-center"
+                    set:html={translates.heading}>
                 </h1>
 
                 <p class="z-10 text-white text-base md:text-3xl text-center">
-                    Little Chefs, Big Fun!
+                    {translates.subheading}
                 </p>
             </div>
 
             <Button
-                title="Book master Class"
+                title={translates.formButtonTitle}
                 extraClass="w-full md:w-fit"
-                data-react-trigger={TRIGGER_NAME}
+                data-react-trigger="mc-pizza"
             />
 
             <div

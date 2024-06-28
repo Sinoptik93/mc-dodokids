@@ -1,6 +1,7 @@
-export const createReactTrigger = ({name}: { name: string }) => () => {
+export const createReactTrigger = <T = any>({name, detail}: { name: string; detail: T; }) => () => {
     const customEvent = new CustomEvent(name, {
-        bubbles: true
+        bubbles: true,
+        detail,
     });
 
     console.log('dispatch', customEvent);

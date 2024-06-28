@@ -2,6 +2,10 @@ import {useEffect, useState} from 'react';
 import {twMerge} from "tailwind-merge";
 import {getLocalTimeZone, parseDate, today} from "@internationalized/date";
 import {useForm, useFieldArray, Controller} from 'react-hook-form';
+import PhoneInput from 'react-phone-input-2';
+
+
+import {initRealisticConfetti} from "~/utils/confetti.ts";
 
 import {
     Modal,
@@ -22,7 +26,6 @@ import {
     VisuallyHidden,
     RadioProps
 } from '@nextui-org/react';
-import PhoneInput from 'react-phone-input-2';
 
 import {TRIGGER_NAME} from './config'
 
@@ -50,8 +53,76 @@ type FormValues = {
     agreePromotions: boolean;
 };
 
-import type {FC} from 'react';
-import {initRealisticConfetti} from "~/utils/confetti.ts";
+
+interface RadioItem {
+    title: string;
+    value: string;
+}
+
+interface RadioGroup {
+    name: string;
+    list: RadioItem[];
+}
+
+interface InputItem {
+    name: string;
+    placeholder: string;
+}
+
+interface Translate {
+    heading: string;
+    subheading: string;
+    event: {
+        title: string;
+    } & RadioGroup;
+    pizzeria: {
+        title: string;
+    } & RadioGroup;
+    personal: {
+        title: string;
+        name: InputItem;
+        phone: InputItem & { phoneCode: string; };
+    };
+    date: {
+        title: string;
+        description: string;
+    };
+    child: {
+        counterTitle: string;
+        childTitle: string;
+        name: InputItem;
+        age: InputItem;
+        allergyCheckboxTitle: string;
+        allergy: InputItem;
+        deleteButtonTitle: string;
+    }
+    details: {
+        placeholder: string;
+        caps: {
+            charsStart: string;
+            charsEnd: string;
+        };
+    }
+    privacyPolicy: {
+        title: string;
+        url: string;
+    };
+    promotionAgreement: {
+        title: string;
+        url: string;
+    };
+    bookEventButtonTitle: string;
+    successScreen: {
+        heading: string;
+        subheading: string;
+        returnButtonTitle: string;
+    };
+    errorScreen: {
+        heading: string;
+        subheading: string;
+        returnButtonTitle: string;
+    }
+}
 
 
 const Loader = () => {
@@ -72,8 +143,6 @@ const Loader = () => {
 
     );
 };
-
-export {};
 
 export const CustomRadio = (props: RadioProps) => {
     const {
@@ -115,33 +184,16 @@ export const CustomRadio = (props: RadioProps) => {
     );
 };
 
-const ModalBookingEvent = () => {
-    const {isOpen, onOpen, onOpenChange, onClose} = useDisclosure();
-    const [isPhoneValid, setIsPhoneValid] = useState(true);
-    const {
-        register,
-        control,
-        handleSubmit,
-        watch,
-        formState: {errors, isSubmitSuccessful, isSubmitting},
-        getValues,
-    } = useForm<FormValues>({
-        defaultValues: {
-            event: 'pizza-mc',
-            address: null,
-            name: 'Sergey',
-            phone: '+79097376778',
-            date: "2024-06-25",
-            children: [{name: 'Anton', age: '20', noAllergy: false, allergyDetails: 'Some allergy'}],
-            additionalInfo: 'Some info',
-            agreePrivacy: true,
-            agreePromotions: false,
-        },
-    });
+type Events = "pizza-mc" | "birthday" | "baking" | "schools-mc";
 
+interface DefaultValues {
+    event?: Events
+}
+
+const ModalBookingEvent = ({translates}: { translates: Translate; }) => {
     const empty = {
         event: 'pizza-mc',
-        address: 'a',
+        address: '',
         name: '',
         phone: '',
         date: '',
@@ -157,9 +209,35 @@ const ModalBookingEvent = () => {
         agreePrivacy: true,
         agreePromotions: false,
     }
+    const test = {
+        event: 'pizza-mc',
+        address: null,
+        name: 'Sergey',
+        phone: '+79097376778',
+        date: "2024-06-25",
+        children: [{name: 'Anton', age: '20', noAllergy: false, allergyDetails: 'Some allergy'}],
+        additionalInfo: 'Some info',
+        agreePrivacy: true,
+        agreePromotions: false,
+    }
 
+    const {isOpen, onOpen, onOpenChange, onClose} = useDisclosure();
+    const {
+        register,
+        control,
+        handleSubmit,
+        watch,
+        setValue,
+        formState: {errors, isSubmitSuccessful, isSubmitting},
+        getValues,
+    } = useForm<FormValues>({
+        defaultValues: empty,
+    });
+
+
+    const address = watch('event');
+    console.log({address})
     const additionalInfo = watch('additionalInfo')
-    const address = watch('address');
 
     const {fields, append, remove} = useFieldArray({
         control,
@@ -184,7 +262,12 @@ const ModalBookingEvent = () => {
     useEffect(() => {
         onOpen();
 
-        const handleOpenModal = () => {
+        const handleOpenModal = ({detail}: CustomEvent<{defaultEvent: string;}>) => {
+
+            console.log(detail)
+            if (!!detail.defaultEvent) {
+                setValue('event', detail.defaultEvent, { shouldDirty: true, shouldValidate: true, shouldTouch: true});
+            }
             onOpen();
         };
 
@@ -258,11 +341,8 @@ const ModalBookingEvent = () => {
                                     <ModalHeader
                                         className="sticky top-0 z-20 p-0 pb-6 flex flex-col gap-1 bg-white"
                                     >
-                                        <h2 className="text-2xl md:text-4xl font-black">Booking Event</h2>
-                                        <p className="text-base md:text-xl max-w-96">Please leave your information and
-                                            choose a
-                                            suitable time
-                                            to join the event.</p>
+                                        <h2 className="text-2xl md:text-4xl font-black">{translates.heading}</h2>
+                                        <p className="text-base md:text-xl max-w-96">{translates.subheading}</p>
                                     </ModalHeader>
 
                                     <ModalBody className="p-0 pb-10">
@@ -271,76 +351,52 @@ const ModalBookingEvent = () => {
                                             className="flex flex-col px-4 gap-8"
                                         >
                                             <div className="flex flex-col gap-2">
-                                                <label className="">Choose event</label>
+                                                <label className="">{translates.event.title}</label>
                                                 <div className="space-y-2">
                                                     <Controller
-                                                        name="event"
+                                                        name="name"
                                                         control={control}
                                                         rules={{required: true}}
                                                         render={({field}) => (
                                                             <RadioGroup
-                                                                aria-label="Choose even"
+                                                                aria-label={translates.event.title}
                                                                 defaultValue={field.value}
                                                                 onChange={field.onChange}
                                                             >
-                                                                <Radio
-                                                                    value="pizza-mc"
-                                                                    // classNames={{
-                                                                    //     control: "bg-orange",
-                                                                    //     wrapper: "group-data-[selected=true]:border-orange border-orange"
-                                                                    // }}
-                                                                >
-                                                                    Pizza making master class
-                                                                </Radio>
-                                                                <Radio
-                                                                    value="birthday"
-                                                                    // classNames={{
-                                                                    //     control: "bg-orange",
-                                                                    //     wrapper: "group-data-[selected=true]:border-orange border-orange"
-                                                                    // }}
-                                                                >
-                                                                    Birthday party</Radio>
-                                                                <Radio
-                                                                    value="baking"
-                                                                    // classNames={{
-                                                                    //     control: "bg-orange",
-                                                                    //     wrapper: "group-data-[selected=true]:border-orange border-orange"
-                                                                    // }}
-                                                                >
-                                                                    Baking class and birthday party</Radio>
-                                                                <Radio
-                                                                    value="schools-mc"
-                                                                    // classNames={{
-                                                                    //     control: "bg-orange",
-                                                                    //     wrapper: "group-data-[selected=true]:border-orange border-orange"
-                                                                    // }}
-                                                                >
-                                                                    Master class for schools</Radio>
+                                                                {
+                                                                    translates.event.list.map((eventType) => (
+                                                                        <Radio
+                                                                            value={eventType.value}
+                                                                        >
+                                                                            {eventType.title}
+                                                                        </Radio>
+                                                                    ))
+                                                                }
                                                             </RadioGroup>
                                                         )}
                                                     />
                                                 </div>
                                             </div>
 
-                                            <div className="flex flex-col gap-4 w-full">
-                                                <p>City</p>
-                                                <Select
-                                                    size="lg"
-                                                    defaultSelectedKeys={['limassol']}
-                                                    fullWidth
-                                                    variant="bordered"
-                                                    placeholder="City"
-                                                >
-                                                    {[{label: 'Limassol', key: 'limassol'}].map((city) => (
-                                                        <SelectItem key={city.key}>
-                                                            {city.label}
-                                                        </SelectItem>
-                                                    ))}
-                                                </Select>
-                                            </div>
+                                            {/*<div className="flex flex-col gap-4 w-full">*/}
+                                            {/*    <p>City</p>*/}
+                                            {/*    <Select*/}
+                                            {/*        size="lg"*/}
+                                            {/*        defaultSelectedKeys={['limassol']}*/}
+                                            {/*        fullWidth*/}
+                                            {/*        variant="bordered"*/}
+                                            {/*        placeholder="City"*/}
+                                            {/*    >*/}
+                                            {/*        {[{label: 'Limassol', key: 'limassol'}].map((city) => (*/}
+                                            {/*            <SelectItem key={city.key}>*/}
+                                            {/*                {city.label}*/}
+                                            {/*            </SelectItem>*/}
+                                            {/*        ))}*/}
+                                            {/*    </Select>*/}
+                                            {/*</div>*/}
 
                                             <div className="flex flex-col gap-2">
-                                                <label className="">Choose a pizzeria</label>
+                                                <label className="">{translates.pizzeria.title}</label>
                                                 <div className="space-y-2">
                                                     <Controller
                                                         name="address"
@@ -350,29 +406,20 @@ const ModalBookingEvent = () => {
                                                         }}
                                                         render={({field, fieldState}) => (
                                                             <RadioGroup
-                                                                aria-label="Choose a pizzeria"
+                                                                aria-label={translates.pizzeria.title}
                                                                 isInvalid={fieldState.invalid}
                                                                 defaultValue={field.value}
                                                                 onChange={field.onChange}
                                                             >
-                                                                <Radio
-                                                                    value="address1"
-                                                                    // classNames={{
-                                                                    //     control: "bg-orange",
-                                                                    //     wrapper: "group-data-[selected=true]:border-orange border-orange"
-                                                                    // }}
-                                                                >
-                                                                    address1
-                                                                </Radio>
-                                                                <Radio
-                                                                    value="address2"
-                                                                    // classNames={{
-                                                                    //     control: "bg-orange",
-                                                                    //     wrapper: "group-data-[selected=true]:border-orange border-orange"
-                                                                    // }}
-                                                                >
-                                                                    address2
-                                                                </Radio>
+                                                                {
+                                                                    translates.pizzeria.list.map((pizzeria) => (
+                                                                        <Radio
+                                                                            value={pizzeria.value}
+                                                                        >
+                                                                            {pizzeria.title}
+                                                                        </Radio>
+                                                                    ))
+                                                                }
                                                             </RadioGroup>
                                                         )}
                                                     />
@@ -380,18 +427,15 @@ const ModalBookingEvent = () => {
                                             </div>
 
                                             <div className="flex flex-col gap-4 w-full">
-                                                <p>Order person info</p>
+                                                <p>{translates.personal.title}</p>
                                                 <Input
                                                     isClearable
-                                                    aria-label="Order person info"
+                                                    aria-label="Person name"
                                                     fullWidth
                                                     size="lg"
                                                     variant="bordered"
-                                                    placeholder="Name"
+                                                    placeholder={translates.personal.name.placeholder}
                                                     isInvalid={!!errors.name}
-                                                    // classNames={{
-                                                    //     inputWrapper: "border-2 border-neutral-200 rounded-2xl bg-white data-[hover=true]:bg-orange-100"
-                                                    // }}
                                                     {...register('name', {required: true})}
                                                 />
 
@@ -405,8 +449,8 @@ const ModalBookingEvent = () => {
                                                         }}
                                                         render={({field}) => (
                                                             <PhoneInput
-                                                                placeholder="Phone"
-                                                                country={'cy'}
+                                                                placeholder={translates.personal.phone.placeholder}
+                                                                country={translates.personal.phone.phoneCode}
                                                                 {...field}
                                                             />
                                                         )}
@@ -416,10 +460,10 @@ const ModalBookingEvent = () => {
 
 
                                             <div className="flex flex-col gap-4">
-                                                <label className="">Date</label>
+                                                <label className="">{translates.date.title}</label>
                                                 {/* @ts-ignore */}
                                                 <DatePicker
-                                                    aria-label="Date"
+                                                    aria-label={translates.date.title}
                                                     variant="bordered"
                                                     isInvalid={!!errors.date}
                                                     size="lg"
@@ -435,13 +479,11 @@ const ModalBookingEvent = () => {
                                                     })}
                                                 />
 
-                                                <p className="text-sm">We will contact you within 24 hours to select the
-                                                    date
-                                                    and time of your visit.</p>
+                                                <p className="text-sm">{translates.date.description}</p>
                                             </div>
 
                                             <div className="flex flex-col gap-4">
-                                                <label className="">Number of children</label>
+                                                <label className="">{translates.child.counterTitle}</label>
                                                 <div className="flex gap-2 items-center mb-8">
                                                     <Button
                                                         onClick={() => remove(fields.length - 1)}
@@ -469,7 +511,7 @@ const ModalBookingEvent = () => {
                                                 {fields.map((field, index) => (
                                                     <div key={field.id} className="space-y-2">
                                                         <div className="flex justify-between">
-                                                            <p className="pb-4">{`Child ${index + 1}`}</p>
+                                                            <p className="pb-4">{`${translates.child.childTitle} ${index + 1}`}</p>
 
                                                             {
                                                                 fields.length > 1 && (
@@ -482,63 +524,51 @@ const ModalBookingEvent = () => {
                                                                             <IconTrash/>
                                                                         </div>
 
-                                                                        <p>Delete card</p>
+                                                                        <p>{translates.child.deleteButtonTitle}</p>
                                                                     </Button>
                                                                 )
                                                             }
                                                         </div>
                                                         <div className="flex gap-4">
                                                             <Input
-                                                                aria-label="Child name"
+                                                                aria-label={translates.child.name}
                                                                 isClearable
                                                                 fullWidth
                                                                 size="lg"
                                                                 variant="bordered"
                                                                 isInvalid={errors.children && !!errors?.children[index]?.name}
-                                                                placeholder="Name"
+                                                                placeholder={translates.child.name.placeholder}
                                                                 {...register(`children.${index}.name`, {
                                                                     required: true
                                                                 })}
-                                                                // classNames={{
-                                                                //     inputWrapper: "border-2 border-neutral-200 rounded-2xl bg-white data-[hover=true]:bg-orange-100"
-                                                                // }}
                                                             />
                                                             <Input
-                                                                aria-label="Child age"
+                                                                aria-label={translates.child.age.name}
                                                                 isClearable
                                                                 fullWidth
                                                                 size="lg"
                                                                 variant="bordered"
                                                                 isInvalid={errors.children && !!errors?.children[index]?.age}
-                                                                placeholder="Age"
+                                                                placeholder={translates.child.name.placeholder}
                                                                 {...register(`children.${index}.age`, {required: true})}
-                                                                // classNames={{
-                                                                //     inputWrapper: "border-2 border-neutral-200 rounded-2xl bg-white data-[hover=true]:bg-orange-100"
-                                                                // }}
                                                             />
                                                         </div>
 
                                                         <Checkbox
                                                             {...register(`children.${index}.noAllergy`)}
-                                                            // classNames={{
-                                                            //     wrapper: "before:border-orange after:bg-orange",
-                                                            // }}
                                                         >
-                                                            No allergy
+                                                            {translates.child.allergyCheckboxTitle}
                                                         </Checkbox>
 
                                                         {!watchChildren[index]?.noAllergy && (
                                                             <Textarea
-                                                                aria-label="Child allergy details"
+                                                                aria-label={translates.child.allergy.placeholder}
                                                                 fullWidth
                                                                 size="lg"
                                                                 variant="bordered"
                                                                 isInvalid={errors.children && !!errors?.children[index]?.allergyDetails}
-                                                                placeholder="What allergies do you have? Write separated by commas"
+                                                                placeholder={translates.child.allergy.placeholder}
                                                                 {...register(`children.${index}.allergyDetails`, {required: true})}
-                                                                // classNames={{
-                                                                //     inputWrapper: "border-2 border-neutral-200 rounded-2xl bg-white data-[hover=true]:bg-orange-100"
-                                                                // }}
                                                             />
                                                         )}
                                                     </div>
@@ -546,47 +576,42 @@ const ModalBookingEvent = () => {
                                             </div>
 
                                             <div className="flex flex-col gap-4">
-                                                <label className="">Additional Information</label>
 
                                                 <div className="relative">
-
                                                     <Textarea
-                                                        aria-label="Details"
+                                                        aria-label={translates.details.placeholder}
                                                         fullWidth
                                                         size="lg"
                                                         variant="bordered"
-                                                        placeholder="Details"
+                                                        placeholder={translates.details.placeholder}
                                                         maxLength={200}
                                                         {...register('additionalInfo')}
-                                                        // classNames={{
-                                                        //     inputWrapper: "border-2 border-neutral-200 rounded-2xl bg-white data-[hover=true]:bg-orange-100"
-                                                        // }}
                                                     />
 
-                                                    <p className="text-sm text-neutral-300 absolute bottom-1 right-4">{additionalInfo.length} of
-                                                        200 characters</p>
+                                                    <p className="text-sm text-neutral-300 absolute bottom-1 right-4">{additionalInfo.length} {translates.details.caps.charsStart} 200 {translates.details.caps.charsEnd}</p>
                                                 </div>
                                             </div>
 
                                             <div>
                                                 <Checkbox
+                                                    className="items-start mb-4"
                                                     {...register('agreePrivacy', {required: true})}
-                                                    // classNames={{
-                                                    //     wrapper: "before:border-orange after:bg-orange",
-                                                    // }}
                                                 >
-                                                    I agree with the Privacy Policy
+                                                    <p
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: translates.privacyPolicy.title
+                                                        }}
+                                                    />
                                                 </Checkbox>
-                                                {errors.agreePrivacy &&
-                                                    <span
-                                                        className="text-red-500 text-xs">This field is required</span>}
                                                 <Checkbox
+                                                    className="items-start"
                                                     {...register('agreePromotions')}
-                                                    classNames={{
-                                                        // wrapper: "before:border-orange after:bg-orange",
-                                                    }}
                                                 >
-                                                    I agree to receive promotional and informational communications
+                                                    <p
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: translates.promotionAgreement.title
+                                                        }}
+                                                    />
                                                 </Checkbox>
                                             </div>
 
@@ -602,7 +627,7 @@ const ModalBookingEvent = () => {
                                                     )
                                                 }
                                             >
-                                                Book event
+                                                {translates.bookEventButtonTitle}
                                             </Button>
                                         </form>
                                     </ModalBody>
@@ -619,10 +644,9 @@ const ModalBookingEvent = () => {
                                         <TriangleFriendCool/>
                                     </div>
 
-                                    <p className="font-black text-4xl text-center">You’re awesome!</p>
+                                    <p className="font-black text-4xl text-center">{translates.successScreen.heading}</p>
 
-                                    <p className="text-neutral-600 text-center">You have successfully registered for the
-                                        Pepperoni Rush master class! We are waiting for you:</p>
+                                    <p className="text-neutral-600 text-center">{translates.successScreen.subheading}</p>
 
                                     <p className="text-neutral-600 text-center bg-neutral-200 p-4 rounded-xl">{new Date(getValues().date).toLocaleDateString('en-EN', {
                                         day: 'numeric',
@@ -641,7 +665,7 @@ const ModalBookingEvent = () => {
                                             )
                                         }
                                     >
-                                        Back to main page
+                                        {translates.successScreen.returnButtonTitle}
                                     </Button>
 
                                 </ModalBody>

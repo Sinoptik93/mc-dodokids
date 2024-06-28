@@ -11,7 +11,7 @@ import 'swiper/css';
 import './sliderPhotos.styles.scss'
 
 
-const SliderPhotos = ({slides}: { slides: { src: string; alt: string }[] }) => {
+const SliderPhotos = ({slides, title}: { title: string; slides: { src: string; alt: string }[] }) => {
     return (
         <div
             id="slider-photos"
@@ -37,7 +37,7 @@ const SliderPhotos = ({slides}: { slides: { src: string; alt: string }[] }) => {
                     )
                 }>
                     <div className="w-8 aspect-square md:w-16 rounded-full bg-orange"/>
-                    <p className="text-base md:text-2xl font-black">Dodo Pizza Cyprus</p>
+                    <p className="text-base md:text-2xl font-black">{title}</p>
                 </div>
 
                 <div

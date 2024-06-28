@@ -6,17 +6,11 @@ import CustomMap from '~/components/Map/Map';
 
 interface Props {
     extraClass?: string;
+    mapCenter: {lat: number, lng: number};
 }
 
+const {extraClass, mapCenter} = Astro.props;
 
-const {extraClass} = Astro.props;
-
-const center = {
-    lat: 35.166063,
-    lng: 33.358583
-}
-
-const pointsList = [center]
 ---
 
 <div class={
@@ -25,8 +19,8 @@ const pointsList = [center]
     )
 }>
     <CustomMap
-        pointsList={pointsList}
-        center={center}
+        pointsList={[mapCenter]}
+        center={mapCenter}
         client:only="react"
     />
 </div>
