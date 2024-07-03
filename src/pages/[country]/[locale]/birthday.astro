@@ -1,0 +1,24 @@
+---
+import { getCollection, getEntry } from "astro:content";
+
+export async function getStaticPaths() {
+    const allLocations = await getCollection("location");
+    const filteredLocations = allLocations.filter((location) => (location.data.pageHb))
+
+    return filteredLocations.map((location) => {
+        return {
+            params: {
+                country: location.data.country,
+                locale: location.data.locale,
+            },
+            props: {
+                location,
+            },
+        };
+    });
+}
+
+const { location } = Astro.props;
+---
+
+<p>Birthday {location ? location?.id : null}</p>

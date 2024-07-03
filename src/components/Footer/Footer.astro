@@ -1,8 +1,14 @@
 ---
-import {Image} from 'astro:assets';
-import {twMerge} from "tailwind-merge";
+import { Image } from "astro:assets";
+import { twMerge } from "tailwind-merge";
 
-import logoDodo from '~/assets/logos/logo-dodo.svg';
+import dodoLogo from "~/assets/logos/logo-dodo.svg";
+import dodoLogoAz from "~/assets/logos/logo-dodo-az.svg";
+
+const logoLibrary = {
+    az: dodoLogoAz,
+    default: dodoLogo,
+};
 
 interface Translate {
     privacy: {
@@ -13,49 +19,38 @@ interface Translate {
         title: string;
         url: string;
     };
-    sections: FooterSection[]
+    sections: FooterSection[];
 }
 
 interface Props {
     extraClass?: string;
+    logo?: "az" | "default";
     translates: Translate;
 }
 
-const {extraClass, translates} = Astro.props;
+const { extraClass, translates, logo } = Astro.props;
 
 interface SourceLink {
     title: string;
     url: string;
-    target?: '_blank' | '_self';
+    target?: "_blank" | "_self";
 }
 
 interface FooterSection {
-        heading: string;
-        linksList: SourceLink[];
+    heading: string;
+    linksList: SourceLink[];
 }
 
-type DataProps = FooterSection[]
-
+type DataProps = FooterSection[];
 ---
 
-<div
-    class={
-        twMerge(
-            extraClass
-        )
-    }
->
+<div class={twMerge(extraClass)}>
     <div class="container py-16 flex flex-col gap-12">
         <div class="flex flex-col items-start md:flex-row gap-8 md:gap-8">
             <div class="md:basis-80 mb-4">
-
-                <div class={
-                    twMerge(
-                        "w-36"
-                    )
-                }>
+                <div class={twMerge("w-36")}>
                     <Image
-                        src={logoDodo}
+                        src={logoLibrary[logo ?? 'default']}
                         alt="logoDodo"
                         class="h-full w-full object-contain"
                     />
@@ -65,27 +60,45 @@ type DataProps = FooterSection[]
             {
                 translates.sections.map((footerSection) => (
                     <div class="flex flex-col gap-4 md:gap-6 md:basis-80">
-                        <p class="font-bold text-neutral-300 text-2xl">{footerSection.heading}</p>
+                        <p class="font-bold text-neutral-300 text-2xl">
+                            {footerSection.heading}
+                        </p>
 
                         <ul class="flex flex-col gap-2">
-                            {
-                                footerSection.linksList.map((link) => (
-                                    <li class="text-xl"><a href={link.url} target={link.target ?? "_blank"}>{link.title}</a></li>
-                                ))
-                            }
+                            {footerSection.linksList.map((link) => (
+                                <li class="text-xl">
+                                    <a
+                                        href={link.url}
+                                        target={link.target ?? "_blank"}
+                                    >
+                                        {link.title}
+                                    </a>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 ))
             }
-
         </div>
 
         <div class="flex justify-between flex-col gap-4 md:flex-row">
-            <p class="text-neutral-300">Dodo Pizza © {new Date().toLocaleDateString('en-EN', {year: 'numeric'})} </p>
+            <p class="text-neutral-300">
+                Dodo Pizza © {
+                    new Date().toLocaleDateString("en-EN", { year: "numeric" })
+                }
+            </p>
 
             <div class="flex flex-col md:flex-row gap-4">
-                <a href={translates.privacy.url} target="_blank" class="text-neutral-300">{translates.privacy.title}</a>
-                <a href={translates.useTerms.url} target="_blank" class="text-neutral-300">{translates.useTerms.title}</a>
+                <a
+                    href={translates.privacy.url}
+                    target="_blank"
+                    class="text-neutral-300">{translates.privacy.title}</a
+                >
+                <a
+                    href={translates.useTerms.url}
+                    target="_blank"
+                    class="text-neutral-300">{translates.useTerms.title}</a
+                >
             </div>
         </div>
     </div>

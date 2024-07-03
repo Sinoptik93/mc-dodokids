@@ -1,19 +1,19 @@
 ---
-import {Image} from 'astro:assets';
-import {twMerge} from "tailwind-merge";
+import { Image } from "astro:assets";
+import { twMerge } from "tailwind-merge";
 import ButtonLink from "~/components/ButtonLink/ButtonLink.astro";
 import SliderAdditional from "~/components/SliderAdditional/SliderAdditional";
 
 import celebrateImageTop from "~/assets/images/celebrate-1-1.svg";
 import celebrateImageBottom from "~/assets/images/celebrate-1-2.svg";
 
-import type {SlideAdditionalProps} from "~/components/SliderAdditional/types";
-import {TRIGGER_NAME} from "../components/ModalBookingEvent/config";
+import type { SlideAdditionalProps } from "~/components/SliderAdditional/types";
+import { TRIGGER_NAME } from "../components/ModalBookingEvent/config";
 
 interface Translate {
     heading: {
-      base: string;
-      colored: string;
+        base: string;
+        colored: string;
     };
     subheading: string;
     bookButton: {
@@ -21,47 +21,50 @@ interface Translate {
         url: string;
     };
     sliderHeading: string;
+    slides: SlideAdditionalProps[];
 }
 
 interface Props {
     extraClass?: string;
-    slides: SlideAdditionalProps[];
     translates: Translate;
 }
 
-
-const {extraClass, slides, translates} = Astro.props;
+const { extraClass, translates } = Astro.props;
 ---
-<script>
-    import {createReactTrigger} from '~/utils/triggers/reactTrigger'
-    import {TRIGGER_NAME} from '~/components/ModalBookingEvent/config'
 
-    const modalButton = document.querySelector(`[data-react-trigger="${TRIGGER_NAME}"]`);
-    const handleClick = createReactTrigger<{defaultEvent: string}>({name: TRIGGER_NAME, detail: {defaultEvent: 'birthday'}})
+<script>
+    import { createReactTrigger } from "~/utils/triggers/reactTrigger";
+    import { TRIGGER_NAME } from "~/components/ModalBookingEvent/config";
+
+    const modalButton = document.querySelector(
+        `[data-react-trigger="${TRIGGER_NAME}"]`,
+    );
+    const handleClick = createReactTrigger<{ defaultEvent: string }>({
+        name: TRIGGER_NAME,
+        detail: { defaultEvent: "birthday" },
+    });
 
     if (modalButton) {
-        modalButton.addEventListener('click', handleClick);
+        modalButton.addEventListener("click", handleClick);
     }
 </script>
 
 <div
-    class={
-        twMerge(
-            "relative flex flex-col overflow-hidden",
-            "bg-orange-100 rounded-3xl md:rounded-8xl",
-            "md:rounded-8xl md:overflow-visible",
-            extraClass
-        )
-    }
+    class={twMerge(
+        "relative flex flex-col overflow-hidden",
+        "bg-orange-100 rounded-3xl md:rounded-8xl",
+        "md:rounded-8xl md:overflow-visible",
+        extraClass,
+    )}
 >
-    <div class="relative flex flex-col overflow-hidden">
-        <div class={
-            twMerge(
+    <div class="relative flex flex-col overflow-hidden py-16 md:py-24">
+        <div
+            class={twMerge(
                 "absolute",
                 "w-[420px] -top-[70px] -right-[190px]",
-                "md:w-auto md:-top-[260px] md:-right-[160px]"
-            )
-        }>
+                "md:w-auto md:-top-[260px] md:-right-[160px]",
+            )}
+        >
             <Image
                 src={celebrateImageTop}
                 alt="celebrate bg"
@@ -69,16 +72,13 @@ const {extraClass, slides, translates} = Astro.props;
             />
         </div>
 
-        <div class="relative z-10 container flex flex-col py-16 md:py-32">
-            <div class={
-                twMerge(
-                    "flex flex-col gap-6 max-w-md mb-10 md:mb-40",
-                )
-            }>
-                <h2
-                    class="font-black text-4xl md:text-6xl"
-                >
-                    {translates.heading.base}<span class="bg-color-radial"><br/>{translates.heading.colored}</span>
+        <div class="relative z-10 container flex flex-col mb-8">
+            <div class={twMerge("flex flex-col gap-6 max-w-72 md:max-w-md mb-10 md:mb-40")}>
+                <h2 class="font-black text-4xl md:text-6xl">
+                    {translates.heading.base}
+                    <span class="bg-color-radial"
+                        ><br />{translates.heading.colored}</span
+                    >
                 </h2>
 
                 <p class="md:text-xl text-stone-500">
@@ -93,28 +93,28 @@ const {extraClass, slides, translates} = Astro.props;
             </div>
 
             <div class="relative z-10 flex flex-col gap-6 items-center">
-                <h2 class="font-black text-3xl md:text-5xl">{translates.sliderHeading}</h2>
-
-                <SliderAdditional
-                    slides={slides}
-                    client:only="react"
-                />
+                <h2 class="font-black text-3xl md:text-5xl">
+                    {translates.sliderHeading}
+                </h2>
             </div>
+        </div>
+
+        <div class="md:container">
+            <SliderAdditional slides={translates.slides} client:only="react" />
         </div>
     </div>
 
-    <div class={
-        twMerge(
+    <div
+        class={twMerge(
             "absolute",
             "w-[800px] top-[390px] -left-[90px]",
-            "md:overflow-visible md:w-auto md:top-[480px] md:left-0"
-        )
-    }>
+            "md:overflow-visible md:w-auto md:top-[480px] md:left-0",
+        )}
+    >
         <Image
             src={celebrateImageBottom}
             alt="celebrate bg"
             class="h-full w-full object-contain"
         />
     </div>
-
 </div>

@@ -40,7 +40,7 @@ const {extraClass, translates} = Astro.props;
 
 <div class={
     twMerge(
-        "relative overflow-hidden flex items-center justify-center",
+        "relative overflow-hidden flex items-center justify-center mt-16",
         "h-[520px] md:h-screen ",
         "rounded-b-3xl md:rounded-b-8xl",
         extraClass
@@ -69,7 +69,7 @@ const {extraClass, translates} = Astro.props;
             )
         }>
             <div>
-                <h1 class="z-10 font-black uppercase text-white text-6xl md:text-8xl text-center"
+                <h1 class="z-10 font-black uppercase text-white text-4xl md:text-8xl text-center"
                     set:html={translates.heading}>
                 </h1>
 
@@ -89,7 +89,7 @@ const {extraClass, translates} = Astro.props;
                     twMerge(
                         "absolute z-20",
                         "-top-[60px] right-[50px] w-16",
-                        "md:-top-[108px] md:right-[240px] md:w-auto",
+                        "md:-top-[100px] md:right-[30%] md:w-auto",
                         "animate-fade animate-once animate-delay-300"
                     )
                 }
@@ -106,7 +106,7 @@ const {extraClass, translates} = Astro.props;
                     twMerge(
                         "absolute z-20",
                         "-top-[42px] left-[68px] h-14",
-                        "md:-top-[64px] md:left-[290px] md:h-auto",
+                        "md:-top-[60px] md:left-[25%] md:h-auto",
                         "animate-fade animate-once animate-delay-500"
                     )
                 }
@@ -118,7 +118,7 @@ const {extraClass, translates} = Astro.props;
                 />
             </div>
 
-            <div
+            <!-- <div
                 class={
                     twMerge(
                         "absolute z-20",
@@ -133,7 +133,7 @@ const {extraClass, translates} = Astro.props;
                     alt="friendTriangle"
                     class="object-contain w-full h-full"
                 />
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

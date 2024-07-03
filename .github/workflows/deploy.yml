@@ -30,8 +30,6 @@ jobs:
                 node-version: '20'
             - name: Install dependencies
               run: yarn install
-            - name: Install sharp with ignore-engines
-              run: yarn add sharp --ignore-engines
             - name: Install, build, and upload your site
               uses: withastro/action@v2
 

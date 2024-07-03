@@ -1,0 +1,96 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import Layout from "~/layouts/Layout.astro";
+
+import Header from "~/components/Header/Header";
+import Footer from "~/components/Footer/Footer.astro";
+
+import SectionHero from "~/sections/Hero.astro";
+import SectionSummary from "~/sections/Summary.astro";
+import SectionAdditionalInfo from "~/sections/AdditionalInfo.astro";
+import SectionPhotoPreview from "~/sections/PhotoPreview.astro";
+import SectionFeedback from "~/sections/Feedback.astro";
+import SectionPizzaPromote from "~/sections/PizzaPromote.astro";
+import SectionForSchools from "~/sections/ForSchools.astro";
+import SectionQuestionAndAnswers from "~/sections/QuestionAndAnswers.astro";
+import SectionSocialNetworks from "~/sections/SocialsNetworks.astro";
+import SectionMap from "~/sections/Map.astro";
+import ModalBookingEvent from "~/components/ModalBookingEvent/ModalBookingEvent";
+
+export async function getStaticPaths() {
+    const allLocations = await getCollection("location");
+
+    return allLocations.map((location) => ({
+        params: {
+            country: location.data.country,
+            locale: location.data.locale,
+        },
+        props: {
+            location,
+        },
+    }));
+}
+
+const { location } = Astro.props;
+
+const translates = location.data.translates;
+
+const allLocations = await getCollection("location");
+const languages = allLocations
+    .filter(
+        (currentLocation) =>
+            location.data.country === currentLocation.data.country,
+    )
+    .map((currentLocation) => ({
+        label: currentLocation.data.locale,
+        active: location.data.locale === currentLocation.data.locale,
+    }));
+
+const center = {
+    lat: 35.166063,
+    lng: 33.358583,
+};
+---
+
+<Layout title="title">
+    <ModalBookingEvent
+        client:only="react"
+        translates={translates.modalBooking}
+    />
+
+    <Header logo={location.data.logo} translate={translates.header} languageList={languages} client:load />
+
+    <SectionHero extraClass="mb-10" translates={translates.hero} />
+
+    <SectionSummary extraClass="mb-10" translates={translates.summary} />
+
+    <SectionAdditionalInfo
+        extraClass="mb-10"
+        translates={translates.additionalInfo}
+    />
+
+    <SectionPhotoPreview
+        extraClass="mb-10"
+        translates={translates.photoPreview}
+    />
+
+    <SectionFeedback extraClass="mb-10" translates={translates.feedback} />
+
+    <SectionPizzaPromote translates={translates.pizzaPromote} />
+
+    <SectionForSchools extraClass="mb-10" translates={translates.forSchools} />
+
+    <SectionQuestionAndAnswers
+        extraClass="mb-20 md:mb-40"
+        translates={translates.questionAndAnswers}
+    />
+
+    <SectionSocialNetworks translates={translates.socialNetworks} />
+
+    <SectionMap mapCenter={center} />
+
+    <Footer
+    logo={location.data.logo}
+    translates={translates.footer}
+     />
+</Layout>

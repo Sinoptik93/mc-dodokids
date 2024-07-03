@@ -1,36 +1,27 @@
 import DodoLogo from '~/assets/logos/logo-dodo.svg?react';
+import DodoLogoAz from '~/assets/logos/logo-dodo-az.svg?react';
 import IconPhone from '~/assets/icons/icon-phone.svg?react';
+import IconBurger from '~/assets/icons/icon-burger.svg?react';
+import IconCross from '~/assets/icons/icon-cross.svg?react';
+import { twMerge } from "tailwind-merge";
+import { useState } from "react";
 
-const menu = [
-    {
-        title: 'Master classes',
-        url: '#',
-    },
-    {
-        title: 'Birthday',
-        url: '#',
-    },
-    {
-        title: 'Reviews',
-        url: '#',
-    },
-    {
-        title: 'Schools',
-        url: '#',
-    },
-    {
-        title: 'FAQ',
-        url: '#',
-    },
-    {
-        title: 'Contact us',
-        url: '#',
-    },
-];
+const logoLibrary = {
+    az: <DodoLogoAz />,
+    default: <DodoLogo />
+};
 
 interface Props {
+    logo?: string;
     translate: {
-        test: string;
+        phone: {
+            url: string;
+            title: string;
+        },
+        menu: {
+            title: string;
+            url: string;
+        }[]
     },
     languageList: {
         label: string;
@@ -38,46 +29,120 @@ interface Props {
     }[]
 }
 
-const Header = ({ languageList, translate }: Props) => {
+const Header = ({ languageList, translate, logo }: Props) => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    console.log(translate);
+
     return (
-        <div className="container hidden md:block">
-            <div className="flex items-center py-8 gap-8">
+        <>
+            <div className="bg-white z-50 fixed top-0 left-0 right-0 flex flex-col">
+                <div className="container">
+                    <div className="flex items-center justify-between py-2 md:py-6">
 
-                <div className="w-32">
-                    <DodoLogo/>
-                </div>
+                        <div className="w-28 md:w-32 md:mr-12">
+                            {
+                                logoLibrary[logo ?? 'default']
+                            }
+                        </div>
 
-                <nav className="flex grow">
-                    <ul className="flex grow justify-between">
-                        {menu.map((item, index) => (
-                            <li>
-                                <a href={item.url}>{item.title}</a>
-                            </li>
-                        ))}
-                    </ul>
-                </nav>
+                        <button
+                            className="md:hidden flex justify-between items-center size-6"
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        >
+                            {
+                                isMenuOpen
+                                    ? <IconCross />
+                                    : <IconBurger />
+                            }
+                        </button>
 
-                <div className="flex gap-4">
-                    <div className="size-8">
-                        <IconPhone/>
+                        <div className="hidden md:flex items-center grow justify-between gap-8">
+
+                            <nav className="flex grow">
+                                <ul className="flex grow justify-between">
+                                    {translate.menu.map((item, index) => (
+                                        <li>
+                                            <a href={item.url}>{item.title}</a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </nav>
+
+                            <div className="flex gap-4">
+                                <div className="size-8">
+                                    <IconPhone />
+                                </div>
+                                <a href={translate.phone.url}>{translate.phone.title}</a>
+                            </div>
+
+                            <div className="flex">
+                                {
+                                    languageList.map((language) => (
+                                        <a
+                                            href={`/${language.label}`}
+                                            className={twMerge(
+                                                "px-4 py-2 rounded-full shrink-0 uppercase",
+                                                language.active && 'bg-orange text-white',
+                                            )}
+                                        >
+                                            {language.label}
+                                        </a>
+                                    ))
+                                }
+                            </div>
+
+                            <div>
+                                <button className="p-4 bg-orange text-white rounded-full">Bookmark master class</button>
+                            </div>
+                        </div>
                     </div>
-                    <a href="tel:+799999999">+7999999999</a>
-                </div>
 
-                <div className="flex gap-4">
-                    <a
-                        href="/en"
-                    >en</a>
-                    <a
-                        href="/ru"
-                    >ru</a>
-                </div>
+                    {
+                        isMenuOpen && (
+                            <div className="bg-white flex flex-col gap-8 pb-12 pt-4">
+                                <div className="flex flex-col gap-8">
+                                    <nav className="">
+                                        <ul className="flex flex-col gap-6">
+                                            {translate.menu.map((item, index) => (
+                                                <li>
+                                                    <a
+                                                        className="text-3xl text-bold"
+                                                        href={item.url}
+                                                    >
+                                                        {item.title}
+                                                    </a>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </nav>
 
-                <div>
-                    <button className="p-4 bg-orange text-white rounded-full">Bookmark master class</button>
+                                    <div className="flex">
+                                        {
+                                            languageList.map((language) => (
+                                                <a
+                                                    href={`/${language.label}`}
+                                                    className={twMerge(
+                                                        "px-1 rounded-full shrink-0 uppercase",
+                                                        language.active && 'bg-orange text-white',
+                                                    )}
+                                                >
+                                                    {language.label}
+                                                </a>
+                                            ))
+                                        }
+                                    </div>
+                                </div>
+
+                                <button className="w-full p-4 bg-orange text-white rounded-full">Bookmark master class</button>
+                            </div>
+                        )
+                    }
                 </div>
             </div>
-        </div>
+
+        </>
+
     );
 };
 

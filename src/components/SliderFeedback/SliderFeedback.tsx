@@ -3,6 +3,7 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 import {Pagination} from 'swiper/modules';
 
 import IconStar from '~/assets/icons/icon-star.svg?react'
+import IconCross from '~/assets/icons/icon-cross.svg?react';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -81,7 +82,7 @@ const SlideFeedback = ({feedbackText, userName, date, rating}: SlideFeedbackProp
             <Modal
                 className={
                     twMerge(
-                        "max-h-svh m-10 flex flex-col gap-4 bg-white border-4 border-orange",
+                        "max-h-svh m-10 flex flex-col gap-4 bg-white border-4 border-orange overflow-visible",
                         "p-2 rounded-2xl",
                         " md:p-8 md:rounded-5xl"
                     )
@@ -94,6 +95,19 @@ const SlideFeedback = ({feedbackText, userName, date, rating}: SlideFeedbackProp
                     {(onClose) => (
                         <>
                             <ModalBody>
+
+                            <button
+                            onClick={() => onClose()}
+                            className={
+                                twMerge(
+                                    "z-40 size-10  absolute right-1 top-1 p-3",
+                                    "bg-white rounded-full shadow-lg shadow-neutral-400",
+                                    "md:-right-2 md:-top-2 md:shadow-xl"
+                                )
+                            }
+                        >
+                            <IconCross/>
+                        </button>
 
                                 <div
                                     className={

@@ -5,7 +5,7 @@ import {useForm, useFieldArray, Controller} from 'react-hook-form';
 import PhoneInput from 'react-phone-input-2';
 
 
-import {initRealisticConfetti} from "~/utils/confetti.ts";
+import {initRealisticConfetti} from "~/utils/confetti";
 
 import {
     Modal,
@@ -260,7 +260,7 @@ const ModalBookingEvent = ({translates}: { translates: Translate; }) => {
     };
 
     useEffect(() => {
-        onOpen();
+        // onOpen();
 
         const handleOpenModal = ({detail}: CustomEvent<{defaultEvent: string;}>) => {
 
@@ -328,7 +328,7 @@ const ModalBookingEvent = ({translates}: { translates: Translate; }) => {
                             onClick={() => onClose()}
                             className={
                                 twMerge(
-                                    "z-40 absolute right-1 top-1 p-3",
+                                    "z-40 size-10  absolute right-1 top-1 p-3",
                                     "bg-white rounded-full shadow-lg shadow-neutral-400",
                                     "md:-right-2 md:-top-2 md:shadow-xl"
                                 )
