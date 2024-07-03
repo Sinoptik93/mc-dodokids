@@ -55,6 +55,7 @@ const center = {
 
 <Layout
     title={location.data.title}
+    extraClass="flex flex-col gap-4"
 >
     <ModalBookingEvent
         client:only="react"
@@ -69,47 +70,66 @@ const center = {
     />
 
     <SectionHero
-        extraClass="mb-10"
+        extraClass="mb-10 mt-24"
         translates={translates.hero}
     />
 
-    <SectionSummary
-        extraClass="mb-10"
-        translates={translates.summary}
-    />
+    <div>
+        <div id="mc"/>
+        <SectionSummary
+            extraClass="mb-10"
+            translates={translates.summary}
+        />
+    </div>
 
-    <SectionAdditionalInfo
-        extraClass="mb-10"
-        translates={translates.additionalInfo}
-    />
+    <div>
+        <div id="birthday"/>
+        <SectionAdditionalInfo
+            extraClass="mb-10"
+            translates={translates.additionalInfo}
+        />
+    </div>
 
     <SectionPhotoPreview
         extraClass="mb-10"
         translates={translates.photoPreview}
     />
 
-    <SectionFeedback
-        extraClass="mb-10"
-        translates={translates.feedback}
-    />
+    <div>
+        <div id="feedback"/>
+        <SectionFeedback
+            extraClass="mb-10 mt-32"
+            translates={translates.feedback}
+        />
+    </div>
 
     <SectionPizzaPromote
         translates={translates.pizzaPromote}
     />
 
-    <SectionForSchools
-        extraClass="mb-10"
-        translates={translates.forSchools}
-    />
+    <div>
+        <div id="mc-schools"/>
+        <SectionForSchools
+            extraClass="mb-10 mt-24"
+            translates={translates.forSchools}
+        />
+    </div>
 
-    <SectionQuestionAndAnswers
-        extraClass="mb-20 md:mb-40"
-        translates={translates.questionAndAnswers}
-    />
+    <div class="mt-32">
+        <div id="faq"/>
+        <SectionQuestionAndAnswers
+            extraClass="mb-20 mt-32"
+            translates={translates.questionAndAnswers}
+        />
+    </div>
 
-    <SectionSocialNetworks
-        translates={translates.socialNetworks}
-    />
+    <div class="mt-36">
+        <div id="contacts"/>
+        <SectionSocialNetworks
+            extraClass="mt-14"
+            translates={translates.socialNetworks}
+        />
+    </div>
 
     <SectionMap
         mapCenter={center}

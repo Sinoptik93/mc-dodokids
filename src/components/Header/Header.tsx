@@ -33,8 +33,6 @@ interface Props {
 const Header = ({ languageList, translate, logo }: Props) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    console.log(translate);
-
     return (
         <>
             <div className="bg-white z-50 fixed top-0 left-0 right-0 flex flex-col">
@@ -63,8 +61,14 @@ const Header = ({ languageList, translate, logo }: Props) => {
                             <nav className="flex grow">
                                 <ul className="flex grow justify-between">
                                     {translate.menu.map((item, index) => (
-                                        <li>
-                                            <a href={item.url}>{item.title}</a>
+                                        <li
+                                            key={item.title}
+                                        >
+                                            <a
+                                                href={item.url}
+                                            >
+                                                {item.title}
+                                            </a>
                                         </li>
                                     ))}
                                 </ul>
@@ -81,6 +85,7 @@ const Header = ({ languageList, translate, logo }: Props) => {
                                 {
                                     languageList.map((language) => (
                                         <a
+                                            key={language.label}
                                             href={language.url}
                                             className={twMerge(
                                                 "px-4 py-2 rounded-full shrink-0 uppercase",
@@ -105,14 +110,21 @@ const Header = ({ languageList, translate, logo }: Props) => {
                                 <div className="flex flex-col gap-8">
                                     <nav className="">
                                         <ul className="flex flex-col gap-6">
-                                            {translate.menu.map((item, index) => (
-                                                <li>
-                                                    <a
+                                            {translate.menu.map((item) => (
+                                                <li
+                                                    key={item.title}
+                                                >
+                                                    <button
+                                                        type="button"
                                                         className="text-3xl text-bold"
-                                                        href={item.url}
+                                                        onClick={(e) => {
+                                                            console.log('click');
+                                                            window.location.href = item.url;
+                                                            setIsMenuOpen(false);
+                                                        }}
                                                     >
                                                         {item.title}
-                                                    </a>
+                                                    </button>
                                                 </li>
                                             ))}
                                         </ul>
@@ -122,6 +134,7 @@ const Header = ({ languageList, translate, logo }: Props) => {
                                         {
                                             languageList.map((language) => (
                                                 <a
+                                                    key={language.label}
                                                     href={language.url}
                                                     className={twMerge(
                                                         "px-1 rounded-full shrink-0 uppercase",

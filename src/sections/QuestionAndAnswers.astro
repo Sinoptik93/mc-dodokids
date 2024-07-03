@@ -26,12 +26,11 @@ const {extraClass, translates} = Astro.props;
         extraClass,
     )
 }>
-    <h2 class="relative z-10 mb-10 font-black text-4xl md:text-5xl text-center uppercase">
+    <h2 class="relative z-10 mb-10 font-black text-4xl md:text-5xl text-center uppercase mt-">
         {translates.heading}
     </h2>
 
     <AccordionGroup
-
         infoList={translates.questions}
         client:load
     />

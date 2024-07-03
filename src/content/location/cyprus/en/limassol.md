@@ -19,17 +19,17 @@ translates:
       title: "+357 7700 07 07"
     menu:
       - title: "Master classes"
-        url: "#"
+        url: "#mc"
       - title: "Birthday"
-        url: "#"
+        url: "#birthday"
       - title: "Reviews"
-        url: "#"
+        url: "#feedback"
       - title: "Schools"
-        url: "#"
+        url: "#mc-schools"
       - title: "FAQ"
-        url: "#"
+        url: "#faq"
       - title: "Contact us"
-        url: "#"
+        url: "#contacts"
 
   hero:
     heading: "DODO PIZZA<br>ADVENTURE FOR KIDS"

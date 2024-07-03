@@ -17,17 +17,17 @@ translates:
       title: "+99455 4553635"
     menu:
       - title: "Master classes"
-        url: "#"
+        url: "#mc"
       - title: "Birthday"
-        url: "#"
+        url: "#birthday"
       - title: "Reviews"
-        url: "#"
+        url: "#feedback"
       - title: "Schools"
-        url: "#"
+        url: "#mc-schools"
       - title: "FAQ"
-        url: "#"
+        url: "#faq"
       - title: "Contact us"
-        url: "#"
+        url: "#contacts"
 
   hero:
     heading: "ДОДО ДЕТЯМ И <br/>ЛЮБОПЫТНЫМ ВЗРОСЛЫМ"

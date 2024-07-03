@@ -19,17 +19,17 @@ translates:
       title: "+357 7700 07 07"
     menu:
       - title: "Мастер классы"
-        url: "#"
+        url: "#mc"
       - title: "День рождения"
-        url: "#"
+        url: "#birthday"
       - title: "Отзывы"
-        url: "#"
+        url: "#feedback"
       - title: "Для школьников"
-        url: "#"
+        url: "#mc-schools"
       - title: "FAQ"
-        url: "#"
+        url: "#faq"
       - title: "Контакты"
-        url: "#"
+        url: "#contacts"
 
   hero:
     heading: "ДОДО ДЕТЯМ <br/>И ЛЮБОПЫТНЫМ<br/>ВЗРОСЛЫМ"
