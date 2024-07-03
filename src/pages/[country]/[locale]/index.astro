@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry } from "astro:content";
+import {getCollection, getEntry} from "astro:content";
 import Layout from "~/layouts/Layout.astro";
 
 import Header from "~/components/Header/Header";
@@ -31,7 +31,7 @@ export async function getStaticPaths() {
     }));
 }
 
-const { location } = Astro.props;
+const {location} = Astro.props;
 
 const translates = location.data.translates;
 
@@ -52,17 +52,30 @@ const center = {
 };
 ---
 
-<Layout title="title">
+<Layout
+    title={location.data.title}
+>
     <ModalBookingEvent
         client:only="react"
         translates={translates.modalBooking}
     />
 
-    <Header logo={location.data.logo} translate={translates.header} languageList={languages} client:load />
+    <Header
+        client:load
+        logo={location.data.logo}
+        translate={translates.header}
+        languageList={languages}
+    />
 
-    <SectionHero extraClass="mb-10" translates={translates.hero} />
+    <SectionHero
+        extraClass="mb-10"
+        translates={translates.hero}
+    />
 
-    <SectionSummary extraClass="mb-10" translates={translates.summary} />
+    <SectionSummary
+        extraClass="mb-10"
+        translates={translates.summary}
+    />
 
     <SectionAdditionalInfo
         extraClass="mb-10"
@@ -74,23 +87,35 @@ const center = {
         translates={translates.photoPreview}
     />
 
-    <SectionFeedback extraClass="mb-10" translates={translates.feedback} />
+    <SectionFeedback
+        extraClass="mb-10"
+        translates={translates.feedback}
+    />
 
-    <SectionPizzaPromote translates={translates.pizzaPromote} />
+    <SectionPizzaPromote
+        translates={translates.pizzaPromote}
+    />
 
-    <SectionForSchools extraClass="mb-10" translates={translates.forSchools} />
+    <SectionForSchools
+        extraClass="mb-10"
+        translates={translates.forSchools}
+    />
 
     <SectionQuestionAndAnswers
         extraClass="mb-20 md:mb-40"
         translates={translates.questionAndAnswers}
     />
 
-    <SectionSocialNetworks translates={translates.socialNetworks} />
+    <SectionSocialNetworks
+        translates={translates.socialNetworks}
+    />
 
-    <SectionMap mapCenter={center} />
+    <SectionMap
+        mapCenter={center}
+    />
 
     <Footer
-    logo={location.data.logo}
-    translates={translates.footer}
-     />
+        logo={location.data.logo}
+        translates={translates.footer}
+    />
 </Layout>

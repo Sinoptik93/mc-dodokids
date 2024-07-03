@@ -12,7 +12,7 @@ const logoLibrary = {
 };
 
 interface Props {
-    logo?: string;
+    logo?: 'default' | 'az';
     translate: {
         phone: {
             url: string;
