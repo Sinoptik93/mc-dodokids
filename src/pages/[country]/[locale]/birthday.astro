@@ -1,5 +1,13 @@
 ---
-import { getCollection, getEntry } from "astro:content";
+import {getCollection} from 'astro:content';
+import Layout from '~/layouts/Layout.astro';
+
+import BirthdayHero from '~/sections/BirthdayHero.astro';
+import BirthdayHeading from '~/sections/BirthdayHeading.astro';
+import BirthdayOffers from '~/sections/BirthdayOffers.astro';
+import BirthdayQuestionAndAnswers from '~/sections/BirthdayQuestionAndAnswers.astro';
+import ModalBookingEvent from "~/components/ModalBookingEvent/ModalBookingEvent";
+import Footer from "~/components/Footer/Footer.astro";
 
 export async function getStaticPaths() {
     const allLocations = await getCollection("location");
@@ -18,7 +26,198 @@ export async function getStaticPaths() {
     });
 }
 
-const { location } = Astro.props;
----
+const {location} = Astro.props;
 
-<p>Birthday {location ? location?.id : null}</p>
+
+
+const languages = [
+    {
+        label: 'en',
+        active: true
+    }
+];
+
+const translateFooter = {
+    privacy: {
+        title: "Политика конфиденциальности",
+        url: "#",
+    },
+    useTerms: {
+        title: "Условия использования",
+        url: "#",
+    },
+    sections: [
+        {
+            heading: 'О нас',
+            linksList: [
+                {
+                    title: 'Dodo Brands сайт',
+                    url: 'https://dodobrands.io/',
+                },
+                {
+                    title: 'Додо Пицца в Кипре',
+                    url: '#',
+                },
+            ]
+        },
+        {
+            heading: 'Follow us',
+            linksList: [
+                {
+                    title: 'Додо Пицца Кипр Instagram',
+                    url: '#',
+                },
+                {
+                    title: 'Додо Пицца Кипр TikTok',
+                    url: '#',
+                },
+            ]
+        },
+        {
+            heading: 'Contacts',
+            linksList: [
+                {
+                    title: '+99455 4553635',
+                    url: 'tel:+99455 4553635',
+                },
+                {
+                    title: 'feedback@dodopizza.com.cy',
+                    url: 'mailto:feedback@dodopizza.com.cy',
+                },
+            ]
+        },
+
+    ]
+}
+
+const translatesModalBooking = {
+    heading: "Бронирование",
+    subheading: "Пожалуйста, заполните форму и выберите удобную дату для участия.",
+    event: {
+        title: "Выберите мероприятие",
+        name: "event",
+        list: [
+            {
+                title: "Мастер-класс",
+                value: "pizza-mc",
+            },
+            {
+                title: "Проведение Дня рождения",
+                value: "birthday",
+            },
+            {
+                title: "Мастер-класс и проведение Дня рождения",
+                value: "baking",
+            },
+            {
+                title: "Мастер класс для школьников",
+                value: "schools-mc",
+            },
+        ],
+    },
+    pizzeria: {
+        title: "Выберите пиццерию",
+        name: "pizzeria",
+        list: [
+            {
+                title: "st. 28 October Ave 327, Limassol",
+                value: "limassol-1",
+            },
+            {
+                title: "st. Omonoias, 38, Limassol",
+                value: "limassol-2",
+            },
+        ],
+    },
+    personal: {
+        title: "Информация",
+        name: {
+            name: "name",
+            placeholder: "Имя",
+        },
+        phone: {
+            name: "phone",
+            placeholder: "Телефон",
+            phoneCode: "cy"
+        },
+    },
+    date: {
+        title: "Дата",
+        description: "Мы свяжемся с вами в течение 24 часов, чтобы выбрать дату и время вашего визита.",
+    },
+    child: {
+        counterTitle: "Количество детей",
+        childTitle: "Ребенок",
+        name: {
+            name: "name",
+            placeholder: "Имя",
+        },
+        age: {
+            name: "age",
+            placeholder: "Возраст",
+        },
+        allergyCheckboxTitle: "Аллергии нет",
+        allergy: {
+            name: "allergy",
+            placeholder: "Какие аллергии есть у ребенка?",
+        },
+        deleteButtonTitle: "Удалить",
+    },
+    details: {
+        placeholder: "Детали",
+        caps: {
+            charsStart: "из",
+            charsEnd: "символов",
+        },
+    },
+    privacyPolicy: {
+        title: "<p>Я согласен с Политикой конфиденциальности *</p><p>Указанные вами персональные данные могут обрабатываться (сбор, систематизация, накопление, хранение, обновление, модификация, использование, обезличивание, уничтожение, передача) компанией Capian Pizza MMC (далее - Оператор) и другими третьими лицами, привлеченными Оператором в соответствии с Политикой конфиденциальности.</p>",
+        url: "#",
+    },
+    promotionAgreement: {
+        title: "Я согласен получать рекламные и информационные сообщения\n от Capian Pizza MMC по каналам связи (SMS, push, электронная почта и т.д.)",
+        url: "#",
+    },
+    bookEventButtonTitle: "Записаться",
+    successScreen: {
+        heading: "Потрясающе!",
+        subheading: "Вы успешно зарегистрировались. Мы свяжемся с вами в течение 24 часов, чтобы выбрать дату и время вашего визита.",
+        returnButtonTitle: "Вернуться на главную",
+    },
+    errorScreen: {
+        heading: "Что-то пошло не так",
+        subheading: "К сожалению, что-то пошло не так. Попробуйте перезагрузить страницу и забронировать снова.",
+        returnButtonTitle: "Вернуться на главную",
+    }
+}
+---
+<script src='~/components/ModalBookingEvent/modalBookingEventTrigger'></script>
+
+<Layout
+    title="title"
+>
+    <ModalBookingEvent
+        translates={translatesModalBooking}
+        client:only="react"
+    />
+
+    <BirthdayHero/>
+
+    <BirthdayHeading
+        extraClass="mb-20"
+    />
+
+    <BirthdayOffers
+        extraClass="mb-20"
+    />
+
+    <BirthdayQuestionAndAnswers
+        extraClass="mb-20"
+    />
+
+    <Footer
+        translates={translateFooter}
+    />
+
+</Layout>
+
