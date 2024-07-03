@@ -44,6 +44,7 @@ const languages = allLocations
     .map((currentLocation) => ({
         label: currentLocation.data.locale,
         active: location.data.locale === currentLocation.data.locale,
+        url: `/${currentLocation.data.country}/${currentLocation.data.locale}`,
     }));
 
 const center = {

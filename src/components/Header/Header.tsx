@@ -25,6 +25,7 @@ interface Props {
     },
     languageList: {
         label: string;
+        url: string;
         active: boolean
     }[]
 }
@@ -80,7 +81,7 @@ const Header = ({ languageList, translate, logo }: Props) => {
                                 {
                                     languageList.map((language) => (
                                         <a
-                                            href={`/${language.label}`}
+                                            href={language.url}
                                             className={twMerge(
                                                 "px-4 py-2 rounded-full shrink-0 uppercase",
                                                 language.active && 'bg-orange text-white',
@@ -121,7 +122,7 @@ const Header = ({ languageList, translate, logo }: Props) => {
                                         {
                                             languageList.map((language) => (
                                                 <a
-                                                    href={`/${language.label}`}
+                                                    href={language.url}
                                                     className={twMerge(
                                                         "px-1 rounded-full shrink-0 uppercase",
                                                         language.active && 'bg-orange text-white',

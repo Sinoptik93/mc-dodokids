@@ -32,7 +32,7 @@ const {extraClass, translates} = Astro.props;
     <div class={
         twMerge(
             "absolute z-20",
-            "w-[180px] bottom-0 right-0",
+            "w-[150px] bottom-0 right-0",
             "md:w-[450px] md:-bottom-[10px] md:right-[180px]"
         )
     }>
@@ -44,7 +44,7 @@ const {extraClass, translates} = Astro.props;
     </div>
 
     <div class="relative z-10 flex flex-col gap-4 max-w-[200px] md:max-w-[390px]">
-        <p class="relative z-10 font-black text-2xl md:text-6xl">{translates.heading}</p>
+        <p class="relative z-10 font-black text-xl md:text-6xl">{translates.heading}</p>
         <ButtonLink
             extraClass="relative z-10 w-fit md:px-20"
             url="#"
@@ -54,7 +54,7 @@ const {extraClass, translates} = Astro.props;
         <div class={
             twMerge(
                 "absolute-center pointer-events-auto",
-                "size-[350px] bottom-0 right-0 rotate-45",
+                "size-[380px] bottom-0 right-0 rotate-45",
                 "md:size-[550px] md:bottom-0 md:right-0 md:rotate-0"
             )
         }>
