@@ -7,6 +7,7 @@ import iconMail from '~/assets/icons/icon-mail.svg';
 import schoolDesktop from '~/assets/images/school-desktop.svg'
 import schoolMobile from '~/assets/images/school-mobile.svg'
 
+
 interface Translate {
     heading: string;
     subheading: string;
@@ -24,17 +25,10 @@ const {extraClass, translates} = Astro.props;
 ---
 
 <script>
-    import {createReactTrigger} from '~/utils/triggers/reactTrigger'
-    import {TRIGGER_NAME} from '~/components/ModalBookingEvent/config'
-    // const TRIGGER_NAME = "schools-mc"
+    import {handleModalTrigger} from '~/utils/triggers/reactTrigger'
 
-    const modalButton = document.querySelector(`[data-react-trigger="birthday"]`);
-    const handleClick = createReactTrigger<{defaultEvent: string}>({name: TRIGGER_NAME, detail: {defaultEvent: 'birthday'}})
-
-    console.log(modalButton)
-    if (modalButton) {
-        modalButton.addEventListener('click', handleClick);
-    }
+    const detail = {defaultEvent: "schools-mc"}
+    handleModalTrigger({triggerName: "schools-mc-trigger", detail})
 </script>
 
 <div
@@ -64,7 +58,7 @@ const {extraClass, translates} = Astro.props;
             </p>
 
             <Button
-                data-react-trigger="birthday"
+                data-react-trigger="schools-mc-trigger"
                 title={translates.linkTitle}
                 extraClass="bg-purple text-white w-fit mb-11"
             />

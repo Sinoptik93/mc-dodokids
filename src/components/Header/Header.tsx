@@ -4,7 +4,9 @@ import IconPhone from '~/assets/icons/icon-phone.svg?react';
 import IconBurger from '~/assets/icons/icon-burger.svg?react';
 import IconCross from '~/assets/icons/icon-cross.svg?react';
 import { twMerge } from "tailwind-merge";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { TRIGGER_NAME } from '~/components/ModalBookingEvent/config'
 
 const logoLibrary = {
     az: <DodoLogoAz />,
@@ -30,8 +32,12 @@ interface Props {
     }[]
 }
 
+import {createReactTrigger} from '~/utils/triggers/reactTrigger'
+
+
 const Header = ({ languageList, translate, logo }: Props) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const handleOpenModal = createReactTrigger({name: TRIGGER_NAME, detail: {defaultEvent: "pizza-mc"}})
 
     return (
         <>
@@ -99,7 +105,12 @@ const Header = ({ languageList, translate, logo }: Props) => {
                             </div>
 
                             <div>
-                                <button className="p-4 bg-orange text-white rounded-full">Bookmark master class</button>
+                                <button
+                                    className="p-4 bg-orange text-white rounded-full"
+                                    onClick={handleOpenModal}
+                                >
+                                    Bookmark master class
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -118,7 +129,6 @@ const Header = ({ languageList, translate, logo }: Props) => {
                                                         type="button"
                                                         className="text-3xl text-bold"
                                                         onClick={(e) => {
-                                                            console.log('click');
                                                             window.location.href = item.url;
                                                             setIsMenuOpen(false);
                                                         }}
@@ -148,7 +158,12 @@ const Header = ({ languageList, translate, logo }: Props) => {
                                     </div>
                                 </div>
 
-                                <button className="w-full p-4 bg-orange text-white rounded-full">Bookmark master class</button>
+                                <button
+                                    className="w-full p-4 bg-orange text-white rounded-full"
+                                    onClick={handleOpenModal}
+                                >
+                                    Bookmark master class
+                                </button>
                             </div>
                         )
                     }

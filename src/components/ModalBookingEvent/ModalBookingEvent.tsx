@@ -37,7 +37,7 @@ import 'react-phone-input-2/lib/style.css';
 import './modalBookingEvent.styles.scss'
 
 type FormValues = {
-    event: string;
+    event: Events;
     address: string | null;
     name: string;
     phone: string;
@@ -54,14 +54,14 @@ type FormValues = {
 };
 
 
-interface RadioItem {
+interface RadioItem<T = string> {
     title: string;
-    value: string;
+    value: T;
 }
 
-interface RadioGroup {
+interface RadioGroup<T = any> {
     name: string;
-    list: RadioItem[];
+    list: RadioItem<T>[];
 }
 
 interface InputItem {
@@ -74,7 +74,7 @@ interface Translate {
     subheading: string;
     event: {
         title: string;
-    } & RadioGroup;
+    } & RadioGroup<Events>;
     pizzeria: {
         title: string;
     } & RadioGroup;
@@ -184,7 +184,7 @@ export const CustomRadio = (props: RadioProps) => {
     );
 };
 
-type Events = "pizza-mc" | "birthday" | "baking" | "schools-mc";
+export type Events = "pizza-mc" | "birthday" | "baking" | "schools-mc";
 
 interface DefaultValues {
     event?: Events
@@ -209,6 +209,7 @@ const ModalBookingEvent = ({translates}: { translates: Translate; }) => {
         agreePrivacy: true,
         agreePromotions: false,
     }
+
     const test = {
         event: 'pizza-mc',
         address: null,
@@ -231,12 +232,27 @@ const ModalBookingEvent = ({translates}: { translates: Translate; }) => {
         formState: {errors, isSubmitSuccessful, isSubmitting},
         getValues,
     } = useForm<FormValues>({
-        defaultValues: empty,
+        defaultValues: {
+            event: 'pizza-mc',
+            address: '',
+            name: '',
+            phone: '',
+            date: '',
+            children: [
+                {
+                    name: '',
+                    age: '',
+                    noAllergy: false,
+                    allergyDetails: ''
+                }
+            ],
+            additionalInfo: '',
+            agreePrivacy: true,
+            agreePromotions: false,
+        },
     });
 
 
-    const address = watch('event');
-    console.log({address})
     const additionalInfo = watch('additionalInfo')
 
     const {fields, append, remove} = useFieldArray({
@@ -260,9 +276,7 @@ const ModalBookingEvent = ({translates}: { translates: Translate; }) => {
     };
 
     useEffect(() => {
-        // onOpen();
-
-        const handleOpenModal = ({detail}: CustomEvent<{defaultEvent: string;}>) => {
+        const handleOpenModal = ({detail}: CustomEvent<{defaultEvent: Events;}>) => {
 
             console.log(detail)
             if (!!detail.defaultEvent) {
@@ -271,11 +285,9 @@ const ModalBookingEvent = ({translates}: { translates: Translate; }) => {
             onOpen();
         };
 
-        // @ts-ignore
         window.addEventListener(TRIGGER_NAME, handleOpenModal);
 
         return () => {
-            // @ts-ignore
             window.removeEventListener(TRIGGER_NAME, handleOpenModal);
             onClose();
         }
@@ -300,10 +312,14 @@ const ModalBookingEvent = ({translates}: { translates: Translate; }) => {
             isOpen={isOpen}
             backdrop="blur"
             closeButton={false}
+            classNames={{
+                backdrop: "flex items-center justify-center",
+            }}
             onOpenChange={onOpenChange}
             className={
                 twMerge(
-                    "modal-booking relative h-5/6 px-6 overflow-visible",
+                    "modal-booking",
+                    "relative h-full px-6 overflow-visible",
                     "bg-white shadow-lg shadow-neutral-400",
                     "md:px-20 md:rounded-5xl md:max-h-[900px] md:min-w-[800px]",
                 )
@@ -356,7 +372,8 @@ const ModalBookingEvent = ({translates}: { translates: Translate; }) => {
                                                 <label className="">{translates.event.title}</label>
                                                 <div className="space-y-2">
                                                     <Controller
-                                                        name="name"
+                                                        name="event"
+                                                        defaultValue={event}
                                                         control={control}
                                                         rules={{required: true}}
                                                         render={({field}) => (

@@ -3,7 +3,7 @@ import {Image} from 'astro:assets';
 import {twMerge} from "tailwind-merge";
 
 import mcPhotosAccent from '~/assets/images/mc-photos-accent.png'
-import ButtonLink from "../components/ButtonLink/ButtonLink.astro";
+import Button from "~/components/Button/Button";
 
 interface Translates {
     heading: string;
@@ -26,6 +26,11 @@ interface Props {
 const {extraClass, translates} = Astro.props;
 ---
 
+<script>
+    import {handleModalTrigger} from '~/utils/triggers/reactTrigger';
+    handleModalTrigger({triggerName: "extra-mc-trigger", detail: {defaultEvent: "baking"}});
+</script>
+
 <div class={
     twMerge(
         "container flex flex-col-reverse gap-2 md:gap-4",
@@ -38,8 +43,7 @@ const {extraClass, translates} = Astro.props;
         <div class="max-w-md flex flex-col gap-6 md:gap-10">
             <div class="flex flex-col gap-4 md:gap-6">
 
-                <h2 class="uppercase font-black text-3xl md:text-5xl" set:html={translates.heading}>
-                </h2>
+                <h2 class="uppercase font-black text-3xl md:text-5xl" set:html={translates.heading} />
 
                 <p
                     class="w-fit text-orange bg-orange-100 rounded-xl p-3 leading-tight"
@@ -74,8 +78,8 @@ const {extraClass, translates} = Astro.props;
                 {translates.description}
             </p>
 
-            <ButtonLink
-                url="#"
+            <Button
+                data-react-trigger="extra-mc-trigger"
                 title={translates.formButtonTitle}
                 extraClass="md:w-fit"
             />

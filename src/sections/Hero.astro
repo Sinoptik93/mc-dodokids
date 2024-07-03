@@ -26,15 +26,8 @@ const {extraClass, translates} = Astro.props;
 ---
 
 <script>
-    import {createReactTrigger} from '~/utils/triggers/reactTrigger'
-    import {TRIGGER_NAME} from '~/components/ModalBookingEvent/config'
-
-    const modalButton = document.querySelector(`[data-react-trigger="mc-pizza"]`);
-    const handleClick = createReactTrigger<{defaultEvent: string}>({name: TRIGGER_NAME, detail: {defaultEvent: 'mc-pizza'}})
-
-    if (modalButton) {
-        modalButton.addEventListener('click', handleClick);
-    }
+    import {handleModalTrigger} from '~/utils/triggers/reactTrigger';
+    handleModalTrigger({triggerName: "hero-pizza-trigger", detail: {defaultEvent: "pizza-mc"}});
 </script>
 
 
@@ -81,7 +74,7 @@ const {extraClass, translates} = Astro.props;
             <Button
                 title={translates.formButtonTitle}
                 extraClass="w-full md:w-fit"
-                data-react-trigger="mc-pizza"
+                data-react-trigger="hero-pizza-trigger"
             />
 
             <div

@@ -70,7 +70,7 @@ const center = {
     />
 
     <SectionHero
-        extraClass="mb-10 mt-24"
+        extraClass="mb-10 mt-16 md:mt-24"
         translates={translates.hero}
     />
 
@@ -103,16 +103,19 @@ const center = {
         />
     </div>
 
-    <SectionPizzaPromote
-        translates={translates.pizzaPromote}
-    />
-
     <div>
-        <div id="mc-schools"/>
-        <SectionForSchools
-            extraClass="mb-10 mt-24"
-            translates={translates.forSchools}
+
+        <SectionPizzaPromote
+            translates={translates.pizzaPromote}
         />
+
+        <div>
+            <div id="mc-schools"/>
+            <SectionForSchools
+            extraClass="mb-10"
+            translates={translates.forSchools}
+            />
+        </div>
     </div>
 
     <div class="mt-32">
