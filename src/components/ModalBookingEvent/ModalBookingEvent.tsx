@@ -190,7 +190,7 @@ interface DefaultValues {
     event?: Events
 }
 
-const ModalBookingEvent = ({translates}: { translates: Translate; }) => {
+const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Translate; locale: string; }) => {
     const empty = {
         event: 'pizza-mc',
         address: '',
@@ -618,7 +618,9 @@ const ModalBookingEvent = ({translates}: { translates: Translate; }) => {
                                                     className="items-start mb-4"
                                                     {...register('agreePrivacy', {required: true})}
                                                 >
-                                                    <p
+                                                    <a
+                                                        className="hover:text-orange"
+                                                        href={translates.privacyPolicy.url}
                                                         dangerouslySetInnerHTML={{
                                                             __html: translates.privacyPolicy.title
                                                         }}
@@ -628,7 +630,9 @@ const ModalBookingEvent = ({translates}: { translates: Translate; }) => {
                                                     className="items-start"
                                                     {...register('agreePromotions')}
                                                 >
-                                                    <p
+                                                    <a
+                                                        className="hover:text-orange"
+                                                        href={translates.promotionAgreement.url}
                                                         dangerouslySetInnerHTML={{
                                                             __html: translates.promotionAgreement.title
                                                         }}
@@ -669,10 +673,12 @@ const ModalBookingEvent = ({translates}: { translates: Translate; }) => {
 
                                     <p className="text-neutral-600 text-center">{translates.successScreen.subheading}</p>
 
-                                    <p className="text-neutral-600 text-center bg-neutral-200 p-4 rounded-xl">{new Date(getValues().date).toLocaleDateString('en-EN', {
-                                        day: 'numeric',
-                                        month: 'long'
-                                    })}</p>
+                                    <p className="text-neutral-600 text-center bg-neutral-200 p-4 rounded-xl">{
+                                        new Date(getValues().date).toLocaleDateString(locale, {
+                                            day: 'numeric',
+                                            month: 'long'
+                                        })
+                                    }</p>
 
                                     <Button
                                         type="button"

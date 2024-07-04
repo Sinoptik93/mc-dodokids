@@ -5,7 +5,8 @@ test: 'str'
 translate1: "Cyprus"
 country: "Cyprus"
 logo: 'default'
-locale: 'en'
+localeSlug: 'en'
+locale: 'en-EN'
 map:
   center:
     lat: 34.6841
@@ -227,11 +228,11 @@ translates:
         charsStart: "of"
         charsEnd: "characters"
     privacyPolicy:
-      title: "<p>I agree with the Privacy Policy *</p><p>The personal data you specify may be processed (collection, systematization, accumulation, storage, upgrade, modification, usage, anonymization, destruction, transferring) by GTC Pizza LTD (further - Operator) and other third parties engaged by the Operator according to the Privacy Policy</p>"
-      url: "#"
+      title: "I agree with the Privacy Policy *<br>The personal data you specify may be processed (collection, systematization, accumulation, storage, upgrade, modification, usage, anonymization, destruction, transferring) by GTC Pizza LTD (further - Operator) and other third parties engaged by the Operator according to the Privacy Policy"
+      url: "https://google.com"
     promotionAgreement:
       title: "I agree to receive promotional and informational communications from GTC Pizza LTD over telecommunication networks (SMS, push, email, etc.)"
-      url: "#"
+      url: "https://yandex.ru"
     bookEventButtonTitle: "Book event"
     successScreen:
       heading: "You’re awesome!"

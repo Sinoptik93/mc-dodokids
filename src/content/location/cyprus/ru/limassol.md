@@ -4,7 +4,8 @@ pageHb: true
 test: 'str'
 translate1: "Кипр"
 country: "Cyprus"
-locale: 'ru'
+locale: 'ru-RU'
+localeSlug: 'ru'
 logo: 'default'
 map:
   center:

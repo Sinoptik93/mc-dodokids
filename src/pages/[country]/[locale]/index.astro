@@ -23,7 +23,7 @@ export async function getStaticPaths() {
     return allLocations.map((location) => ({
         params: {
             country: location.data.country,
-            locale: location.data.locale,
+            locale: location.data.localeSlug,
         },
         props: {
             location,
@@ -42,15 +42,10 @@ const languages = allLocations
             location.data.country === currentLocation.data.country,
     )
     .map((currentLocation) => ({
-        label: currentLocation.data.locale,
+        label: currentLocation.data.localeSlug,
         active: location.data.locale === currentLocation.data.locale,
-        url: `/${currentLocation.data.country}/${currentLocation.data.locale}`,
+        url: `/${currentLocation.data.country}/${currentLocation.data.localeSlug}`,
     }));
-
-const center = {
-    lat: 34.6841,
-    lng: 33.0463,
-};
 ---
 
 <Layout

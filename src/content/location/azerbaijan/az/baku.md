@@ -5,7 +5,8 @@ test: 'str'
 translate1: "Azzzzz"
 country: "Azerbaijan"
 logo: 'az'
-locale: 'az'
+locale: 'az-Latn-AZ'
+localeSlug: 'az'
 map:
   center:
     lat: 40.4093
@@ -219,10 +220,10 @@ translates:
         charsEnd: "işarə"
     privacyPolicy:
       title: "<p>Mən Məxfilik Siyasəti ilə razıyam *</p><p>Açıqladığınız şəxsi məlumatlar Capian Pizza MMC (bundan sonra - Operator) və Məxfilik Qaydalarına uyğun olaraq Operator tərəfindən cəlb edilmiş digər üçüncü şəxslər tərəfindən emal edilə bilər (toplanması, sistemləşdirilməsi, yığılması, saxlanması, təkmilləşdirilməsi, dəyişdirilməsi, istifadəsi, anonimləşdirilməsi, məhv edilməsi, ötürülməsi). </p>"
-      url: "#"
+      url: "https://drive.google.com/file/d/1IvrxxVYzYlDIHek5PyyT8Fy2u3N1nBP-/view"
     promotionAgreement:
       title: "Mən Capian Pizza MMC-dən (bundan sonra - Operator) təqdimat və məlumat xarakterli kommunikasiyalar almağa razıyam (SMS, puş, e-mail və s.)"
-      url: "#"
+      url: "https://drive.google.com/file/d/18TSxJlXCMLg1A8EviL4HupGq1PynT_4s/view"
     bookEventButtonTitle: "Kitab tədbiri"
     successScreen:
       heading: "Super!"

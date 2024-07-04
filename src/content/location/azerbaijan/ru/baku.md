@@ -5,7 +5,8 @@ test: 'str'
 translate1: "Азербайджан"
 country: "Azerbaijan"
 logo: 'az'
-locale: 'ru'
+locale: 'ru-RU'
+localeSlug: 'ru'
 map:
   center:
     lat: 40.4093
@@ -223,10 +224,10 @@ translates:
         charsEnd: "символов"
     privacyPolicy:
       title: "<p>Я согласен с Политикой конфиденциальности *</p><p>Указанные вами персональные данные могут обрабатываться (сбор, систематизация, накопление, хранение, обновление, модификация, использование, обезличивание, уничтожение, передача) компанией Capian Pizza MMC (далее - Оператор) и другими третьими лицами, привлеченными Оператором в соответствии с Политикой конфиденциальности.</p>"
-      url: "#"
+      url: "https://drive.google.com/file/d/1IvrxxVYzYlDIHek5PyyT8Fy2u3N1nBP-/view"
     promotionAgreement:
       title: "Я согласен получать рекламные и информационные сообщения\n от Capian Pizza MMC по каналам связи (SMS, push, электронная почта и т.д.)"
-      url: "#"
+      url: "https://drive.google.com/file/d/18TSxJlXCMLg1A8EviL4HupGq1PynT_4s/view"
     bookEventButtonTitle: "Записаться"
     successScreen:
       heading: "Потрясающе!"

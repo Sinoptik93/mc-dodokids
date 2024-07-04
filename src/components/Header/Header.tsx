@@ -69,6 +69,7 @@ const Header = ({ languageList, translate, logo }: Props) => {
                                 <ul className="flex grow justify-between">
                                     {translate.menu.map((item, index) => (
                                         <li
+                                            className="text-sm"
                                             key={item.title}
                                         >
                                             <a

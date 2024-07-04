@@ -9,6 +9,7 @@ const locationSchema = z.object({
   translate1: z.string(),
   country: z.string(),
   locale: z.string(),
+  localeSlug: z.string(),
   logo: z.enum(["az", "default"]).optional(),
   map: z.object({
     center: z.object({
