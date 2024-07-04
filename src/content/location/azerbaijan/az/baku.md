@@ -6,17 +6,24 @@ translate1: "Azzzzz"
 country: "Azerbaijan"
 logo: 'az'
 locale: 'az'
+map:
+  center:
+    lat: 40.4093
+    lng: 49.8671
 cities:
-  - name: 'Name 1'
-    label: 'Label 1'
-  - name: 'Name 2'
-    label: 'Label 2'
+  - name: 'baku-1'
+    label: 'Baku-1'
+    address: 'ST. MIRZƏBALA ƏHMƏDZADƏ, 13'
+    coordinates:
+      lat: 40.401673
+      lng: 49.870117
 
 translates:
   header:
     phone:
       url: "tel:+99455 4553635"
       title: "+99455 4553635"
+    bookButtonTitle: "Book master class"
     menu:
       - title: "Master classes"
         url: "#mc"

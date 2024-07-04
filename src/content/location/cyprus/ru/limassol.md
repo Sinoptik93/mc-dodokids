@@ -6,17 +6,30 @@ translate1: "Кипр"
 country: "Cyprus"
 locale: 'ru'
 logo: 'default'
+map:
+  center:
+    lat: 34.6841
+    lng: 33.0463
 cities:
-  - name: 'Name 1'
-    label: 'Label 1'
-  - name: 'Name 2'
-    label: 'Label 2'
+  - name: 'limassol-1'
+    label: 'Лимасол-1'
+    address: 'st. 28 October Ave 327, Limassol'
+    coordinates:
+      lng: 33.06036
+      lat: 34.684674
+  - name: 'limassol-2'
+    label: 'Лимасол-2'
+    address: 'st. Omonoias, 38, Limassol'
+    coordinates:
+      lng: 33.011699
+      lat: 34.671162
 
 translates:
   header:
     phone:
       url: "tel:+357 7700 07 07"
       title: "+357 7700 07 07"
+    bookButtonTitle: "Забронировать мастер класс"
     menu:
       - title: "Мастер классы"
         url: "#mc"

@@ -6,27 +6,36 @@ translate1: "Азербайджан"
 country: "Azerbaijan"
 logo: 'az'
 locale: 'ru'
+map:
+  center:
+    lat: 40.4093
+    lng: 49.8671
 cities:
   - name: 'baku-1'
-    label: 'st. Mirzəbala Əhmədzadə, 13'
+    label: 'Баку-1'
+    address: 'ST. MIRZƏBALA ƏHMƏDZADƏ, 13'
+    coordinates:
+      lng: 49.870117
+      lat: 40.401673
 
 translates:
   header:
     phone:
       url: "tel:+99455 4553635"
       title: "+99455 4553635"
+    bookButtonTitle: "Забронировать мастер класс"
     menu:
-      - title: "Master classes"
+      - title: "Мастер классы"
         url: "#mc"
-      - title: "Birthday"
+      - title: "День рождения"
         url: "#birthday"
-      - title: "Reviews"
+      - title: "Отзывы"
         url: "#feedback"
-      - title: "Schools"
+      - title: "Для школьников"
         url: "#mc-schools"
       - title: "FAQ"
         url: "#faq"
-      - title: "Contact us"
+      - title: "Контакты"
         url: "#contacts"
 
   hero:

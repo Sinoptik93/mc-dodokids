@@ -373,7 +373,6 @@ const ModalBookingEvent = ({translates}: { translates: Translate; }) => {
                                                 <div className="space-y-2">
                                                     <Controller
                                                         name="event"
-                                                        defaultValue={event}
                                                         control={control}
                                                         rules={{required: true}}
                                                         render={({field}) => (

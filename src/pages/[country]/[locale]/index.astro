@@ -48,8 +48,8 @@ const languages = allLocations
     }));
 
 const center = {
-    lat: 35.166063,
-    lng: 33.358583,
+    lat: 34.6841,
+    lng: 33.0463,
 };
 ---
 
@@ -135,7 +135,8 @@ const center = {
     </div>
 
     <SectionMap
-        mapCenter={center}
+        mapCenter={location.data.map.center}
+        points={location.data.cities}
     />
 
     <Footer

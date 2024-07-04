@@ -6,17 +6,30 @@ translate1: "Cyprus"
 country: "Cyprus"
 logo: 'default'
 locale: 'en'
+map:
+  center:
+    lat: 34.6841
+    lng: 33.0463
 cities:
   - name: 'limassol-1'
-    label: 'st. 28 October Ave 327, Limassol'
-  - name: st. Omonoias, 38, Limassol'
-    label: 'limassol-2'
+    label: 'Limassol-1'
+    address: 'st. 28 October Ave 327, Limassol'
+    coordinates:
+      lat: 34.684674
+      lng: 33.06036
+  - name: 'limassol-2'
+    label: 'Limassol-2'
+    address: 'st. Omonoias, 38, Limassol'
+    coordinates:
+      lat: 34.671162
+      lng: 33.011699
 
 translates:
   header:
     phone:
       url: "tel:+357 7700 07 07"
       title: "+357 7700 07 07"
+    bookButtonTitle: "Book master class"
     menu:
       - title: "Master classes"
         url: "#mc"

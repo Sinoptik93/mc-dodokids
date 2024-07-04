@@ -4,13 +4,25 @@ import {twMerge} from "tailwind-merge";
 
 import CustomMap from '~/components/Map/Map';
 
+interface Coordinates {
+    lat: number;
+    lng: number;
+}
+
+interface Point {
+    coordinates: Coordinates;
+    label: string;
+    name: string;
+    address: string;
+}
+
 interface Props {
     extraClass?: string;
     mapCenter: {lat: number, lng: number};
+    points: Point[];
 }
 
-const {extraClass, mapCenter} = Astro.props;
-
+const {extraClass, mapCenter, points} = Astro.props;
 ---
 
 <div class={
@@ -19,7 +31,7 @@ const {extraClass, mapCenter} = Astro.props;
     )
 }>
     <CustomMap
-        pointsList={[mapCenter]}
+        pointsList={points}
         center={mapCenter}
         client:only="react"
     />

@@ -10,9 +10,20 @@ const locationSchema = z.object({
   country: z.string(),
   locale: z.string(),
   logo: z.enum(["az", "default"]).optional(),
+  map: z.object({
+    center: z.object({
+      lat: z.number(),
+      lng: z.number(),
+    }),
+  }),
   cities: z.array(z.object({
     name: z.string(),
     label: z.string(),
+    address: z.string(),
+    coordinates: z.object({
+      lat: z.number(),
+      lng: z.number(),
+    }),
   })),
   translates: translateSchema,
 });

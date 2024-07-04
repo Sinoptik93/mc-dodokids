@@ -20,6 +20,7 @@ interface Props {
             url: string;
             title: string;
         },
+        bookButtonTitle: string;
         menu: {
             title: string;
             url: string;
@@ -109,7 +110,7 @@ const Header = ({ languageList, translate, logo }: Props) => {
                                     className="p-4 bg-orange text-white rounded-full"
                                     onClick={handleOpenModal}
                                 >
-                                    Bookmark master class
+                                    {translate.bookButtonTitle}
                                 </button>
                             </div>
                         </div>
@@ -162,7 +163,7 @@ const Header = ({ languageList, translate, logo }: Props) => {
                                     className="w-full p-4 bg-orange text-white rounded-full"
                                     onClick={handleOpenModal}
                                 >
-                                    Bookmark master class
+                                    {translate.bookButtonTitle}
                                 </button>
                             </div>
                         )

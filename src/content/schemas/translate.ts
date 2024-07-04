@@ -11,7 +11,8 @@ const translateSchema = z.object({
         title: z.string(),
         url: z.string(),
       })
-    )
+    ),
+    bookButtonTitle: z.string(),
   }),
   hero: z.object({
     heading: z.string(),
