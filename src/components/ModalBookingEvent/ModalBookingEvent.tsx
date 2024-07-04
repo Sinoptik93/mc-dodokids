@@ -285,9 +285,11 @@ const ModalBookingEvent = ({translates}: { translates: Translate; }) => {
             onOpen();
         };
 
+        // @ts-ignore
         window.addEventListener(TRIGGER_NAME, handleOpenModal);
 
         return () => {
+            // @ts-ignore
             window.removeEventListener(TRIGGER_NAME, handleOpenModal);
             onClose();
         }

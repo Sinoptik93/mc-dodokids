@@ -108,7 +108,7 @@ const translateSchema = z.object({
       name: z.string(),
       list: z.array(z.object({
         title: z.string(),
-        value: z.string(),
+        value: z.enum(["pizza-mc", "birthday", "baking", "schools-mc"]),
       })),
     }),
     pizzeria: z.object({
