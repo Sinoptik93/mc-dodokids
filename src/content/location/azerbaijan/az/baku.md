@@ -55,8 +55,6 @@ translates:
         linksList:
           - title: "Dodo Pizza Baku Instagram"
             url: "#"
-          - title: "Dodo Pizza Baku TikTok"
-            url: "#"
       - heading: "Üzvlər"
         linksList:
           - title: "+99455 4553635"

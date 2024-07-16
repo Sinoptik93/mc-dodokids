@@ -119,7 +119,7 @@ const SlideFeedback = ({feedbackText, userName, date, rating}: Feedback & { onOp
                                             key={step} className={
                                             twMerge(
                                                 "w-8",
-                                                (rating > step ? "text-yellow-400" : 'text-white')
+                                                (rating >= step ? "text-yellow-400" : 'text-white')
                                             )
                                         }
                                         >

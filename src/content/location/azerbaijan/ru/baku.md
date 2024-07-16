@@ -55,8 +55,6 @@ translates:
         linksList:
           - title: "Додо Пицца Азербайджан Instagram"
             url: "#"
-          - title: "Додо Пицца Азербайджан TikTok"
-            url: "#"
       - heading: "Контакты"
         linksList:
           - title: "+99455 4553635"
