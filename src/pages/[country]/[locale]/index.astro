@@ -1,5 +1,5 @@
 ---
-import {getCollection, getEntry} from "astro:content";
+import {getCollection} from "astro:content";
 import Layout from "~/layouts/Layout.astro";
 
 import Header from "~/components/Header/Header";
@@ -17,6 +17,8 @@ import SectionSocialNetworks from "~/sections/SocialsNetworks.astro";
 import SectionMap from "~/sections/Map.astro";
 import ModalBookingEvent from "~/components/ModalBookingEvent/ModalBookingEvent";
 
+import {photosLibrary, feedbackLibrary} from "~/utils/locations";
+
 export async function getStaticPaths() {
     const allLocations = await getCollection("location");
 
@@ -32,8 +34,9 @@ export async function getStaticPaths() {
 }
 
 const {location} = Astro.props;
+const {country, localeSlug} = location.data;
 
-const translates = location.data.translates;
+const {header, footer, pages, modalBooking} = location.data.translates;
 
 const allLocations = await getCollection("location");
 const languages = allLocations
@@ -49,67 +52,59 @@ const languages = allLocations
 ---
 
 <Layout
-    title={location.data.title}
-    extraClass="flex flex-col gap-4"
+    title={location.data.title} extraClass="flex flex-col gap-4"
 >
     <ModalBookingEvent
-        client:only="react"
-        locale={location.data.locale}
-        translates={translates.modalBooking}
+        client:only="react" locale={location.data.locale} translates={modalBooking}
     />
 
     <Header
-        client:load
-        logo={location.data.logo}
-        translate={translates.header}
-        languageList={languages}
+        client:load logo={location.data.logo} translate={header} languageList={languages}
     />
 
     <SectionHero
-        extraClass="mb-10 mt-16 md:mt-24"
-        translates={translates.hero}
+        extraClass="mb-10 mt-16 md:mt-24" translates={pages.main.hero}
     />
 
     <div>
         <div id="mc"/>
         <SectionSummary
-            extraClass="mb-10"
-            translates={translates.summary}
+            extraClass="mb-10" translates={pages.main.summary}
         />
     </div>
 
     <div>
         <div id="birthday"/>
         <SectionAdditionalInfo
-            extraClass="mb-10"
-            translates={translates.additionalInfo}
+            extraClass="mb-10" translates={pages.main.additionalInfo}
+            isHbPage={location.data.pageHb}
         />
     </div>
 
     <SectionPhotoPreview
-        extraClass="mb-10"
-        translates={translates.photoPreview}
+        extraClass="mb-10" translates={pages.main.photoPreview} slides={photosLibrary[country]}
     />
 
     <div>
         <div id="feedback"/>
+
+        <!--@ts-ignore-->
         <SectionFeedback
-            extraClass="mb-10 mt-32"
-            translates={translates.feedback}
+            extraClass="mb-10 mt-32" translates={pages.main.feedback}
+            feedback={feedbackLibrary[country][localeSlug]}
         />
     </div>
 
     <div>
 
         <SectionPizzaPromote
-            translates={translates.pizzaPromote}
+            translates={pages.main.pizzaPromote}
         />
 
         <div>
             <div id="mc-schools"/>
             <SectionForSchools
-            extraClass="mb-10"
-            translates={translates.forSchools}
+                extraClass="mb-10" translates={pages.main.forSchools}
             />
         </div>
     </div>
@@ -117,26 +112,22 @@ const languages = allLocations
     <div class="mt-32">
         <div id="faq"/>
         <SectionQuestionAndAnswers
-            extraClass="mb-20 mt-32"
-            translates={translates.questionAndAnswers}
+            extraClass="mb-20 mt-32" translates={pages.main.questionAndAnswers}
         />
     </div>
 
     <div class="mt-36">
         <div id="contacts"/>
         <SectionSocialNetworks
-            extraClass="mt-14"
-            translates={translates.socialNetworks}
+            extraClass="mt-14" translates={pages.main.socialNetworks}
         />
     </div>
 
     <SectionMap
-        mapCenter={location.data.map.center}
-        points={location.data.cities}
+        mapCenter={location.data.map.center} points={location.data.cities}
     />
 
     <Footer
-        logo={location.data.logo}
-        translates={translates.footer}
+        logo={location.data.logo} translates={footer}
     />
 </Layout>

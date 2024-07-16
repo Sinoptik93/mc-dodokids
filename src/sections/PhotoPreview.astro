@@ -6,8 +6,7 @@ import SliderPhotos from "~/components/SliderPhotos/SliderPhotos";
 
 import heart from "~/assets/images/heart.svg";
 import heartSmall from "~/assets/images/heart-small.svg";
-import photo1 from "~/assets/images/photo-1.png";
-import photo2 from "~/assets/images/photo-2.png";
+
 
 interface Translates {
     heading: string;
@@ -15,39 +14,19 @@ interface Translates {
     headingSlider: string;
 }
 
+interface Slide {
+    alt: string;
+    src: string
+}
+
 interface Props {
     extraClass?: string;
     translates: Translates;
+    slides: Slide[]
 }
 
-const {extraClass, translates} = Astro.props;
+const {extraClass, translates, slides} = Astro.props;
 
-const slides: {alt: string; src: string}[] = [
-    {
-        alt: 'photo 1',
-        src: photo1.src,
-    },
-    {
-        alt: 'photo 2',
-        src: photo2.src,
-    },
-    {
-        alt: 'photo 3',
-        src: photo1.src,
-    },
-    {
-        alt: 'photo 4',
-        src: photo2.src,
-    },
-    {
-        alt: 'photo 5',
-        src: photo1.src,
-    },
-    {
-        alt: 'photo 6',
-        src: photo2.src,
-    },
-]
 ---
 
 <div class={

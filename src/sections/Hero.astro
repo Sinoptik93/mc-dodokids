@@ -7,14 +7,12 @@ import Button from "~/components/Button/Button";
 import DodoKidsPreview from '~/assets/images/preview-mc-kids.png'
 import friendBalloon from '~/assets/images/friend-balloon.svg'
 import friendOctopus from '~/assets/images/friend-octopus.svg'
-import friendTriangle from '~/assets/images/friend-triangle.svg'
 
-import {TRIGGER_NAME} from '~/components/ModalBookingEvent/config'
 
 interface Translates {
     heading: string;
     subheading: string;
-    formButtonTitle: string;
+    bookButtonTitle: string;
 }
 
 interface Props {
@@ -72,7 +70,7 @@ const {extraClass, translates} = Astro.props;
             </div>
 
             <Button
-                title={translates.formButtonTitle}
+                title={translates.bookButtonTitle}
                 extraClass="w-full md:w-fit"
                 data-react-trigger="hero-pizza-trigger"
             />

@@ -1,19 +1,25 @@
 ---
 import {Image} from 'astro:assets';
 import {twMerge} from "tailwind-merge";
+import ButtonLink from "~/components/ButtonLink/ButtonLink.astro";
+
+import speechBalloon from '~/assets/images/speech-balloon.svg';
+import friendBalloon from '~/assets/images/friend-balloon.svg';
+
 
 interface Translate {
     heading: string;
-    orderButtonTitle: string;
+    orderButton: {
+        url: string;
+        title: string;
+    }
 }
 
 interface Props {
     extraClass?: string;
     translates: Translate;
 }
-import speechBalloon from '~/assets/images/speech-balloon.svg';
-import friendBalloon from '~/assets/images/friend-balloon.svg';
-import ButtonLink from "~/components/ButtonLink/ButtonLink.astro";
+
 
 const {extraClass, translates} = Astro.props;
 ---
@@ -28,7 +34,6 @@ const {extraClass, translates} = Astro.props;
         )
     }
 >
-
     <div class={
         twMerge(
             "absolute z-20",
@@ -47,8 +52,8 @@ const {extraClass, translates} = Astro.props;
         <p class="relative z-10 font-black text-xl md:text-4xl">{translates.heading}</p>
         <ButtonLink
             extraClass="relative z-10 w-fit md:px-20"
-            url="#"
-            title={translates.orderButtonTitle}
+            url={translates.orderButton.url}
+            title={translates.orderButton.title}
         />
 
         <div class={

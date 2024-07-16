@@ -5,7 +5,9 @@ import {twMerge} from "tailwind-merge";
 import SliderFeedback from '~/components/SliderFeedback/SliderFeedback';
 
 import star from '~/assets/images/star.svg'
-import {SlideFeedbackProps} from "../components/SliderFeedback/types";
+
+// REFACTOR: todo
+import type {Feedback} from "~/components/SliderFeedback/types";
 
 interface Translates {
     heading: string;
@@ -14,51 +16,10 @@ interface Translates {
 interface Props {
     extraClass?: string;
     translates: Translates;
+    feedback: Feedback[]
 }
 
-const {extraClass, translates} = Astro.props;
-
-const feedbackList: SlideFeedbackProps[] = [
-    {
-        rating: 4,
-        date: new Date(),
-        userName: "Лариса Дудлик",
-        feedbackText: "Недавно нам выдали проспект, рекламирующий увлекательнейшее бесплатное мероприятие в пиццерии \"Додо\" и мы, не откладывая в долгий ящик, тут же его посетили. Вернее сначала мы оставили заявку на сайте Dodokids, перезвонили нам примерно через сутки... Интересное и бесплатное мероприятие-платишь только за приготовленную пиццу, могут участвовать и дети и взрослые, в дополнение к мастер-классу экскурсия по кухне, понравилась работа персонала, который отнесся к детям с пониманием и заботой"
-
-    },
-    {
-        rating: 5,
-        date: new Date(),
-        userName: "Дима",
-        feedbackText: "Приветствую, друзья!\n Детям понравилось. Бесплатно, платишь только за то, что будут готовить поварята."
-    },
-    {
-        rating: 3,
-        date: new Date(),
-        userName: "Анна Капшина",
-        feedbackText: "Этот отзыв о том, как весело и полезно провести время с детьми! Одна знакомая предложила нам посетить вместе с ее дочкой мастер-класс по изготовлению пиццы в \"Додо пицца\", мы конечно же не отказались."
-    },
-    {
-        rating: 4,
-        date: new Date(),
-        userName: "Лариса Дудлик",
-        feedbackText: "Недавно нам выдали проспект, рекламирующий увлекательнейшее бесплатное мероприятие в пиццерии \"Додо\" и мы, не откладывая в долгий ящик, тут же его посетили. Вернее сначала мы оставили заявку на сайте Dodokids, перезвонили нам примерно через сутки... Интересное и бесплатное мероприятие-платишь только за приготовленную пиццу, могут участвовать и дети и взрослые, в дополнение к мастер-классу экскурсия по кухне, понравилась работа персонала, который отнесся к детям с пониманием и заботой"
-
-    },
-    {
-        rating: 5,
-        date: new Date(),
-        userName: "Дима",
-        feedbackText: "Приветствую, друзья!\n Детям понравилось. Бесплатно, платишь только за то, что будут готовить поварята."
-    },
-    {
-        rating: 3,
-        date: new Date(),
-        userName: "Анна Капшина",
-        feedbackText: "Этот отзыв о том, как весело и полезно провести время с детьми! Одна знакомая предложила нам посетить вместе с ее дочкой мастер-класс по изготовлению пиццы в \"Додо пицца\", мы конечно же не отказались."
-    },
-
-]
+const {extraClass, translates, feedback} = Astro.props;
 ---
 
 <div class={
@@ -74,7 +35,7 @@ const feedbackList: SlideFeedbackProps[] = [
         </h2>
 
         <SliderFeedback
-            feedbackList={feedbackList}
+            feedbackList={feedback}
             client:only="react"
         />
 

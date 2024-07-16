@@ -1,14 +1,14 @@
 ---
-import { Image } from "astro:assets";
-import { twMerge } from "tailwind-merge";
+import {Image} from "astro:assets";
+import {twMerge} from "tailwind-merge";
 import ButtonLink from "~/components/ButtonLink/ButtonLink.astro";
+import Button from "~/components/Button/Button";
 import SliderAdditional from "~/components/SliderAdditional/SliderAdditional";
 
 import celebrateImageTop from "~/assets/images/celebrate-1-1.svg";
 import celebrateImageBottom from "~/assets/images/celebrate-1-2.svg";
 
-import type { SlideAdditionalProps } from "~/components/SliderAdditional/types";
-import { TRIGGER_NAME } from "../components/ModalBookingEvent/config";
+import type {SlideAdditionalProps} from "~/components/SliderAdditional/types";
 
 interface Translate {
     heading: {
@@ -27,26 +27,16 @@ interface Translate {
 interface Props {
     extraClass?: string;
     translates: Translate;
+    isHbPage: boolean;
 }
 
-const { extraClass, translates } = Astro.props;
+const {extraClass, translates, isHbPage} = Astro.props;
 ---
-
 <script>
-    import { createReactTrigger } from "~/utils/triggers/reactTrigger";
-    import { TRIGGER_NAME } from "~/components/ModalBookingEvent/config";
+    import {handleModalTrigger} from '~/utils/triggers/reactTrigger'
 
-    const modalButton = document.querySelector(
-        `[data-react-trigger="${TRIGGER_NAME}"]`,
-    );
-    const handleClick = createReactTrigger<{ defaultEvent: string }>({
-        name: TRIGGER_NAME,
-        detail: { defaultEvent: "birthday" },
-    });
-
-    if (modalButton) {
-        modalButton.addEventListener("click", handleClick);
-    }
+    const detail = {defaultEvent: "birthday"}
+    handleModalTrigger({triggerName: "birthday-trigger", detail})
 </script>
 
 <div
@@ -66,30 +56,35 @@ const { extraClass, translates } = Astro.props;
             )}
         >
             <Image
-                src={celebrateImageTop}
-                alt="celebrate bg"
-                class="h-full w-full object-contain"
+                src={celebrateImageTop} alt="celebrate bg" class="h-full w-full object-contain"
             />
         </div>
 
         <div class="relative z-10 container flex flex-col mb-8">
             <div class={twMerge("flex flex-col gap-6 max-w-72 md:max-w-md mb-10 md:mb-40")}>
                 <h2 class="font-black text-4xl md:text-6xl">
-                    {translates.heading.base}
-                    <span class="bg-color-radial"
-                        ><br />{translates.heading.colored}</span
-                    >
+                    {translates.heading.base} <span class="bg-color-radial"><br/>{translates.heading.colored}</span>
                 </h2>
 
                 <p class="md:text-xl text-stone-500">
                     {translates.subheading}
                 </p>
 
-                <ButtonLink
-                    url={translates.bookButton.title}
-                    title={translates.bookButton.title}
-                    extraClass="md:w-fit"
-                />
+                {
+                    isHbPage
+                        ? (
+                            <ButtonLink
+                                url={translates.bookButton.title} title={translates.bookButton.title} extraClass="md:w-fit"
+                            />
+                        )
+                        : (
+                            <Button
+                                data-react-trigger="birthday-trigger"
+                                title={translates.bookButton.title}
+                                extraClass="md:w-fit"
+                            />
+                        )
+                }
             </div>
 
             <div class="relative z-10 flex flex-col gap-6 items-center">
@@ -100,7 +95,7 @@ const { extraClass, translates } = Astro.props;
         </div>
 
         <div class="md:container">
-            <SliderAdditional slides={translates.slides} client:only="react" />
+            <SliderAdditional slides={translates.slides} client:only="react"/>
         </div>
     </div>
 
@@ -112,9 +107,7 @@ const { extraClass, translates } = Astro.props;
         )}
     >
         <Image
-            src={celebrateImageBottom}
-            alt="celebrate bg"
-            class="h-full w-full object-contain"
+            src={celebrateImageBottom} alt="celebrate bg" class="h-full w-full object-contain"
         />
     </div>
 </div>

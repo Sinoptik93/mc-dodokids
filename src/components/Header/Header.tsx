@@ -53,7 +53,7 @@ const Header = ({ languageList, translate, logo }: Props) => {
                         </div>
 
                         <button
-                            className="md:hidden flex justify-between items-center size-6"
+                            className="lg:hidden flex justify-between items-center size-6"
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                         >
                             {
@@ -63,11 +63,10 @@ const Header = ({ languageList, translate, logo }: Props) => {
                             }
                         </button>
 
-                        <div className="hidden md:flex items-center grow justify-between gap-8">
-
+                        <div className="hidden lg:flex items-center grow justify-between gap-4">
                             <nav className="flex grow">
-                                <ul className="flex grow justify-between">
-                                    {translate.menu.map((item, index) => (
+                                <ul className="flex grow gap-1 items-center justify-between">
+                                    {translate.menu.map((item) => (
                                         <li
                                             className="text-sm"
                                             key={item.title}
@@ -82,8 +81,8 @@ const Header = ({ languageList, translate, logo }: Props) => {
                                 </ul>
                             </nav>
 
-                            <div className="flex gap-4">
-                                <div className="size-8">
+                            <div className="flex items-center gap-4">
+                                <div className="size-6">
                                     <IconPhone />
                                 </div>
                                 <a href={translate.phone.url}>{translate.phone.title}</a>
@@ -130,7 +129,7 @@ const Header = ({ languageList, translate, logo }: Props) => {
                                                     <button
                                                         type="button"
                                                         className="text-3xl text-bold"
-                                                        onClick={(e) => {
+                                                        onClick={() => {
                                                             window.location.href = item.url;
                                                             setIsMenuOpen(false);
                                                         }}

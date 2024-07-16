@@ -1,6 +1,6 @@
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {twMerge} from "tailwind-merge";
-import {getLocalTimeZone, parseDate, today} from "@internationalized/date";
+import {getLocalTimeZone, today} from "@internationalized/date";
 import {useForm, useFieldArray, Controller} from 'react-hook-form';
 import PhoneInput from 'react-phone-input-2';
 
@@ -11,8 +11,6 @@ import {
     Modal,
     Button,
     Radio,
-    Select,
-    SelectItem,
     Input,
     Textarea,
     Checkbox,
@@ -111,16 +109,18 @@ interface Translate {
         title: string;
         url: string;
     };
-    bookEventButtonTitle: string;
-    successScreen: {
-        heading: string;
-        subheading: string;
-        returnButtonTitle: string;
-    };
-    errorScreen: {
-        heading: string;
-        subheading: string;
-        returnButtonTitle: string;
+    bookButtonTitle: string;
+    screen: {
+        success: {
+            heading: string;
+            subheading: string;
+            returnButtonTitle: string;
+        };
+        error: {
+            heading: string;
+            subheading: string;
+            returnButtonTitle: string;
+        }
     }
 }
 
@@ -148,8 +148,6 @@ export const CustomRadio = (props: RadioProps) => {
     const {
         Component,
         children,
-        isSelected,
-        description,
         getBaseProps,
         getWrapperProps,
         getInputProps,
@@ -186,42 +184,7 @@ export const CustomRadio = (props: RadioProps) => {
 
 export type Events = "pizza-mc" | "birthday" | "baking" | "schools-mc";
 
-interface DefaultValues {
-    event?: Events
-}
-
 const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Translate; locale: string; }) => {
-    const empty = {
-        event: 'pizza-mc',
-        address: '',
-        name: '',
-        phone: '',
-        date: '',
-        children: [
-            {
-                name: '',
-                age: '',
-                noAllergy: false,
-                allergyDetails: ''
-            }
-        ],
-        additionalInfo: '',
-        agreePrivacy: true,
-        agreePromotions: false,
-    }
-
-    const test = {
-        event: 'pizza-mc',
-        address: null,
-        name: 'Sergey',
-        phone: '+79097376778',
-        date: "2024-06-25",
-        children: [{name: 'Anton', age: '20', noAllergy: false, allergyDetails: 'Some allergy'}],
-        additionalInfo: 'Some info',
-        agreePrivacy: true,
-        agreePromotions: false,
-    }
-
     const {isOpen, onOpen, onOpenChange, onClose} = useDisclosure();
     const {
         register,
@@ -265,7 +228,7 @@ const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Transla
             "AKfycbyWeo6GqjKjHKeCUI1EEuJOFpeH_5a0LJzVkgkEU6TNsR60m6MDrdUZrliVpO_K3Inivw";
         const getUrl = (id: string) => `https://script.google.com/macros/s/${id}/exec`;
 
-        const response = await fetch(getUrl(ID_DODO), {
+        return await fetch(getUrl(ID_DODO), {
             method: "POST",
             redirect: "follow",
             headers: {
@@ -652,7 +615,7 @@ const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Transla
                                                     )
                                                 }
                                             >
-                                                {translates.bookEventButtonTitle}
+                                                {translates.bookButtonTitle}
                                             </Button>
                                         </form>
                                     </ModalBody>
@@ -669,9 +632,9 @@ const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Transla
                                         <TriangleFriendCool/>
                                     </div>
 
-                                    <p className="font-black text-4xl text-center">{translates.successScreen.heading}</p>
+                                    <p className="font-black text-4xl text-center">{translates.screen.success.heading}</p>
 
-                                    <p className="text-neutral-600 text-center">{translates.successScreen.subheading}</p>
+                                    <p className="text-neutral-600 text-center">{translates.screen.success.subheading}</p>
 
                                     <p className="text-neutral-600 text-center bg-neutral-200 p-4 rounded-xl">{
                                         new Date(getValues().date).toLocaleDateString(locale, {
@@ -692,7 +655,7 @@ const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Transla
                                             )
                                         }
                                     >
-                                        {translates.successScreen.returnButtonTitle}
+                                        {translates.screen.success.returnButtonTitle}
                                     </Button>
 
                                 </ModalBody>

@@ -1,7 +1,17 @@
 {
     "name": "dodo-kids-mc-landing",
     "type": "module",
-    "version": "0.0.1",
+    "license": "UNLICENSED",
+    "author": {
+        "email": "s.chepukhin@dodobrands.io",
+        "name": "Sergey Chepukhin",
+        "url": "https://github.com/Sinoptik93"
+    },
+    "private": true,
+    "packageManager": "yarn@4.3.1",
+    "engines": {
+        "node": ">=20.7.0"
+    },
     "scripts": {
         "dev": "astro dev",
         "start": "astro dev",
@@ -58,6 +68,5 @@
         "sharp": "^0.33.4",
         "tailwind-merge": "^2.3.0",
         "vite-plugin-svgr": "^4.2.0"
-    },
-    "packageManager": "yarn@4.3.1"
+    }
 }

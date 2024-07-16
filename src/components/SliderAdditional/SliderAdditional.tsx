@@ -23,7 +23,7 @@ const iconsLibrary: Record<IconsList, ReactNode> = {
 
 const SlideAdditional = ({icon, title, description}: SlideAdditionalProps) => {
     return (
-        <div className="mx-4 md:mx-0 p-8 flex flex-col gap-4 bg-white rounded-5xl md:h-[400px]">
+        <div className="mx-4 md:mx-0 p-8 flex flex-col gap-4 bg-white rounded-5xl h-[380px] md:h-[400px]">
             <div className="size-14 p-1 text-yellow-700">
                 {
                     iconsLibrary[icon]
