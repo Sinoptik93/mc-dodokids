@@ -4,7 +4,7 @@ import IconPhone from '~/assets/icons/icon-phone.svg?react';
 import IconBurger from '~/assets/icons/icon-burger.svg?react';
 import IconCross from '~/assets/icons/icon-cross.svg?react';
 import { twMerge } from "tailwind-merge";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { TRIGGER_NAME } from '~/components/ModalBookingEvent/config'
 

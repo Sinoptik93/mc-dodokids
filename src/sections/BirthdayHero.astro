@@ -26,18 +26,21 @@ const {extraClass} = Astro.props;
     }
 >
 
-    <div class={
-        twMerge(
-            "container relative z-10 flex flex-col justify-center items-center",
-
-        )
-    }>
-        <h1 class={
+    <div
+        class={
             twMerge(
-                "text-5xl font-black uppercase text-center mb-8",
-                "md:max-w-xl md:text-8xl"
+                "container relative z-10 flex flex-col justify-center items-center",
             )
-        }>
+        }
+    >
+        <h1
+            class={
+                twMerge(
+                    "text-5xl font-black uppercase text-center mb-8",
+                    "md:max-w-xl md:text-8xl"
+                )
+            }
+        >
             Celebrate birthday <br/>
             <span class="bg-color-radial">with us</span>
         </h1>

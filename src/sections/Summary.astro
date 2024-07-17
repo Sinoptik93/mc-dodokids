@@ -28,22 +28,28 @@ const {extraClass, translates} = Astro.props;
 
 <script>
     import {handleModalTrigger} from '~/utils/triggers/reactTrigger';
-    handleModalTrigger({triggerName: "extra-mc-trigger", detail: {defaultEvent: "baking"}});
+
+    handleModalTrigger({triggerName: "extra-mc-trigger", detail: {defaultEvent: "pizza-mc"}});
 </script>
 
-<div class={
-    twMerge(
-        "container flex flex-col-reverse gap-2 md:gap-4",
-        "md:flex-row",
-        extraClass
-    )
-}>
+<div
+    class={
+        twMerge(
+            "container flex flex-col-reverse gap-2 md:gap-4",
+            "md:flex-row",
+            extraClass
+        )
+    }
+>
     <div class="flex justify-center items-center">
 
         <div class="max-w-md flex flex-col gap-6 md:gap-10">
             <div class="flex flex-col gap-4 md:gap-6">
 
-                <h2 class="uppercase font-black text-3xl md:text-5xl" set:html={translates.heading} />
+                <h2
+                    class="uppercase font-black text-3xl md:text-5xl"
+                    set:html={translates.heading}
+                />
 
                 <p
                     class="w-fit text-orange bg-orange-100 rounded-xl p-3 leading-tight"
@@ -51,27 +57,19 @@ const {extraClass, translates} = Astro.props;
                     {translates.costBadge}
                 </p>
 
-                <p class="text-neutral-400">
-                    {translates.subtitle}
-                </p>
+                <p class="text-neutral-400">{translates.subtitle}</p>
             </div>
 
             <div class="flex flex-wrap gap-2 items-center text-neutral-400">
-                <p>
-                    {translates.extra.description}
-                </p>
+                <p>{translates.extra.description}</p>
 
                 <div class="bg-neutral-400 size-1 rounded-full"/>
 
-                <p>
-                    {translates.extra.time}
-                </p>
+                <p>{translates.extra.time}</p>
 
                 <div class="bg-neutral-400 size-1 rounded-full"/>
 
-                <p>
-                    {translates.extra.product}
-                </p>
+                <p>{translates.extra.product}</p>
             </div>
 
             <p>
@@ -89,11 +87,13 @@ const {extraClass, translates} = Astro.props;
     </div>
 
     <div class="flex flex-1 justify-center items-center">
-        <div class={
-            twMerge(
-                "w-full"
-            )
-        }>
+        <div
+            class={
+                twMerge(
+                    "w-full"
+                )
+            }
+        >
             <Image
                 src={mcPhotosAccent}
                 alt="mcPhotosAccent"

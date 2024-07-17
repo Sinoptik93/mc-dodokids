@@ -1,29 +1,28 @@
 import {useEffect} from 'react';
 import {twMerge} from "tailwind-merge";
 import {getLocalTimeZone, today} from "@internationalized/date";
-import {useForm, useFieldArray, Controller} from 'react-hook-form';
+import {Controller, useFieldArray, useForm} from 'react-hook-form';
 import PhoneInput from 'react-phone-input-2';
-
-
-import {initRealisticConfetti} from "~/utils/confetti";
+import {v4 as uuidv4} from 'uuid';
 
 import {
-    Modal,
     Button,
-    Radio,
-    Input,
-    Textarea,
     Checkbox,
-    RadioGroup,
-    useDisclosure,
+    DatePicker,
+    Input,
+    Modal,
+    ModalBody,
     ModalContent,
     ModalHeader,
-    ModalBody,
-    useRadio,
-    DatePicker,
-    VisuallyHidden,
-    RadioProps
+    Radio,
+    RadioGroup,
+    Textarea,
+    useDisclosure,
 } from '@nextui-org/react';
+import {motion, AnimatePresence} from 'framer-motion';
+import {Loader} from "./Loader";
+
+import {initRealisticConfetti} from "~/utils/confetti";
 
 import {TRIGGER_NAME} from './config'
 
@@ -34,177 +33,43 @@ import TriangleFriendCool from '~/assets/images/friend-triangle-cool.svg?react'
 import 'react-phone-input-2/lib/style.css';
 import './modalBookingEvent.styles.scss'
 
-type FormValues = {
-    event: Events;
-    address: string | null;
-    name: string;
-    phone: string;
-    date: string;
-    children: {
-        name: string;
-        age: string;
-        noAllergy: boolean;
-        allergyDetails?: string;
-    }[];
-    additionalInfo: string;
-    agreePrivacy: boolean;
-    agreePromotions: boolean;
-};
 
+import type {
+    CountryPhoneInput,
+    FormValues,
+    Translate,
+    ValidatePhoneInputProps
+} from "./types";
+import {Event} from "~/shared/types";
 
-interface RadioItem<T = string> {
-    title: string;
-    value: T;
-}
-
-interface RadioGroup<T = any> {
-    name: string;
-    list: RadioItem<T>[];
-}
-
-interface InputItem {
-    name: string;
-    placeholder: string;
-}
-
-interface Translate {
-    heading: string;
-    subheading: string;
-    event: {
-        title: string;
-    } & RadioGroup<Events>;
-    pizzeria: {
-        title: string;
-    } & RadioGroup;
-    personal: {
-        title: string;
-        name: InputItem;
-        phone: InputItem & { phoneCode: string; };
-    };
-    date: {
-        title: string;
-        description: string;
-    };
-    child: {
-        counterTitle: string;
-        childTitle: string;
-        name: InputItem;
-        age: InputItem;
-        allergyCheckboxTitle: string;
-        allergy: InputItem;
-        deleteButtonTitle: string;
-    }
-    details: {
-        placeholder: string;
-        caps: {
-            charsStart: string;
-            charsEnd: string;
-        };
-    }
-    privacyPolicy: {
-        title: string;
-        url: string;
-    };
-    promotionAgreement: {
-        title: string;
-        url: string;
-    };
-    bookButtonTitle: string;
-    screen: {
-        success: {
-            heading: string;
-            subheading: string;
-            returnButtonTitle: string;
-        };
-        error: {
-            heading: string;
-            subheading: string;
-            returnButtonTitle: string;
-        }
-    }
-}
-
-
-const Loader = () => {
-    return (
-
-        <div role="status">
-            <svg aria-hidden="true" className="size-24 text-gray-200 animate-spin dark:text-gray-600 fill-orange"
-                 viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                    fill="currentColor"/>
-                <path
-                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                    fill="currentFill"/>
-            </svg>
-            <span className="sr-only">Loading...</span>
-        </div>
-
-    );
-};
-
-export const CustomRadio = (props: RadioProps) => {
-    const {
-        Component,
-        children,
-        getBaseProps,
-        getWrapperProps,
-        getInputProps,
-        getLabelProps,
-        getLabelWrapperProps,
-        getControlProps,
-    } = useRadio(props);
-
-    return (
-        <Component
-            {...getBaseProps()}
-            className={twMerge(
-                "group flex items-center",
-                "cursor-pointer",
-                "data-[selected=true]:border-orange",
-            )}
-        >
-            <VisuallyHidden>
-                <input {...getInputProps()} />
-            </VisuallyHidden>
-
-            <span
-                {...getWrapperProps()}
-            >
-                <span {...getControlProps()} />
-            </span>
-
-            <div {...getLabelWrapperProps()}>
-                {children && <span {...getLabelProps()}>{children}</span>}
-            </div>
-        </Component>
-    );
-};
-
-export type Events = "pizza-mc" | "birthday" | "baking" | "schools-mc";
 
 const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Translate; locale: string; }) => {
-    const {isOpen, onOpen, onOpenChange, onClose} = useDisclosure();
+    const MAX_CHILDREN_COUNT = 10;
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const {
         register,
-        control,
         handleSubmit,
-        watch,
         setValue,
-        formState: {errors, isSubmitSuccessful, isSubmitting},
+        control,
+        watch,
         getValues,
+        formState: {
+            errors,
+            isSubmitSuccessful,
+            isSubmitting
+        },
     } = useForm<FormValues>({
         defaultValues: {
             event: 'pizza-mc',
             address: '',
             name: '',
             phone: '',
-            date: '',
+            date: today(getLocalTimeZone()).add({days: 1}),
             children: [
                 {
                     name: '',
                     age: '',
+                    tempId: uuidv4(),
                     noAllergy: false,
                     allergyDetails: ''
                 }
@@ -217,11 +82,14 @@ const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Transla
 
 
     const additionalInfo = watch('additionalInfo')
+    const eventType = watch('event')
 
+    const watchChildren = watch("children", []);
     const {fields, append, remove} = useFieldArray({
         control,
         name: "children"
     });
+
 
     const onSubmit = async (data: FormValues) => {
         const ID_DODO =
@@ -238,24 +106,37 @@ const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Transla
         });
     };
 
-    useEffect(() => {
-        const handleOpenModal = ({detail}: CustomEvent<{defaultEvent: Events;}>) => {
+    const handleValidatePhone = ({country, inputNumber, fieldState}: ValidatePhoneInputProps) => {
+        if (!fieldState.isDirty && !fieldState.invalid) return true;
+        if (inputNumber.length === 0) return false;
 
-            console.log(detail)
+        const countDots = (str: string): number => {
+            return (str.match(/\./g) || []).length;
+        };
+
+        const countDigits = (str: string): number => {
+            return str.replace(/\D/g, '').length;
+        };
+
+        const inputDigitsCount = countDigits(inputNumber);
+        const formatDigitsCount = countDots(country.format);
+
+        const isValidNumber = inputDigitsCount === formatDigitsCount && inputNumber.startsWith(country.dialCode);
+
+        return isValidNumber;
+    }
+
+    useEffect(() => {
+        const handleOpenModal = ({detail}: CustomEvent<{ defaultEvent: Event; }>) => {
+
             if (!!detail.defaultEvent) {
-                setValue('event', detail.defaultEvent, { shouldDirty: true, shouldValidate: true, shouldTouch: true});
+                setValue('event', detail.defaultEvent, {shouldDirty: true, shouldValidate: true, shouldTouch: true});
             }
             onOpen();
         };
 
         // @ts-ignore
         window.addEventListener(TRIGGER_NAME, handleOpenModal);
-
-        return () => {
-            // @ts-ignore
-            window.removeEventListener(TRIGGER_NAME, handleOpenModal);
-            onClose();
-        }
     }, []);
 
 
@@ -268,9 +149,6 @@ const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Transla
     }, [
         isSubmitSuccessful
     ])
-
-    const watchChildren = watch("children", []);
-
 
     return (
         <Modal
@@ -295,11 +173,13 @@ const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Transla
                     <>
                         {
                             isSubmitting && (
-                                <div className={twMerge(
-                                    "z-30 absolute inset-0",
-                                    "bg-black bg-opacity-20 rounded-5xl",
-                                    "flex justify-center items-center"
-                                )}>
+                                <div
+                                    className={twMerge(
+                                        "z-30 absolute inset-0",
+                                        "bg-black bg-opacity-20 rounded-5xl",
+                                        "flex justify-center items-center"
+                                    )}
+                                >
                                     <Loader/>
                                 </div>
                             )
@@ -349,6 +229,7 @@ const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Transla
                                                                 {
                                                                     translates.event.list.map((eventType) => (
                                                                         <Radio
+                                                                            key={eventType.value}
                                                                             value={eventType.value}
                                                                         >
                                                                             {eventType.title}
@@ -384,9 +265,8 @@ const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Transla
                                                     <Controller
                                                         name="address"
                                                         control={control}
-                                                        rules={{
-                                                            required: true,
-                                                        }}
+                                                        rules={{required: true}}
+                                                        defaultValue={getValues('address')}
                                                         render={({field, fieldState}) => (
                                                             <RadioGroup
                                                                 aria-label={translates.pizzeria.title}
@@ -397,6 +277,7 @@ const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Transla
                                                                 {
                                                                     translates.pizzeria.list.map((pizzeria) => (
                                                                         <Radio
+                                                                            key={pizzeria.value}
                                                                             value={pizzeria.value}
                                                                         >
                                                                             {pizzeria.title}
@@ -428,12 +309,23 @@ const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Transla
                                                         control={control}
                                                         rules={{
                                                             required: true,
-
                                                         }}
-                                                        render={({field}) => (
+                                                        render={({field, fieldState}) => (
                                                             <PhoneInput
                                                                 placeholder={translates.personal.phone.placeholder}
                                                                 country={translates.personal.phone.phoneCode}
+                                                                isValid={(inputNumber, country, countries) => {
+                                                                    const countryCast = country as CountryPhoneInput;
+                                                                    const countriesCast = countries as CountryPhoneInput[];
+
+                                                                    return handleValidatePhone({
+                                                                        fieldState,
+                                                                        inputNumber,
+                                                                        country: countryCast,
+                                                                        countries: countriesCast
+                                                                    })
+                                                                }}
+                                                                autoFormat
                                                                 {...field}
                                                             />
                                                         )}
@@ -445,21 +337,24 @@ const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Transla
                                             <div className="flex flex-col gap-4">
                                                 <label className="">{translates.date.title}</label>
                                                 {/* @ts-ignore */}
-                                                <DatePicker
-                                                    aria-label={translates.date.title}
-                                                    variant="bordered"
-                                                    isInvalid={!!errors.date}
-                                                    size="lg"
-                                                    minValue={today(getLocalTimeZone())}
-                                                    maxValue={today(getLocalTimeZone()).add({years: 1})}
-                                                    defaultValue={today(getLocalTimeZone()).add({days: 1})}
-                                                    // classNames={{
-                                                    //     inputWrapper: "border-2 border-neutral-200 rounded-2xl mb-2 bg-white data-[hover=true]:bg-orange-100",
-                                                    //     input: "data-[selected=true]:bg-orange"
-                                                    // }}
-                                                    {...register('date', {
+                                                <Controller
+                                                    name="date"
+                                                    control={control}
+                                                    rules={{
                                                         required: true,
-                                                    })}
+                                                    }}
+                                                    render={({field, fieldState}) => (
+                                                        <DatePicker
+                                                            aria-label={translates.date.title}
+                                                            variant="bordered"
+                                                            isInvalid={fieldState.invalid}
+                                                            size="lg"
+                                                            minValue={today(getLocalTimeZone())}
+                                                            maxValue={today(getLocalTimeZone()).add({years: 1})}
+                                                            defaultValue={getValues('date')}
+                                                            {...field}
+                                                        />
+                                                    )}
                                                 />
 
                                                 <p className="text-sm">{translates.date.description}</p>
@@ -467,96 +362,120 @@ const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Transla
 
                                             <div className="flex flex-col gap-4">
                                                 <label className="">{translates.child.counterTitle}</label>
-                                                <div className="flex gap-2 items-center mb-8">
+                                                <div className="flex gap-2 items-center">
                                                     <Button
                                                         onClick={() => remove(fields.length - 1)}
                                                         disabled={fields.length === 1}
-                                                        className="min-w-5 text-orange font-black rounded-xl bg-white"
+                                                        className="min-w-5 text-orange font-black rounded-xl bg-white disabled:text-orange-200"
                                                     >
                                                         -
                                                     </Button>
                                                     <span>{fields.length}</span>
                                                     <Button
-                                                        onClick={() =>
+                                                        disabled={fields.length === MAX_CHILDREN_COUNT}
+                                                        onClick={() => {
+                                                            if (fields.length === MAX_CHILDREN_COUNT) return;
+
                                                             append({
                                                                 name: '',
                                                                 age: '',
                                                                 noAllergy: false,
-                                                                allergyDetails: ''
+                                                                allergyDetails: '',
+                                                                tempId: uuidv4()
                                                             })
                                                         }
-                                                        className="min-w-5 text-orange font-black rounded-xl bg-white"
+
+                                                        }
+                                                        className="min-w-5 text-orange font-black rounded-xl bg-white disabled:text-orange-200"
                                                     >
                                                         +
                                                     </Button>
                                                 </div>
 
-                                                {fields.map((field, index) => (
-                                                    <div key={field.id} className="space-y-2">
-                                                        <div className="flex justify-between">
-                                                            <p className="pb-4">{`${translates.child.childTitle} ${index + 1}`}</p>
-
-                                                            {
-                                                                fields.length > 1 && (
-                                                                    <Button
-                                                                        type="button"
-                                                                        className="flex items-center gap-1 text-red-600 bg-red-100 rounded-2xl px-4 py-2"
-                                                                        onClick={() => remove(index)}
-                                                                    >
-                                                                        <div className="text-red-600  size-4">
-                                                                            <IconTrash/>
-                                                                        </div>
-
-                                                                        <p>{translates.child.deleteButtonTitle}</p>
-                                                                    </Button>
-                                                                )
-                                                            }
-                                                        </div>
-                                                        <div className="flex gap-4">
-                                                            {/*@ts-ignore*/}
-                                                            <Input
-                                                                aria-label={translates.child.name}
-                                                                isClearable
-                                                                fullWidth
-                                                                size="lg"
-                                                                variant="bordered"
-                                                                isInvalid={errors.children && !!errors?.children[index]?.name}
-                                                                placeholder={translates.child.name.placeholder}
-                                                                {...register(`children.${index}.name`, {
-                                                                    required: true
-                                                                })}
-                                                            />
-                                                            <Input
-                                                                aria-label={translates.child.age.name}
-                                                                isClearable
-                                                                fullWidth
-                                                                size="lg"
-                                                                variant="bordered"
-                                                                isInvalid={errors.children && !!errors?.children[index]?.age}
-                                                                placeholder={translates.child.name.placeholder}
-                                                                {...register(`children.${index}.age`, {required: true})}
-                                                            />
-                                                        </div>
-
-                                                        <Checkbox
-                                                            {...register(`children.${index}.noAllergy`)}
+                                                <AnimatePresence>
+                                                    {eventType !== 'schools-mc' && fields.map((field, index) => (
+                                                        <motion.div
+                                                            key={field.tempId}
+                                                            initial={{opacity: 0, maxHeight: 0}}
+                                                            animate={{opacity: 1, maxHeight: '1000px'}}
+                                                            exit={{opacity: 0, maxHeight: 0}}
+                                                            transition={{duration: 0.3}}
+                                                            className={twMerge(
+                                                                "space-y-2",
+                                                                fields.length - 1 === index && "mb-8"
+                                                            )}
                                                         >
-                                                            {translates.child.allergyCheckboxTitle}
-                                                        </Checkbox>
+                                                            <div className="flex justify-between">
+                                                                <p className="pb-4">{`${translates.child.childTitle} ${index + 1}`}</p>
 
-                                                        {!watchChildren[index]?.noAllergy && (
-                                                            <Textarea
-                                                                aria-label={translates.child.allergy.placeholder}
-                                                                fullWidth
-                                                                size="lg"
-                                                                variant="bordered"
-                                                                isInvalid={errors.children && !!errors?.children[index]?.allergyDetails}
-                                                                placeholder={translates.child.allergy.placeholder}
-                                                                {...register(`children.${index}.allergyDetails`, {required: true})}
-                                                            />
-                                                        )}
-                                                    </div>
-                                                ))}
+                                                                {
+                                                                    fields.length > 1 && (
+                                                                        <Button
+                                                                            type="button"
+                                                                            className="flex items-center gap-1 text-red-600 bg-red-100 rounded-2xl px-4 py-2"
+                                                                            onClick={() => remove(index)}
+                                                                        >
+                                                                            <div className="text-red-600 size-4">
+                                                                                <IconTrash/>
+                                                                            </div>
+
+                                                                            <p>{translates.child.deleteButtonTitle}</p>
+                                                                        </Button>
+                                                                    )
+                                                                }
+                                                            </div>
+                                                            <div className="flex gap-4">
+                                                                {/*@ts-ignore*/}
+                                                                <Input
+                                                                    aria-label={translates.child.name}
+                                                                    isClearable
+                                                                    fullWidth
+                                                                    size="lg"
+                                                                    variant="bordered"
+                                                                    isInvalid={errors.children && !!errors?.children[index]?.name}
+                                                                    placeholder={translates.child.name.placeholder}
+                                                                    {...register(`children.${index}.name`, {
+                                                                        required: true
+                                                                    })}
+                                                                />
+                                                                <Input
+                                                                    aria-label={translates.child.age.name}
+                                                                    isClearable
+                                                                    fullWidth
+                                                                    size="lg"
+                                                                    type="number"
+                                                                    variant="bordered"
+                                                                    isInvalid={errors.children && !!errors?.children[index]?.age}
+                                                                    placeholder={translates.child.age.placeholder}
+                                                                    {...register(`children.${index}.age`, {
+                                                                        required: true,
+                                                                        min: 0,
+                                                                        max: 18,
+                                                                        valueAsNumber: true
+                                                                    })}
+                                                                />
+                                                            </div>
+
+                                                            <Checkbox
+                                                                {...register(`children.${index}.noAllergy`)}
+                                                            >
+                                                                {translates.child.allergyCheckboxTitle}
+                                                            </Checkbox>
+
+                                                            {!watchChildren[index]?.noAllergy && (
+                                                                <Textarea
+                                                                    aria-label={translates.child.allergy.placeholder}
+                                                                    fullWidth
+                                                                    size="lg"
+                                                                    variant="bordered"
+                                                                    isInvalid={errors.children && !!errors?.children[index]?.allergyDetails}
+                                                                    placeholder={translates.child.allergy.placeholder}
+                                                                    {...register(`children.${index}.allergyDetails`, {required: true})}
+                                                                />
+                                                            )}
+                                                        </motion.div>
+                                                    ))}
+                                                </AnimatePresence>
                                             </div>
 
                                             <div className="flex flex-col gap-4">
@@ -582,8 +501,9 @@ const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Transla
                                                     {...register('agreePrivacy', {required: true})}
                                                 >
                                                     <a
-                                                        className="hover:text-orange"
+                                                        className="hover:text-orange underline underline-offset-2 transition-colors"
                                                         href={translates.privacyPolicy.url}
+                                                        target="_blank"
                                                         dangerouslySetInnerHTML={{
                                                             __html: translates.privacyPolicy.title
                                                         }}
@@ -594,7 +514,8 @@ const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Transla
                                                     {...register('agreePromotions')}
                                                 >
                                                     <a
-                                                        className="hover:text-orange"
+                                                        className="hover:text-orange underline underline-offset-2 transition-colors"
+                                                        target="_blank"
                                                         href={translates.promotionAgreement.url}
                                                         dangerouslySetInnerHTML={{
                                                             __html: translates.promotionAgreement.title
@@ -637,7 +558,7 @@ const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Transla
                                     <p className="text-neutral-600 text-center">{translates.screen.success.subheading}</p>
 
                                     <p className="text-neutral-600 text-center bg-neutral-200 p-4 rounded-xl">{
-                                        new Date(getValues().date).toLocaleDateString(locale, {
+                                        new Date(getValues('date').toString()).toLocaleDateString(locale, {
                                             day: 'numeric',
                                             month: 'long'
                                         })

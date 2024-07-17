@@ -2,7 +2,7 @@
 import {Image} from 'astro:assets';
 import {twMerge} from "tailwind-merge";
 
-type SocialNetworkEnum = "instagram"  | "facebook"  | "tiktok"  | "phone";
+type SocialNetworkEnum = "instagram" | "facebook" | "tiktok" | "phone";
 
 interface SocialNetwork {
     type: SocialNetworkEnum;
@@ -45,7 +45,10 @@ const logoLibrary = {
     }
 >
     <div class="container">
-        <h2 class="relative z-10 mb-10 font-black text-4xl md:text-5xl text-center uppercase" set:html={translates.heading}>
+        <h2
+            class="relative z-10 mb-10 font-black text-4xl md:text-5xl text-center uppercase"
+            set:html={translates.heading}
+        >
 
         </h2>
 
@@ -57,11 +60,13 @@ const logoLibrary = {
                         class="p-4 flex items-center gap-4 rounded-2xl shadow-lg shadow-neutral-100 bg-white"
                         target="_blank"
                     >
-                        <div class={
-                            twMerge(
-                                "size-8",
-                            )
-                        }>
+                        <div
+                            class={
+                                twMerge(
+                                    "size-8",
+                                )
+                            }
+                        >
                             <Image
                                 class="w-full h-full object-contain"
                                 src={logoLibrary[social.type]}

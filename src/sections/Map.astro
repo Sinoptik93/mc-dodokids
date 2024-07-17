@@ -17,18 +17,20 @@ interface Point {
 
 interface Props {
     extraClass?: string;
-    mapCenter: {lat: number, lng: number};
+    mapCenter: { lat: number, lng: number };
     points: Point[];
 }
 
 const {extraClass, mapCenter, points} = Astro.props;
 ---
 
-<div class={
-    twMerge(
-        extraClass,
-    )
-}>
+<div
+    class={
+        twMerge(
+            extraClass,
+        )
+    }
+>
     <CustomMap
         pointsList={points}
         center={mapCenter}

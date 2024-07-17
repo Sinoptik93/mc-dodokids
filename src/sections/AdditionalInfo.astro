@@ -56,7 +56,9 @@ const {extraClass, translates, isHbPage} = Astro.props;
             )}
         >
             <Image
-                src={celebrateImageTop} alt="celebrate bg" class="h-full w-full object-contain"
+                src={celebrateImageTop}
+                alt="celebrate bg"
+                class="h-full w-full object-contain"
             />
         </div>
 
@@ -74,7 +76,9 @@ const {extraClass, translates, isHbPage} = Astro.props;
                     isHbPage
                         ? (
                             <ButtonLink
-                                url={translates.bookButton.title} title={translates.bookButton.title} extraClass="md:w-fit"
+                                url={translates.bookButton.title}
+                                title={translates.bookButton.title}
+                                extraClass="md:w-fit"
                             />
                         )
                         : (
@@ -95,7 +99,10 @@ const {extraClass, translates, isHbPage} = Astro.props;
         </div>
 
         <div class="md:container">
-            <SliderAdditional slides={translates.slides} client:only="react"/>
+            <SliderAdditional
+                slides={translates.slides}
+                client:only="react"
+            />
         </div>
     </div>
 
@@ -107,7 +114,9 @@ const {extraClass, translates, isHbPage} = Astro.props;
         )}
     >
         <Image
-            src={celebrateImageBottom} alt="celebrate bg" class="h-full w-full object-contain"
+            src={celebrateImageBottom}
+            alt="celebrate bg"
+            class="h-full w-full object-contain"
         />
     </div>
 </div>

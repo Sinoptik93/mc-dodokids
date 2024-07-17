@@ -40,7 +40,7 @@ translates:
   footer:
     privacy:
       title: "Gizlilik Siyasəti"
-      url: "#"
+      url: "https://drive.google.com/file/d/1IvrxxVYzYlDIHek5PyyT8Fy2u3N1nBP-/view"
     useTerms:
       title: "İstifadə şərtləri"
       url: "#"
@@ -54,7 +54,7 @@ translates:
       - heading: "Bizi izləyin"
         linksList:
           - title: "Dodo Pizza Baku Instagram"
-            url: "#"
+            url: "https://www.instagram.com/dodopizza.azerbaijan/"
       - heading: "Üzvlər"
         linksList:
           - title: "+99455 4553635"
@@ -176,7 +176,9 @@ translates:
     
       photoPreview:
         heading: "Balaca şeflərin<br/>pizza sərgüzəştləri"
-        buttonTitle: "İnstaqram səhifəmiz"
+        button: 
+          title: "İnstaqram səhifəmiz"
+          url:  "https://www.instagram.com/dodopizza.azerbaijan/"
         headingSlider: "Dodo Pizza Azərbaycan"
     
       feedback:
@@ -221,14 +223,12 @@ translates:
         heading: "Hələ suallarınız var?<br/>Bizimlə əlaqə saxlayın!"
         socialNetworkList:
           - type: "instagram"
-            url: "https://www.instagram.com"
+            url: "https://www.instagram.com/dodopizza.azerbaijan/"
             alt: "instagram"
             title: "Dodo Pizza Baku"
           - type: "phone"
             url: "tel:+99455 4553635"
             alt: "phone"
             title: "+99455 4553635"
-    
-      
 
 ---

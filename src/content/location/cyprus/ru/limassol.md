@@ -187,7 +187,9 @@ translates:
     
       photoPreview:
         heading: "Моменты детского<br/> пицца-приключения"
-        buttonTitle: "Перейти в Instagram"
+        button:
+          title: "Перейти в Instagram"
+          url: "https://www.instagram.com"
         headingSlider: "Dodo Pizza Cyprus"
     
       feedback:

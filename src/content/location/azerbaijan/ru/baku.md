@@ -40,7 +40,7 @@ translates:
   footer:
     privacy:
       title: "Политика конфиденциальности"
-      url: "#"
+      url: "https://drive.google.com/file/d/1IvrxxVYzYlDIHek5PyyT8Fy2u3N1nBP-/view"
     useTerms:
       title: "Условия использования"
       url: "#"
@@ -54,7 +54,7 @@ translates:
       - heading: "Подписывайтесь на нас"
         linksList:
           - title: "Додо Пицца Азербайджан Instagram"
-            url: "#"
+            url: "https://www.instagram.com/dodopizza.azerbaijan/"
       - heading: "Контакты"
         linksList:
           - title: "+99455 4553635"
@@ -76,7 +76,7 @@ translates:
         - title: "Мастер-класс и проведение Дня рождения"
           value: "baking"
         - title: "Мастер класс для школьников"
-          value: "schools-mc"          
+          value: "schools-mc"
 
     pizzeria:
       title: "Выберите пиццерию"
@@ -84,7 +84,7 @@ translates:
       list:
         - title: "st. Mirzəbala Əhmədzadə, 13"
           value: "baku-1"
-          
+
     personal:
       title: "Информация"
       name:
@@ -94,11 +94,11 @@ translates:
         name: "phone"
         placeholder: "Телефон"
         phoneCode: "az"
-        
+
     date:
       title: "Дата"
       description: "Мы свяжемся с вами в течение 24 часов, чтобы выбрать дату и время вашего визита."
-      
+
     child:
       counterTitle: "Количество детей"
       childTitle: "Ребенок"
@@ -112,7 +112,7 @@ translates:
       allergy:
         name: "allergy"
         placeholder: "Какие аллергии есть у ребенка?"
-      deleteButtonTitle: "Удалить"      
+      deleteButtonTitle: "Удалить"
 
     details:
       placeholder: "Детали"
@@ -123,12 +123,12 @@ translates:
     privacyPolicy:
       title: "<p>Я согласен с Политикой конфиденциальности *</p><p>Указанные вами персональные данные могут обрабатываться (сбор, систематизация, накопление, хранение, обновление, модификация, использование, обезличивание, уничтожение, передача) компанией Capian Pizza MMC (далее - Оператор) и другими третьими лицами, привлеченными Оператором в соответствии с Политикой конфиденциальности.</p>"
       url: "https://drive.google.com/file/d/1IvrxxVYzYlDIHek5PyyT8Fy2u3N1nBP-/view"
-    
+
     promotionAgreement:
       title: "Я согласен получать рекламные и информационные сообщения\n от Capian Pizza MMC по каналам связи (SMS, push, электронная почта и т.д.)"
       url: "https://drive.google.com/file/d/18TSxJlXCMLg1A8EviL4HupGq1PynT_4s/view"
     bookButtonTitle: "Записаться"
-    
+
     screen:
       success:
         heading: "Потрясающе!"
@@ -138,7 +138,7 @@ translates:
         heading: "Что-то пошло не так"
         subheading: "К сожалению, что-то пошло не так. Попробуйте перезагрузить страницу и забронировать снова."
         returnButtonTitle: "Вернуться на главную"
-  
+
   pages:
     birthday:
       example: 'str'
@@ -147,7 +147,7 @@ translates:
         heading: "ДОДО ДЕТЯМ<br/>И ЛЮБОПЫТНЫМ ВЗРОСЛЫМ"
         subheading: "Детские мастер классы и дни рождения"
         bookButtonTitle: "Записаться"
-    
+
       additionalInfo:
         heading:
           base: "Отпразднуйте день рождения"
@@ -170,7 +170,7 @@ translates:
           - icon: "customization"
             title: "Индивидуальные предложения"
             description: "Мы всегда рады организовать праздник в соответствии с вашими пожеланиями, поэтому обращайтесь к нам, и вместе мы создадим волшебный день рождения для вашего ребенка."
-    
+
       summary:
         heading: "МАСТЕР-КЛАСС:<br/>ПИЦЦА СВОИМИ РУКАМИ"
         costBadge: "Мастер-класс бесплатный, оплата только за пиццу"
@@ -181,28 +181,30 @@ translates:
           product: "Пицца"
         description: "Ваш ребенок может стать шеф-поваром пиццы! На занятии они подготовят тесто, выберут начинки и создадут свой собственный кулинарный шедевр, а наши дружелюбные мастера дадут индивидуальные рекомендации."
         formButtonTitle: "Записаться"
-    
+
       photoPreview:
         heading: "Моменты детского<br/> пицца-приключения"
-        buttonTitle: "Перейти в Instagram"
+        button:
+          title: "Перейти в Instagram"
+          url:  "https://www.instagram.com/dodopizza.azerbaijan/"
         headingSlider: "Dodo Pizza Azerbaijan"
-    
+
       feedback:
         heading: "Детям нравится у нас!"
-    
+
       pizzaPromote:
         heading: "Проголодались? Закажите Додо пиццу"
-        orderButton: 
+        orderButton:
           title: "Заказать пиццу"
           url: "https://dodopizza.az/ru/baku/baku"
-    
+
       forSchools:
         heading: "Для школ"
         subheading: "Мастер-классы для разных возрастов"
         description: "Добро пожаловать в Dodo Pizza, где обучение и кулинарное творчество соединяются воедино! Наша программа для школ предлагает практический, образовательный опыт с мастер-классом по приготовлению пиццы. Свяжитесь с нами, чтобы обсудить даты и цены, или оставьте заявку, и мы свяжемся с вами."
         linkTitle: "Узнать о специальных предложениях"
         feedbackEmail: "feedback@dodopizza.com.az"
-    
+
       questionAndAnswers:
         heading: "FAQ"
         questions:
@@ -228,12 +230,12 @@ translates:
             answer: "Вы можете наблюдать за детьми через большое окно нашей открытой кухни в зале ресторана. Кроме того, вы можете воспользоваться услугой онлайн-просмотра на сайте www.dodopizza.az и в мобильном приложении. В зоне ожидания вы можете заказать пиццу, закуски и напитки."
           - question: "Есть ли у вас специальные предложения для школьных групп?"
             answer: "Конечно! Сформированные школьные группы могут воспользоваться нашими специальными предложениями для мастер-классов. Свяжитесь с нами, чтобы организовать индивидуальный опыт для ваших учеников."
-    
+
       socialNetworks:
         heading: "Остались вопросы?<br/>Свяжитесь с нами!"
         socialNetworkList:
           - type: "instagram"
-            url: "https://www.instagram.com"
+            url: "https://www.instagram.com/dodopizza.azerbaijan/"
             alt: "instagram"
             title: "Додо Пицца Азербайджан"
           - type: "phone"

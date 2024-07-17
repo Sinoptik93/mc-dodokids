@@ -141,7 +141,7 @@ const OfferCard = (
                 >
                     <ul className="mt-4">
                         {
-                            benefits.map((benefit, index) => {
+                            benefits.map((benefit) => {
                                 const isInner = Array.isArray(benefit);
 
                                 const list = isInner

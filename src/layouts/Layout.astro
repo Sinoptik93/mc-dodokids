@@ -1,24 +1,36 @@
 ---
 import {twMerge} from "tailwind-merge";
 interface Props {
-	title: string;
+    title: string;
     extraClass?: string;
 }
 
-const { title, extraClass } = Astro.props;
+const {title, extraClass} = Astro.props;
 import './layout.style.scss';
-
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta
+            name="description"
+            content="Astro description"
+        />
+        <meta
+            name="viewport"
+            content="width=device-width"
+        />
+        <link
+            rel="icon"
+            type="image/svg+xml"
+            href="/favicon.svg"
+        />
+        <meta
+            name="generator"
+            content={Astro.generator}
+        />
+        <title>{title}</title>
 
         <style is:global>
             @font-face {
@@ -47,14 +59,16 @@ import './layout.style.scss';
                 scroll-behavior: smooth;
             }
         </style>
-	</head>
-	<body>
-    <main class={
-        twMerge(
-            extraClass,
-        )
-    }>
-		<slot />
-    </main>
-	</body>
+    </head>
+    <body>
+        <main
+            class={
+                twMerge(
+                    extraClass,
+                )
+            }
+        >
+            <slot/>
+        </main>
+    </body>
 </html>

@@ -52,37 +52,48 @@ const languages = allLocations
 ---
 
 <Layout
-    title={location.data.title} extraClass="flex flex-col gap-4"
+    title={location.data.title}
+    extraClass="flex flex-col gap-4"
 >
     <ModalBookingEvent
-        client:only="react" locale={location.data.locale} translates={modalBooking}
+        client:idle
+        locale={location.data.locale}
+        translates={modalBooking}
     />
 
     <Header
-        client:load logo={location.data.logo} translate={header} languageList={languages}
+        client:load
+        logo={location.data.logo}
+        translate={header}
+        languageList={languages}
     />
 
     <SectionHero
-        extraClass="mb-10 mt-16 md:mt-24" translates={pages.main.hero}
+        extraClass="mb-10 mt-16 md:mt-24"
+        translates={pages.main.hero}
     />
 
     <div>
         <div id="mc"/>
         <SectionSummary
-            extraClass="mb-10" translates={pages.main.summary}
+            extraClass="mb-10"
+            translates={pages.main.summary}
         />
     </div>
 
     <div>
         <div id="birthday"/>
         <SectionAdditionalInfo
-            extraClass="mb-10" translates={pages.main.additionalInfo}
+            extraClass="mb-10"
+            translates={pages.main.additionalInfo}
             isHbPage={location.data.pageHb}
         />
     </div>
 
     <SectionPhotoPreview
-        extraClass="mb-10" translates={pages.main.photoPreview} slides={photosLibrary[country]}
+        extraClass="mb-10"
+        translates={pages.main.photoPreview}
+        slides={photosLibrary[country]}
     />
 
     <div>
@@ -90,7 +101,8 @@ const languages = allLocations
 
         <!--@ts-ignore-->
         <SectionFeedback
-            extraClass="mb-10 mt-32" translates={pages.main.feedback}
+            extraClass="mb-10 mt-32"
+            translates={pages.main.feedback}
             feedback={feedbackLibrary[country][localeSlug]}
         />
     </div>
@@ -104,7 +116,8 @@ const languages = allLocations
         <div>
             <div id="mc-schools"/>
             <SectionForSchools
-                extraClass="mb-10" translates={pages.main.forSchools}
+                extraClass="mb-10"
+                translates={pages.main.forSchools}
             />
         </div>
     </div>
@@ -112,22 +125,26 @@ const languages = allLocations
     <div class="mt-32">
         <div id="faq"/>
         <SectionQuestionAndAnswers
-            extraClass="mb-20 mt-32" translates={pages.main.questionAndAnswers}
+            extraClass="mb-20 mt-32"
+            translates={pages.main.questionAndAnswers}
         />
     </div>
 
     <div class="mt-36">
         <div id="contacts"/>
         <SectionSocialNetworks
-            extraClass="mt-14" translates={pages.main.socialNetworks}
+            extraClass="mt-14"
+            translates={pages.main.socialNetworks}
         />
     </div>
 
     <SectionMap
-        mapCenter={location.data.map.center} points={location.data.cities}
+        mapCenter={location.data.map.center}
+        points={location.data.cities}
     />
 
     <Footer
-        logo={location.data.logo} translates={footer}
+        logo={location.data.logo}
+        translates={footer}
     />
 </Layout>

@@ -41,7 +41,10 @@ export const translateMainPageSchema = z.object({
     }),
     photoPreview: z.object({
         heading: z.string(),
-        buttonTitle: z.string(),
+        button: z.object({
+            title: z.string(),
+            url: z.string(),
+        }),
         headingSlider: z.string(),
     }),
     feedback: z.object({

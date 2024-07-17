@@ -66,6 +66,11 @@ export default {
                             foreground: 'hsl(0,0%,100%)',
                             DEFAULT: 'hsl(26,100%,50%)',
                         },
+                        danger: {
+                            ...colors.red,
+                            foreground: 'hsl(0,0%,100%)',
+                            DEFAULT: colors.red["500"],
+                        }
                     },
                 }
             }

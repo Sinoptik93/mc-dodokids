@@ -1,13 +1,30 @@
 .modal-booking {
     .form-control   {
-        @apply relative w-full inline-flex flex-row items-center shadow-sm px-3 pl-14 gap-3 data-[hover=true]:bg-default-200 group-data-[focus=true]:bg-default-100 h-12 min-h-12 rounded-large transition-background motion-reduce:transition-none duration-150 outline-none bg-white border-2 border-neutral-200 font-regular text-base;
+        @apply relative w-full inline-flex flex-row items-center shadow-sm px-3 pl-14 gap-3 data-[hover=true]:bg-default-200 group-data-[focus=true]:bg-default-100 h-12 min-h-12 rounded-large transition-background motion-reduce:transition-none duration-150 outline-none bg-white border-2 border-neutral-200 font-regular text-base focus:border-neutral-600;
+    }
+
+    .form-control.invalid-number {
+        @apply bg-transparent border-red-500 border-2 focus:border-red-500 focus:border-2 focus:bg-transparent ;
+    }
+
+    .form-control:focus + .flag-dropdown {
+        @apply border-neutral-600;
+    }
+
+    .form-control.invalid-number:focus + .flag-dropdown {
+        @apply border-red-500;
     }
 
     .selected-flag {
         @apply rounded hover:bg-transparent;
     }
+
     .flag-dropdown {
         @apply rounded-large bg-transparent px-1 border-2 border-neutral-200;
+    }
+
+    .flag-dropdown.invalid-number {
+        @apply bg-transparent border-red-500 border-2 focus:border-red-500 focus:border-2 focus:bg-transparent ;
     }
 
     .react-tel-input .flag-dropdown.open {

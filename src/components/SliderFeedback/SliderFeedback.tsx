@@ -40,12 +40,13 @@ const SlideFeedback = ({feedbackText, userName, date, rating}: Feedback & { onOp
                     {
                         [1, 2, 3, 4, 5].map((step) => (
                             <div
-                                key={step} className={
-                                twMerge(
-                                    "w-8",
-                                    (rating >= step ? "text-yellow-400" : 'text-white')
-                                )
-                            }
+                                key={step}
+                                className={
+                                    twMerge(
+                                        "w-8",
+                                        (rating >= step ? "text-yellow-400" : 'text-white')
+                                    )
+                                }
                             >
                                 <IconStar/>
                             </div>
@@ -61,7 +62,8 @@ const SlideFeedback = ({feedbackText, userName, date, rating}: Feedback & { onOp
 
                     {isLongText && (
                         <button
-                            onClick={() => onOpen()} className="text-orange"
+                            onClick={() => onOpen()}
+                            className="text-orange"
                         >
                             Читать полностью </button>
                     )}
@@ -88,20 +90,24 @@ const SlideFeedback = ({feedbackText, userName, date, rating}: Feedback & { onOp
                         "p-2 rounded-2xl",
                         " md:p-8 md:rounded-5xl"
                     )
-                } isOpen={isOpen} onOpenChange={onOpenChange} backdrop="blur"
+                }
+                isOpen={isOpen}
+                onOpenChange={onOpenChange}
+                backdrop="blur"
             > <ModalContent>
                 {(onClose) => (
                     <>
                         <ModalBody>
 
                             <button
-                                onClick={() => onClose()} className={
-                                twMerge(
-                                    "z-40 size-10  absolute right-1 top-1 p-3",
-                                    "bg-white rounded-full shadow-lg shadow-neutral-400",
-                                    "md:-right-2 md:-top-2 md:shadow-xl"
-                                )
-                            }
+                                onClick={() => onClose()}
+                                className={
+                                    twMerge(
+                                        "z-40 size-10  absolute right-1 top-1 p-3",
+                                        "bg-white rounded-full shadow-lg shadow-neutral-400",
+                                        "md:-right-2 md:-top-2 md:shadow-xl"
+                                    )
+                                }
                             >
                                 <IconCross/>
                             </button>
@@ -116,12 +122,13 @@ const SlideFeedback = ({feedbackText, userName, date, rating}: Feedback & { onOp
                                 {
                                     [1, 2, 3, 4, 5].map((step) => (
                                         <div
-                                            key={step} className={
-                                            twMerge(
-                                                "w-8",
-                                                (rating >= step ? "text-yellow-400" : 'text-white')
-                                            )
-                                        }
+                                            key={step}
+                                            className={
+                                                twMerge(
+                                                    "w-8",
+                                                    (rating >= step ? "text-yellow-400" : 'text-white')
+                                                )
+                                            }
                                         >
                                             <IconStar/>
                                         </div>
@@ -160,23 +167,29 @@ const SliderFeedback = ({feedbackList}: { feedbackList: Feedback[] }) => {
     return (
         <>
             <Swiper
-                modules={[Pagination]} pagination={{clickable: true}} className="max-w-full h-[400px]" breakpoints={{
-                320: {
-                    slidesPerView: 1,
-                    spaceBetween: 20,
-                },
-                640: {
-                    slidesPerView: 4,
-                    spaceBetween: 20,
-                }
-            }} onSlideChange={() => console.log('slide change')} onSwiper={(swiper) => console.log(swiper)}
+                modules={[Pagination]}
+                pagination={{clickable: true}}
+                className="max-w-full h-[400px]"
+                breakpoints={{
+                    320: {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                    },
+                    640: {
+                        slidesPerView: 4,
+                        spaceBetween: 20,
+                    }
+                }}
             >
                 {
                     feedbackList.map(({rating, userName, date, feedbackText}, index) => (
                         <SwiperSlide
                             key={userName + index}
                         > <SlideFeedback
-                            rating={rating} userName={userName} date={date} feedbackText={feedbackText}
+                            rating={rating}
+                            userName={userName}
+                            date={date}
+                            feedbackText={feedbackText}
                         /> </SwiperSlide>
                     ))
                 }

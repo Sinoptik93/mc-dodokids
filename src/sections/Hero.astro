@@ -25,18 +25,21 @@ const {extraClass, translates} = Astro.props;
 
 <script>
     import {handleModalTrigger} from '~/utils/triggers/reactTrigger';
+
     handleModalTrigger({triggerName: "hero-pizza-trigger", detail: {defaultEvent: "pizza-mc"}});
 </script>
 
 
-<div class={
-    twMerge(
-        "relative overflow-hidden flex items-center justify-center mt-16",
-        "h-[520px] md:h-screen md:min-h-[760px]",
-        "rounded-b-3xl md:rounded-b-8xl",
-        extraClass
-    )
-}>
+<div
+    class={
+        twMerge(
+            "relative overflow-hidden flex items-center justify-center mt-16",
+            "h-[520px] md:h-screen md:min-h-[760px]",
+            "rounded-b-3xl md:rounded-b-8xl",
+            extraClass
+        )
+    }
+>
     <Image
         src={DodoKidsPreview}
         alt="DodoKids Preview"
@@ -47,21 +50,27 @@ const {extraClass, translates} = Astro.props;
         class="absolute z-20 inset-0 bg-black bg-opacity-40"
     />
 
-    <div class={
-        twMerge(
-            "container relative z-30",
-            "flex justify-center items-center",
-        )
-    }>
-        <div class={
+    <div
+        class={
             twMerge(
-                "relative ",
-                "flex flex-col justify-center items-center gap-8"
+                "container relative z-30",
+                "flex justify-center items-center",
             )
-        }>
+        }
+    >
+        <div
+            class={
+                twMerge(
+                    "relative ",
+                    "flex flex-col justify-center items-center gap-8"
+                )
+            }
+        >
             <div>
-                <h1 class="z-10 font-black uppercase text-white text-4xl md:text-8xl text-center"
-                    set:html={translates.heading}>
+                <h1
+                    class="z-10 font-black uppercase text-white text-4xl md:text-8xl text-center"
+                    set:html={translates.heading}
+                >
                 </h1>
 
                 <p class="z-10 text-white text-base md:text-3xl text-center">

@@ -34,13 +34,15 @@ const {extraClass, translates} = Astro.props;
         )
     }
 >
-    <div class={
-        twMerge(
-            "absolute z-20",
-            "w-[150px] bottom-0 right-0",
-            "md:w-[450px] md:-bottom-[10px] md:right-[180px]"
-        )
-    }>
+    <div
+        class={
+            twMerge(
+                "absolute z-20",
+                "w-[150px] bottom-0 right-0",
+                "md:w-[450px] md:-bottom-[10px] md:right-[180px]"
+            )
+        }
+    >
         <Image
             class="-scale-x-100 w-full h-full object-contain"
             src={friendBalloon}
@@ -56,13 +58,15 @@ const {extraClass, translates} = Astro.props;
             title={translates.orderButton.title}
         />
 
-        <div class={
-            twMerge(
-                "absolute-center pointer-events-auto",
-                "size-[380px] bottom-0 right-0 rotate-45",
-                "md:size-[550px] md:bottom-0 md:right-0 md:rotate-0"
-            )
-        }>
+        <div
+            class={
+                twMerge(
+                    "absolute-center pointer-events-auto",
+                    "size-[380px] bottom-0 right-0 rotate-45",
+                    "md:size-[550px] md:bottom-0 md:right-0 md:rotate-0"
+                )
+            }
+        >
             <Image
                 class="w-full h-full object-contain"
                 src={speechBalloon}
