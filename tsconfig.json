@@ -26,9 +26,6 @@
             "~/assets/*": [
                 "assets/*"
             ],
-            "~/utils/*": [
-                "utils/*"
-            ],
             "~/shared/*": [
                 "shared/*"
             ],
