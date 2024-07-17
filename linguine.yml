@@ -1,0 +1,6 @@
+# preserve_hierarchy: true
+
+files:
+  - source: /src/translation/index.json
+    update_option: update_as_unapproved
+    translation: /src/translation/%locale%.%file_extension%

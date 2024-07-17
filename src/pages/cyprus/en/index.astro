@@ -1,0 +1,19 @@
+---
+import {getCollection} from "astro:content";
+import Layout from "~/layouts/Layout.astro";
+
+const allData = await getCollection('locationData');
+allData.forEach((locationData) => {
+    locationData.data.
+})
+const text = JSON.stringify(allData, null, 2)
+console.log(allData)
+---
+
+<Layout
+    title="Cyprus / en"
+>
+
+Cyprus / en
+<p>{text}</p>
+</Layout>

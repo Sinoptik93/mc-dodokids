@@ -41,6 +41,23 @@ const locationCollection = defineCollection({
     schema: locationSchema,
 })
 
+
+
+
+const locationDataCollectionSchema = z.object({
+  "link_1": z.string(),
+  "link_2": z.string(),
+  "config_1": z.boolean(),
+  "config_2": z.boolean()
+})
+
+
+const locationDataCollection = defineCollection({
+  type: 'data',
+  schema: locationDataCollectionSchema
+})
+
 export const collections = {
-  'location': locationCollection
+  location: locationCollection,
+  locationData: locationDataCollection
 };
