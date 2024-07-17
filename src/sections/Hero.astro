@@ -24,7 +24,7 @@ const {extraClass, translates} = Astro.props;
 ---
 
 <script>
-    import {handleModalTrigger} from '~/utils/triggers/reactTrigger';
+    import {handleModalTrigger} from '~/shared/utils/triggers/reactTrigger';
 
     handleModalTrigger({triggerName: "hero-pizza-trigger", detail: {defaultEvent: "pizza-mc"}});
 </script>

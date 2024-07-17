@@ -33,7 +33,7 @@ interface Props {
     }[]
 }
 
-import {createReactTrigger} from '~/utils/triggers/reactTrigger'
+import {createReactTrigger} from '~/shared/utils/triggers/reactTrigger'
 
 
 const Header = ({ languageList, translate, logo }: Props) => {

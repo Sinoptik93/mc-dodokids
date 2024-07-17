@@ -33,7 +33,7 @@ interface Props {
 const {extraClass, translates, isHbPage} = Astro.props;
 ---
 <script>
-    import {handleModalTrigger} from '~/utils/triggers/reactTrigger'
+    import {handleModalTrigger} from '~/shared/utils/triggers/reactTrigger'
 
     const detail = {defaultEvent: "birthday"}
     handleModalTrigger({triggerName: "birthday-trigger", detail})

@@ -17,7 +17,7 @@ import SectionSocialNetworks from "~/sections/SocialsNetworks.astro";
 import SectionMap from "~/sections/Map.astro";
 import ModalBookingEvent from "~/components/ModalBookingEvent/ModalBookingEvent";
 
-import {photosLibrary, feedbackLibrary} from "~/utils/locations";
+import {photosLibrary, feedbackLibrary} from "~/shared/utils/locations";
 
 export async function getStaticPaths() {
     const allLocations = await getCollection("location");

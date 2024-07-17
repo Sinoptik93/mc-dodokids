@@ -25,7 +25,7 @@ const {extraClass, translates} = Astro.props;
 ---
 
 <script>
-    import {handleModalTrigger} from '~/utils/triggers/reactTrigger'
+    import {handleModalTrigger} from '~/shared/utils/triggers/reactTrigger'
 
     const detail = {defaultEvent: "schools-mc"}
     handleModalTrigger({triggerName: "schools-mc-trigger", detail})

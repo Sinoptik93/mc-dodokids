@@ -22,7 +22,7 @@ import {
 import {motion, AnimatePresence} from 'framer-motion';
 import {Loader} from "./Loader";
 
-import {initRealisticConfetti} from "~/utils/confetti";
+import {initRealisticConfetti} from "~/shared/utils/confetti";
 
 import {TRIGGER_NAME} from './config'
 
