@@ -156,6 +156,7 @@ const ModalBookingEvent = ({translates, route, locale = 'en-EN'}: { translates: 
             closeButton={false}
             classNames={{
                 backdrop: "flex items-center justify-center",
+                wrapper: "py-6"
             }}
             onOpenChange={onOpenChange}
             className={
