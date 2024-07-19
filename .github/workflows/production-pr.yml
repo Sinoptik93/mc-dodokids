@@ -49,7 +49,6 @@ jobs:
           path: ./site-frontend
           repository: Sinoptik93/site-frontend
           token: ${{ secrets.GITHUB_TOKEN }}
-          ref: ${{ steps.set-target-branch.outputs.target-branch }}
 
       - name: Create branch
         id: create-branch
