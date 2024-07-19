@@ -8,7 +8,7 @@ interface CountryRoutes {
 
 export const routes: CountryRoutes = {
     azerbaijan: {
-        baku: 'https://script.google.com/macros/s/AKfycbzOGdmfZI7zUqqADWp_QS85C1_AOGJsJmJDyyZzVE5Q5q-Tesvi3n8kaRlEm72khhjuxg/exec'
+        baku: 'https://script.google.com/macros/s/AKfycbz9P_j61uA5e1sXOqRu9EzPvWcsfSG1Ug55pQ1qIDGj-YPRGH9O6H6yH8URA-ye3ObzjA/exec'
     },
     cyprus: {
         limassol: 'https://script.google.com/macros/s/AKfycbyWeo6GqjKjHKeCUI1EEuJOFpeH_5a0LJzVkgkEU6TNsR60m6MDrdUZrliVpO_K3Inivw/exec'
