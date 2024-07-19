@@ -55,7 +55,7 @@ jobs:
         id: create-branch
         working-directory: ./site-frontend
         run: |
-          echo "BRANCH=dodo-kids-$(echo ${{ GITHUB_SHA }} | cut -c1-7)" >> $GITHUB_OUTPUT
+          echo "BRANCH=dodo-kids-$(echo ${GITHUB_SHA} | cut -c1-7)" >> $GITHUB_OUTPUT
           git checkout -b "$BRANCH"
           
           echo "branch=$BRANCH" >> $GITHUB_OUTPUT
