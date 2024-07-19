@@ -26,6 +26,7 @@ const locationSchema = z.object({
   title: z.string(),
   pageHb: z.boolean(),
   country: z.nativeEnum(Countries),
+  city: z.string(),
   locale: z.string(),
   localeSlug: z.nativeEnum(Locales),
   logo: z.enum(["az", "default"]).optional(),

@@ -18,6 +18,7 @@ import SectionMap from "~/sections/Map.astro";
 import ModalBookingEvent from "~/components/ModalBookingEvent/ModalBookingEvent";
 
 import {photosLibrary, feedbackLibrary} from "~/shared/utils/locations";
+import {routes} from "~/shared/api";
 
 export async function getStaticPaths() {
     const allLocations = await getCollection("location");
@@ -34,7 +35,7 @@ export async function getStaticPaths() {
 }
 
 const {location} = Astro.props;
-const {country, localeSlug} = location.data;
+const {country, city, localeSlug} = location.data;
 
 const {header, footer, pages, modalBooking} = location.data.translates;
 
@@ -49,6 +50,8 @@ const languages = allLocations
         active: location.data.locale === currentLocation.data.locale,
         url: `/${currentLocation.data.country}/${currentLocation.data.localeSlug}`,
     }));
+
+const fetchRoute = routes[country][city];
 ---
 
 <Layout
@@ -59,6 +62,7 @@ const languages = allLocations
         client:idle
         locale={location.data.locale}
         translates={modalBooking}
+        route={fetchRoute}
     />
 
     <Header

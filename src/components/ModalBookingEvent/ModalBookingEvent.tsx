@@ -43,7 +43,7 @@ import type {
 import {Event} from "~/shared/types";
 
 
-const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Translate; locale: string; }) => {
+const ModalBookingEvent = ({translates, route, locale = 'en-EN'}: { translates: Translate; locale: string; route: string}) => {
     const MAX_CHILDREN_COUNT = 10;
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const {
@@ -92,17 +92,16 @@ const ModalBookingEvent = ({translates, locale = 'en-EN'}: { translates: Transla
 
 
     const onSubmit = async (data: FormValues) => {
-        const ID_DODO =
-            "AKfycbyWeo6GqjKjHKeCUI1EEuJOFpeH_5a0LJzVkgkEU6TNsR60m6MDrdUZrliVpO_K3Inivw";
-        const getUrl = (id: string) => `https://script.google.com/macros/s/${id}/exec`;
-
-        return await fetch(getUrl(ID_DODO), {
+        return await fetch(route, {
             method: "POST",
             redirect: "follow",
             headers: {
                 "Content-Type": "text/plain;charset=utf-8",
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify({
+                ...data,
+                date: data.date.toString()
+            }),
         });
     };
 

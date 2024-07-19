@@ -2,6 +2,7 @@
 title: 'Азербайджан'
 pageHb: false
 country: "azerbaijan"
+city: 'baku'
 logo: 'az'
 locale: 'ru-RU'
 localeSlug: 'ru'

@@ -2,6 +2,7 @@
 title: 'Кипр'
 pageHb: true
 country: "cyprus"
+city: 'baku'
 locale: 'ru-RU'
 localeSlug: 'ru'
 logo: 'default'

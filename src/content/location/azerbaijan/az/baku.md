@@ -2,6 +2,7 @@
 title: 'Azerbaijan'
 pageHb: false
 country: "azerbaijan"
+city: 'baku'
 logo: 'az'
 locale: 'az-Latn-AZ'
 localeSlug: 'az'
