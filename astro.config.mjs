@@ -9,6 +9,7 @@ import { lifecycleLogs } from "./integrations";
 // https://astro.build/config
 export default defineConfig({
     site: "https://sinoptik93.github.io",
+    base: 'mc-dodokids',
     integrations: [
         react(),
         mdx(),
