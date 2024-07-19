@@ -547,9 +547,9 @@ const ModalBookingEvent = ({translates, route, locale = 'en-EN'}: { translates: 
                         {
                             isSubmitSuccessful && (
                                 <ModalBody
-                                    className="px-24 py-56 flex flex-col gap-6 justify-center items-center"
+                                    className="px-24 flex flex-col gap-6 justify-center items-center"
                                 >
-                                    <div className="w-[340px]">
+                                    <div className="w-[30vh] max-w-[340px]">
                                         <TriangleFriendCool/>
                                     </div>
 
