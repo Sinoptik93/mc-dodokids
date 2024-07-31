@@ -4,8 +4,10 @@ pageHb: false
 country: "azerbaijan"
 city: 'baku'
 logo: 'az'
+isDefaultLanguage: false
 locale: 'ru-RU'
 localeSlug: 'ru'
+domain: 'az'
 map:
   center:
     lat: 40.4093
@@ -41,17 +43,17 @@ translates:
   footer:
     privacy:
       title: "Политика конфиденциальности"
-      url: "https://drive.google.com/file/d/1IvrxxVYzYlDIHek5PyyT8Fy2u3N1nBP-/view"
+      url: "https://drive.google.com/file/d/18TSxJlXCMLg1A8EviL4HupGq1PynT_4s/view"
     useTerms:
       title: "Условия использования"
-      url: "#"
+      url: "https://drive.google.com/file/d/1IvrxxVYzYlDIHek5PyyT8Fy2u3N1nBP-/view"
     sections:
       - heading: "О нас"
         linksList:
           - title: "Dodo Brands сайт"
             url: "https://dodobrands.io/"
           - title: "Додо Пицца в Азербайджане"
-            url: "#"
+            url: "https://dodopizza.az/"
       - heading: "Подписывайтесь на нас"
         linksList:
           - title: "Додо Пицца Азербайджан Instagram"
@@ -144,6 +146,9 @@ translates:
     birthday:
       example: 'str'
     main:
+      seo:
+        title: 'Додо детям и любопытным взрослым'
+        description: 'Детские мастер классы и дни рождения'
       hero:
         heading: "ДОДО ДЕТЯМ<br/>И ЛЮБОПЫТНЫМ ВЗРОСЛЫМ"
         subheading: "Детские мастер классы и дни рождения"

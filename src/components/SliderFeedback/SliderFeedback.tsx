@@ -94,71 +94,75 @@ const SlideFeedback = ({feedbackText, userName, date, rating}: Feedback & { onOp
                 isOpen={isOpen}
                 onOpenChange={onOpenChange}
                 backdrop="blur"
-            > <ModalContent>
-                {(onClose) => (
-                    <>
-                        <ModalBody>
+            >
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalBody>
 
-                            <button
-                                onClick={() => onClose()}
-                                className={
-                                    twMerge(
-                                        "z-40 size-10  absolute right-1 top-1 p-3",
-                                        "bg-white rounded-full shadow-lg shadow-neutral-400",
-                                        "md:-right-2 md:-top-2 md:shadow-xl"
+                                <button
+                                    onClick={() => onClose()}
+                                    className={
+                                        twMerge(
+                                            "z-40 size-10  absolute right-1 top-1 p-3",
+                                            "bg-white rounded-full shadow-lg shadow-neutral-400",
+                                            "md:-right-2 md:-top-2 md:shadow-xl"
+                                        )
+                                    }
+                                >
+                                    <IconCross/>
+                                </button>
+
+                                <div
+                                    className={
+                                        twMerge(
+                                            "flex gap-2"
+                                        )
+                                    }
+                                >
+                                    {
+                                        [1, 2, 3, 4, 5].map((step) => (
+                                            <div
+                                                key={step}
+                                                className={
+                                                    twMerge(
+                                                        "w-8",
+                                                        (rating >= step ? "text-yellow-400" : 'text-white')
+                                                    )
+                                                }
+                                            >
+                                                <IconStar/>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+
+
+                                <div className="h-3/4 overflow-scroll">
+                                    <p className="">
+                                        {feedbackText}
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <p className="text-sm text-neutral-400">{userName}</p>{
+                                    !!date && (
+                                        <p className="text-sm text-neutral-400">{
+                                            date.toLocaleDateString('ru-RU', {
+                                                day: 'numeric',
+                                                month: "long",
+                                                year: 'numeric'
+                                            })
+                                        }</p>
                                     )
                                 }
-                            >
-                                <IconCross/>
-                            </button>
+                                </div>
 
-                            <div
-                                className={
-                                    twMerge(
-                                        "flex gap-2"
-                                    )
-                                }
-                            >
-                                {
-                                    [1, 2, 3, 4, 5].map((step) => (
-                                        <div
-                                            key={step}
-                                            className={
-                                                twMerge(
-                                                    "w-8",
-                                                    (rating >= step ? "text-yellow-400" : 'text-white')
-                                                )
-                                            }
-                                        >
-                                            <IconStar/>
-                                        </div>
-                                    ))
-                                }
-                            </div>
-
-
-                            <div className="h-3/4 overflow-scroll">
-                                <p className="">
-                                    {feedbackText}
-                                </p>
-                            </div>
-
-                            <div>
-                                <p className="text-sm text-neutral-400">{userName}</p>{
-                                !!date && (
-                                    <p className="text-sm text-neutral-400">{date.toLocaleDateString('ru-RU', {
-                                        day: 'numeric',
-                                        month: "long",
-                                        year: 'numeric'
-                                    })}</p>
-                                )
-                            }
-                            </div>
-
-                        </ModalBody>
-                    </>
-                )}
-            </ModalContent> </Modal>
+                            </ModalBody>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
         </>
     )
 }
@@ -176,6 +180,10 @@ const SliderFeedback = ({feedbackList}: { feedbackList: Feedback[] }) => {
                         spaceBetween: 20,
                     },
                     640: {
+                        slidesPerView: 2,
+                        spaceBetween: 10,
+                    },
+                    960: {
                         slidesPerView: 4,
                         spaceBetween: 20,
                     }

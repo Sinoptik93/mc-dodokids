@@ -2,10 +2,12 @@
 title: 'Cyprus'
 pageHb: true
 country: "cyprus"
-city: 'baku'
+city: 'limassol'
 logo: 'default'
+isDefaultLanguage: true
 localeSlug: 'en'
 locale: 'en-EN'
+domain: 'cy'
 map:
   center:
     lat: 34.6841
@@ -146,6 +148,9 @@ translates:
     birthday:
       example: 'str'
     main:
+      seo:
+        title: 'Dodo pizza<br>adventure for kids'
+        description: 'Little Chefs, Big Fun!'
       hero:
         heading: "DODO PIZZA<br>ADVENTURE FOR KIDS"
         subheading: "Little Chefs, Big Fun!"

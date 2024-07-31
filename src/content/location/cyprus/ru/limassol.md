@@ -2,10 +2,12 @@
 title: 'Кипр'
 pageHb: true
 country: "cyprus"
-city: 'baku'
+city: 'limassol'
+isDefaultLanguage: false
 locale: 'ru-RU'
 localeSlug: 'ru'
 logo: 'default'
+domain: 'cy'
 map:
   center:
     lat: 34.6841
@@ -147,6 +149,9 @@ translates:
       example: 'str'
       
     main:
+      seo:
+        title: 'Додо детям и любопытным взрослым'
+        description: 'Детские мастер классы и дни рождения'
       hero:
         heading: "ДОДО ДЕТЯМ <br/>И ЛЮБОПЫТНЫМ<br/>ВЗРОСЛЫМ"
         subheading: "Детские мастер классы и дни рождения"

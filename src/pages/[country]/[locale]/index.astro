@@ -40,22 +40,35 @@ const {country, city, localeSlug} = location.data;
 const {header, footer, pages, modalBooking} = location.data.translates;
 
 const allLocations = await getCollection("location");
+
+// REFACTOR: упростить с i18n
 const languages = allLocations
     .filter(
         (currentLocation) =>
             location.data.country === currentLocation.data.country,
     )
-    .map((currentLocation) => ({
-        label: currentLocation.data.localeSlug,
-        active: location.data.locale === currentLocation.data.locale,
-        url: `/${currentLocation.data.country}/${currentLocation.data.localeSlug}`,
-    }));
+    .map((currentLocation) => {
+        const isProduction = import.meta.env.PROD;
+        const productionRoute = import.meta.env.VITE_PAGE_ROUTE;
+        const {localeSlug, isDefaultLanguage} = currentLocation.data;
+        const localePrePath = `/${localeSlug}`
+
+        const productionPath = `${isDefaultLanguage ? '' : localePrePath}/${productionRoute}`
+        const developerPath = `/${country}/${localeSlug}`;
+
+        return {
+            label: currentLocation.data.localeSlug,
+            active: location.data.locale === currentLocation.data.locale,
+            url: isProduction ? productionPath : developerPath,
+        }
+    });
 
 const fetchRoute = routes[country][city];
 ---
 
 <Layout
-    title={location.data.title}
+    title={pages.main.seo.title}
+    description={pages.main.seo.description}
     extraClass="flex flex-col gap-4"
 >
     <ModalBookingEvent
@@ -126,7 +139,7 @@ const fetchRoute = routes[country][city];
         </div>
     </div>
 
-    <div class="mt-32">
+    <div class="mt-8">
         <div id="faq"/>
         <SectionQuestionAndAnswers
             extraClass="mb-20 mt-32"

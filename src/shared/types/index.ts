@@ -7,6 +7,7 @@ export {
     typesEventsList,
     Countries,
     Locales,
+    Domains,
 } from './libraries';
 
 export type {
@@ -14,5 +15,7 @@ export type {
     Event,
     SocialNetworkIcon,
     LocalesList,
+    LocalesType,
+    CountryType,
 } from './libraries';
 

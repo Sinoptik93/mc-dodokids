@@ -1,11 +1,14 @@
 ---
+import favicon from '~/assets/public/favicon-dodo.svg'
+import ogImage from '~/assets/public/og.jpg'
 import {twMerge} from "tailwind-merge";
 interface Props {
     title: string;
+    description?: string;
     extraClass?: string;
 }
 
-const {title, extraClass} = Astro.props;
+const {title, description, extraClass} = Astro.props;
 import './layout.style.scss';
 ---
 
@@ -14,23 +17,33 @@ import './layout.style.scss';
     <head>
         <meta charset="UTF-8"/>
         <meta
-            name="description"
-            content="Astro description"
-        />
-        <meta
             name="viewport"
             content="width=device-width"
         />
         <link
             rel="icon"
             type="image/svg+xml"
-            href="/favicon.svg"
+            href={favicon.src}
         />
         <meta
             name="generator"
             content={Astro.generator}
         />
+        <meta
+            name="description"
+            content={description ?? 'TITLE'}
+        />
         <title>{title}</title>
+
+        <meta property="og:type" content="website">
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={ogImage.src}>
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description}>
+        <meta name="twitter:image" content={ogImage.src}>
 
         <style is:global>
             @font-face {

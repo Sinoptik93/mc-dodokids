@@ -6,10 +6,19 @@ enum Locales {
     EN = 'en',
 }
 
+enum Domains {
+    AZERBAIJAN = 'az',
+    CYPRUS = 'cy',
+}
+
+type LocalesType = `${Locales}`;
+
 enum Countries {
     AZERBAIJAN = "azerbaijan",
     CYPRUS = "cyprus",
 }
+
+type CountryType = `${Countries}`;
 
 const iconsAdditionalList = ["guest", "food", "discount", "customization"] as const;
 const iconsSocialNetworkList = ["instagram", "facebook", "tiktok", "phone"] as const;
@@ -33,11 +42,14 @@ export type {
     SocialNetworkIcon,
     AdditionalIcon,
     LocalesList,
+    LocalesType,
+    CountryType,
 };
 
 export {
     Locales,
     Countries,
+    Domains,
     countryList,
     typesEventsList,
     iconsSocialNetworkList,

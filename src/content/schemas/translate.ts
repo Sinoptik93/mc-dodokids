@@ -4,7 +4,7 @@ import {
     translateMainPageSchema,
  } from "./pages";
 
-import {typesEventsList} from "~/shared/types/libraries.ts";
+import {typesEventsList} from "../../shared/types/libraries";
 
 const translateHeaderSchema = z.object({
     phone: z.object({

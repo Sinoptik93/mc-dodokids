@@ -23,7 +23,7 @@ const iconsLibrary: Record<IconsList, ReactNode> = {
 
 const SlideAdditional = ({icon, title, description}: SlideAdditionalProps) => {
     return (
-        <div className="mx-4 md:mx-0 p-8 flex flex-col gap-4 bg-white rounded-5xl h-[380px] md:h-[400px]">
+        <div className="mx-4 md:mx-0 p-8 flex flex-col gap-4 bg-white rounded-5xl h-[340px] md:h-[340px] lg:h-[400px]">
             <div className="size-14 p-1 text-yellow-700">
                 {
                     iconsLibrary[icon]
@@ -46,13 +46,17 @@ const SliderAdditional = ({slides}: SliderAdditionalProps) => {
         <Swiper
             modules={[Pagination]}
             pagination={{clickable: true}}
-            className="max-w-full h-[450px]"
+            className="max-w-full h-[380px] lg:h-[450px]"
             breakpoints={{
                 320: {
                     slidesPerView: 1,
                     spaceBetween: 20,
                 },
                 640: {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                },
+                1024: {
                     slidesPerView: 4,
                     spaceBetween: 20,
                 }

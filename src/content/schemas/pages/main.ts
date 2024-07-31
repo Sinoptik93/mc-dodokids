@@ -1,10 +1,14 @@
-import { z } from 'zod';
+import {z} from 'zod';
 
 
-import {iconsAdditionalList, iconsSocialNetworkList} from "~/shared/types/libraries.ts";
+import {iconsAdditionalList, iconsSocialNetworkList} from "../../../shared/types/libraries";
 
 
 export const translateMainPageSchema = z.object({
+    seo: z.object({
+       title: z.string(),
+       description: z.string(),
+    }),
     hero: z.object({
         heading: z.string(),
         subheading: z.string(),

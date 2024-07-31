@@ -4,8 +4,10 @@ pageHb: false
 country: "azerbaijan"
 city: 'baku'
 logo: 'az'
+isDefaultLanguage: true
 locale: 'az-Latn-AZ'
 localeSlug: 'az'
+domain: 'az'
 map:
   center:
     lat: 40.4093
@@ -41,17 +43,17 @@ translates:
   footer:
     privacy:
       title: "Gizlilik Siyasəti"
-      url: "https://drive.google.com/file/d/1IvrxxVYzYlDIHek5PyyT8Fy2u3N1nBP-/view"
+      url: "https://drive.google.com/file/d/18TSxJlXCMLg1A8EviL4HupGq1PynT_4s/view"
     useTerms:
       title: "İstifadə şərtləri"
-      url: "#"
+      url: "https://drive.google.com/file/d/1IvrxxVYzYlDIHek5PyyT8Fy2u3N1nBP-/view "
     sections:
       - heading: "Haqqımızda"
         linksList:
           - title: "Dodo Brendlərin saytı"
             url: "https://dodobrands.io/"
           - title: "Baku Dodo Pizza"
-            url: "#"
+            url: "https://dodopizza.az/"
       - heading: "Bizi izləyin"
         linksList:
           - title: "Dodo Pizza Baku Instagram"
@@ -136,6 +138,9 @@ translates:
     birthday:
       example: 'str'
     main:
+      seo:
+        title: 'Dodo bala: pi̇zza aləmi̇nə səyahət'
+        description: 'Balaca şeflər, böyük əyləncə!'
       hero:
         heading: "DODO BALA:<br/>PİZZA ALƏMİNƏ<br/>SƏYAHƏT"
         subheading: "Balaca şeflər, böyük əyləncə!"

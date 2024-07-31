@@ -29,7 +29,7 @@ const {extraClass, translates} = Astro.props;
         twMerge(
             "container z-10 relative",
             "h-[400px] pt-10 pl-10",
-            "md:h-[520px] md:pt-[100px] md:pl-[240px]",
+            "lg:h-[520px] lg:pt-[100px] lg:pl-[240px]",
             extraClass
         )
     }
@@ -39,7 +39,8 @@ const {extraClass, translates} = Astro.props;
             twMerge(
                 "absolute z-20",
                 "w-[150px] bottom-0 right-0",
-                "md:w-[450px] md:-bottom-[10px] md:right-[180px]"
+                "md:w-[250px] md:-bottom-[10px] md:right-[10px]",
+                "xl:w-[450px] xl:-bottom-[10px] xl:right-[180px]"
             )
         }
     >

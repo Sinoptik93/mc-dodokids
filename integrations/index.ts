@@ -1,1 +1,1 @@
-export {lifecycleLogs} from './lifecycleLogs'
+export {routesLogger} from './lifecycleLogs'
