@@ -3,7 +3,7 @@ import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import svgr from "vite-plugin-svgr";
-import { routesLogger } from "./integrations";
+import { routesLogger, flattenHTML } from "./integrations";
 
 
 // https://astro.build/config
@@ -15,6 +15,7 @@ export default defineConfig({
         mdx(),
         tailwind(),
         routesLogger(),
+        flattenHTML('landings/dodoKids'),
     ],
     vite: {
         build: {
@@ -28,8 +29,8 @@ export default defineConfig({
         port: 4321
     },
     build: {
-        assets: "landingKidsAssets",
-        format: "file",
+        assets: "landingsAssets/dodoKids",
+        format: "directory",
     },
 });
 

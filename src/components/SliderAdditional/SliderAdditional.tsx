@@ -56,7 +56,7 @@ const SliderAdditional = ({slides}: SliderAdditionalProps) => {
                     slidesPerView: 2,
                     spaceBetween: 10,
                 },
-                1024: {
+                1352: {
                     slidesPerView: 4,
                     spaceBetween: 20,
                 }

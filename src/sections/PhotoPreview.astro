@@ -5,7 +5,6 @@ import ButtonLink from "~/components/ButtonLink/ButtonLink.astro";
 import SliderPhotos from "~/components/SliderPhotos/SliderPhotos";
 
 import heart from "~/assets/images/heart.svg";
-import heartSmall from "~/assets/images/heart-small.svg";
 
 
 interface Translates {
@@ -80,13 +79,13 @@ const {extraClass, translates, slides} = Astro.props;
             class={
                 twMerge(
                     "absolute",
-                    "hidden",
+                    "w-12 hidden",
                     "md:block md:top-[280px] md:right-[250px] md:-rotate-[17deg]"
                 )
             }
         >
             <Image
-                src={heartSmall}
+                src={heart}
                 alt="heart small"
                 class="h-full w-full object-contain"
             />
@@ -113,13 +112,13 @@ const {extraClass, translates, slides} = Astro.props;
             class={
                 twMerge(
                     "absolute",
-                    "hidden",
+                    "w-12 hidden",
                     "md:block md:top-[280px] md:left-[250px] md:rotate-[17deg]"
                 )
             }
         >
             <Image
-                src={heartSmall}
+                src={heart}
                 alt="heart small"
                 class="h-full w-full object-contain"
             />

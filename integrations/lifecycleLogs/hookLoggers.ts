@@ -1,10 +1,11 @@
 import type {HookParameters} from "astro";
 import kleur from "kleur";
-import log from "./logger";
+import log from "../utils/logger";
 import type {CountryType, LocalesType} from "../../src/shared/types";
 import {CountriesLanguages} from "./types";
 import {getEnvironmentHosts, getLocalHostUrl, getRemoteHostUrl} from "./utils";
 
+// TODO: убрать на верхний уровень
 const domainLibrary = {
     'azerbaijan': 'az',
     'cyprus': 'cy',

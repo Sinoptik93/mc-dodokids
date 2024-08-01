@@ -1,6 +1,4 @@
 ---
-import favicon from '~/assets/public/favicon-dodo.svg'
-import ogImage from '~/assets/public/og.jpg'
 import {twMerge} from "tailwind-merge";
 interface Props {
     title: string;
@@ -20,11 +18,11 @@ import './layout.style.scss';
             name="viewport"
             content="width=device-width"
         />
-        <link
-            rel="icon"
-            type="image/svg+xml"
-            href={favicon.src}
-        />
+        <link rel="icon" href="/landingsAssets/dodoKids/favicon.ico" />
+        <link rel="icon" href="/landingsAssets/dodoKids/icon.svg" type="image/svg+xml" sizes="any" />
+        <link rel="shortcut icon" href="/landingsAssets/dodoKids/favicon-48x48.png" />
+        <link rel="apple-touch-icon" href="/landingsAssets/dodoKids/apple-touch-icon.png" />
+        <meta name="theme-color" content="#FFFFFF" />
         <meta
             name="generator"
             content={Astro.generator}
@@ -38,12 +36,12 @@ import './layout.style.scss';
         <meta property="og:type" content="website">
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta property="og:image" content={ogImage.src}>
+        <meta property="og:image" content="/landingsAssets/dodoKids/og.jpg" />
 
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description}>
-        <meta name="twitter:image" content={ogImage.src}>
+        <meta name="twitter:image" content="/landingsAssets/dodoKids/og.jpg">
 
         <style is:global>
             @font-face {
